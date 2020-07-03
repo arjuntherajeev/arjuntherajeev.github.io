@@ -1,10 +1,13 @@
 <nav>
-  <div class="nav-wrapper">
+  <div class="nav-wrapper purple">
     {%- comment -%} <a href="#" class="brand-logo">Logo</a> {%- endcomment -%}
     <ul id="nav-mobile" class="left">
       {% for item in site.data.navigation %}
         <li {% if page.url == item.link %}class="active"{% endif %}><a href="{{item.link}}">{{item.name}}</a></li>
       {% endfor %}
+    </ul>
+    <ul id="nav-mobile" class="right">
+      <li><a href="/"><i class="material-icons">library_music</i></a></li>
     </ul>
   </div>
 </nav>

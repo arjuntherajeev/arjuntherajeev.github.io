@@ -7,8 +7,8 @@
 	],
 	"sourcesContent": [
 		"@import \"main\";",
-		".current {\r\n    color: green;\r\n  }"
+		".analog-color {\r\n    color: #B02769;\r\n  }\r\n\r\n.comp-color {\r\n  color: #3BB027;\r\n}"
 	],
 	"names": [],
-	"mappings": "ACAA,AAAA,QAAQ,CAAC,EACL,KAAK,EAAE,KAAK,GACb"
+	"mappings": "ACAA,AAAA,aAAa,CAAC,EACV,KAAK,EAAE,OAAO,GACf;;AAEH,AAAA,WAAW,CAAC,EACV,KAAK,EAAE,OAAO,GACf"
 }
