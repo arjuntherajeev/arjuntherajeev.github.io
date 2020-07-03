@@ -1,7 +1,10 @@
 <nav>
-  {% for item in site.data.navigation %}
-    <a href="{{ item.link }}" {% if page.url == item.link %}class="current"{% endif %}>
-      {{ item.name }}
-    </a>
-  {% endfor %}
+  <div class="nav-wrapper">
+    {%- comment -%} <a href="#" class="brand-logo">Logo</a> {%- endcomment -%}
+    <ul id="nav-mobile" class="left">
+      {% for item in site.data.navigation %}
+        <li {% if page.url == item.link %}class="active"{% endif %}><a href="{{item.link}}">{{item.name}}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
 </nav>
