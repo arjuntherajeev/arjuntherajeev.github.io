@@ -3,18 +3,23 @@
 layout: default
 title: Diary of Arjun
 ---
-
+<h3>Welcome to <b>Diary of Arjun</b></h3>
+<!-- <p>Personal blog and website</p> -->
 <div class="row">
     <div class="col s12 m12 l6">
+      <!-- Blank :) Happy! You're gonna have to hold on! -->
+    </div>
+    <div class="col s12 m12 l6">
         <div class="card">
-        <div class="card-image">
-            <img src="assets/images/moi.jpg">
-            <!-- <span class="card-title">Meet Arjun</span> -->
-            <a href="/about" class="btn-floating halfway-fab waves-effect waves-light comp-color-bg"><i class="material-icons">launch</i></a>
+        <div class="card-image waves-effect waves-block waves-light">
+            <img onclick="window.location='/about'" src="assets/images/moi.jpg">
+            <span class="card-title">Meet Arjun</span>
+            <!-- <a href="/about" class="btn-floating halfway-fab waves-effect waves-light comp-color-bg"><i class="material-icons">launch</i></a> -->
         </div>
         <div class="card-content">
-            <span class="card-title grey-text text-darken-4">Meet Arjun</span>
+            <!-- <span class="card-title grey-text text-darken-4">Meet Arjun</span> -->
             <p>What is my favourite colour? My favourite city? do I like <code>Python</code> or <code>Java</code> (or both)? Answers to these and so much more!</p>
+            <!-- <p><a href="/about">Read more</a></p> -->
         </div>
         </div>
     </div>
@@ -22,20 +27,26 @@ title: Diary of Arjun
 
 <div class="row">
     {% for post in site.posts%}
-    <div class="col s12 m6 l6">
-        <div class="card">
+    <div class="col s12 m12 l6">
+        <div class="card small">
             <div class="card-image waves-effect waves-block waves-light">
               <img class="activator" src="{{post.image_url}}">
             </div>
             <div class="card-content">
               <span class="card-title activator grey-text text-darken-4">{{post.title}}<i class="material-icons right">more_vert</i></span>
-              <p><a href="{{post.url}}">Read more</a></p>
-              <p>{{post.author}}</p>
+              <!-- <p><a href="{{post.url}}">Read more</a></p> -->
+                <div class="chip"> <img src="https://image.freepik.com/free-vector/babanas-apple-strawberry-fruits-icon_24640-20222.jpg" alt="Fruits">Fruits</div>
+                <div class="chip"> <img src="https://image.freepik.com/free-vector/immune-system-concept_23-2148571365.jpg" alt="Healthy">Healthy</div>
+                <div class="chip"> <img src="https://image.freepik.com/free-vector/discount-sale-price-tag-design_1017-15624.jpg" alt="Discount">Discount</div>
+              <!-- <p>{{post.author}}</p> -->
               <!-- <p>{{post.image_url}}</p> -->
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">{{post.title}}<i class="material-icons right">close</i></span>
               <p>{{post.excerpt}}</p>
+              <div class="chip"> <img src="https://image.freepik.com/free-vector/babanas-apple-strawberry-fruits-icon_24640-20222.jpg" alt="Fruits">Fruits</div>
+              <div class="chip"> <img src="https://image.freepik.com/free-vector/immune-system-concept_23-2148571365.jpg" alt="Healthy">Healthy</div>
+              <div class="chip"> <img src="https://image.freepik.com/free-vector/discount-sale-price-tag-design_1017-15624.jpg" alt="Discount">Discount</div>
             </div>
         </div>
     </div>
