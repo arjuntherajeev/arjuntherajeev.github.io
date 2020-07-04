@@ -1,7 +1,12 @@
 ---
+full_title: All About Green Mangoes
 layout: post
 author: jill
 image_url: https://cdn.cdnparenting.com/articles/2019/03/09122917/653583370-H-696x476.jpg
+tags: 
+- Fruits
+- Healthy
+- Nutrition
 ---
 12 Reasons to Add Green Mango (Kairi) to Your Diet In Summer
 
