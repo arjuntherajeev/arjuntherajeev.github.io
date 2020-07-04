@@ -7,8 +7,8 @@
 	],
 	"sourcesContent": [
 		"@import \"main\";",
-		".analog-color {\r\n    color: #B02769;\r\n  }\r\n\r\n.comp-color {\r\n  color: #3BB027;\r\n}"
+		".analog-color {\r\n    color: #B02769;\r\n  }\r\n\r\n.comp-color {\r\n  color: #3BB027;\r\n}\r\n\r\n.comp-color-bg {\r\n  background-color: #3BB027;\r\n}\r\n\r\n.comp-color-bg:hover {\r\n  background-color: black;\r\n}"
 	],
 	"names": [],
-	"mappings": "ACAA,AAAA,aAAa,CAAC,EACV,KAAK,EAAE,OAAO,GACf;;AAEH,AAAA,WAAW,CAAC,EACV,KAAK,EAAE,OAAO,GACf"
+	"mappings": "ACAA,AAAA,aAAa,CAAC,EACV,KAAK,EAAE,OAAO,GACf;;AAEH,AAAA,WAAW,CAAC,EACV,KAAK,EAAE,OAAO,GACf;;AAED,AAAA,cAAc,CAAC,EACb,gBAAgB,EAAE,OAAO,GAC1B;;AAED,AAAA,cAAc,CAAC,KAAK,CAAC,EACnB,gBAAgB,EAAE,KAAK,GACxB"
 }
