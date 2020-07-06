@@ -14,9 +14,7 @@
   background-color: black;
 }
 
-.max {
-  // height: 100px;
-  // width: 100px;
-  max-width: 100vh;
-  overflow: hidden;
+.card-fixed {
+  min-width: 100%;
+  max-width: 100%;
 }

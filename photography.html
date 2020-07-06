@@ -8,13 +8,13 @@ title: Photography
 
 <div class="carousel">
     <a class="carousel-item" href="#one!"><img src="{{apple_url}}"></a>
-    <a class="carousel-item" href="#two!"><img src="{{green_mango_url}}"></a>
     <a class="carousel-item" href="#three!"><img src="{{apple_url}}"></a>
+    <a class="carousel-item" href="#two!"><img src="{{green_mango_url}}"></a>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.carousel');
-        var instances = M.Carousel.init(elems, options);
+        var instances = M.Carousel.init(elems);
       });
 </script>

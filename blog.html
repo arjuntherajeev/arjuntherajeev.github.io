@@ -1,13 +1,46 @@
 ---
-layout: default
-title: Tech Blog
+layout: default_no_container
+title: Blog
 ---
-<h3>Latest Posts</h3>
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <h2><a class="comp-color" href="{{ post.url }}">{{ post.full_title }}</a></h2>
-      {{ post.excerpt }}
-    </li>
-  {% endfor %}
-</ul>
+<div class="row">
+  <div class="col s12 m10 l10">
+    <!-- <h3>Latest Posts</h3> -->
+    <div class="row">
+      {% for post in site.posts %}
+      <div class="col s12 m12 l6">
+          <div class="card medium">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img onclick="window.location='{{post.url}}'" src="{{post.image_url}}">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4 truncate">{{post.full_title}}</span>
+                  <p>Posted on <b>{{ post.date | date_to_long_string }}</b></p>
+                  <p class="truncate">{{post.excerpt}}</p>
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="col s12 m2 l2">
+    <!-- <h3>&nbsp;</h3> -->
+    <!-- <br/> -->
+    {% capture tags %}
+      {% for tag in site.tags %}
+        {{ tag[0] }}
+      {% endfor %}
+    {% endcapture %}
+    {% assign sortedtags = tags | split:' ' | sort %}
+    
+    {% for tag in sortedtags %}
+      <h5 class="chip" id="{{tag}}">{{ tag }}</h5>
+      <ul>
+      {% for post in site.tags[tag] %}
+        <li><a href="{{post.url}}">{{ post.full_title }}</a></li>
+      {% endfor %}
+      </ul>
+    {% endfor %}  
+  </div>
+</div>
+
+

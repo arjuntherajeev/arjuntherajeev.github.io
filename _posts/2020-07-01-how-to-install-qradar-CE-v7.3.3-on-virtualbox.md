@@ -5,9 +5,10 @@ author: arjun
 image_url: https://diaryof0x41.files.wordpress.com/2020/05/screen-shot-2020-05-29-at-8.08.37-pm.png
 tags: 
 - QRadar
-- Community Edition
+- CE
 - SIEM
 - Security
+- VirtualBox
 ---
 Community Edition is a fully-featured free version of QRadar that is low memory, low EPS, and includes a perpetual license.
 
