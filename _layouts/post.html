@@ -1,9 +1,22 @@
 ---
 layout: default_no_container
 ---
-<div class="parallax-container">
-    <div class="parallax"><img class="parallax-img" src="{{page.image_url}}"></div>
-</div>
+<style>
+    header{
+        background: url('{{page.image_url}}');
+        background-size: cover;
+        background-position: center;
+        min-height: 400px;
+    }
+    @media screen and (max-width: 670px){
+        header{
+        min-height: 200px;
+        }
+    }
+</style>
+<header>
+{%- comment -%} This is awesome {%- endcomment -%}
+</header>
 <div class="section white">
     <div class="row container">
         <h2 class="header">{{page.full_title}}</h2>
@@ -18,10 +31,4 @@ layout: default_no_container
     </div>
 </div>
 
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.parallax');
-        var instances = M.Parallax.init(elems);
-      });
-</script>
+</html>

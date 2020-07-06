@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Green Mango</title>
+    <title>All About Green Mangoes</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
     <link rel="stylesheet" href="/assets/css/styles.css">
@@ -25,9 +25,20 @@
   </div>
 </nav>
     <div class="">
-    <div class="parallax-container">
-    <div class="parallax"><img class="parallax-img" src="https://cdn.cdnparenting.com/articles/2019/03/09122917/653583370-H-696x476.jpg"></div>
-</div>
+    <style>
+    header{
+        background: url('https://cdn.cdnparenting.com/articles/2019/03/09122917/653583370-H-696x476.jpg');
+        background-size: cover;
+        background-position: center;
+        min-height: 400px;
+    }
+    @media screen and (max-width: 670px){
+        header{
+        min-height: 200px;
+        }
+    }
+</style>
+<header></header>
 <div class="section white">
     <div class="row container">
         <h2 class="header">All About Green Mangoes</h2>
@@ -49,14 +60,9 @@
     </div>
 </div>
 
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.parallax');
-        var instances = M.Parallax.init(elems);
-      });
-</script>
+</html>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </body>
 </html>

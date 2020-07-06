@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>How To Get Away With Murder</title>
+    <title>How to Get Away with Murder</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
     <link rel="stylesheet" href="/assets/css/styles.css">
@@ -25,9 +25,20 @@
   </div>
 </nav>
     <div class="">
-    <div class="parallax-container">
-    <div class="parallax"><img class="parallax-img" src="https://m.media-amazon.com/images/M/MV5BZDQ5ZDRhMWItNjA5Ni00MDhiLTgwN2EtZjFkYzgzNjBhZTIyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY1000_CR0,0,675,1000_AL_.jpg"></div>
-</div>
+    <style>
+    header{
+        background: url('https://m.media-amazon.com/images/M/MV5BZDQ5ZDRhMWItNjA5Ni00MDhiLTgwN2EtZjFkYzgzNjBhZTIyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY1000_CR0,0,675,1000_AL_.jpg');
+        background-size: cover;
+        background-position: center;
+        min-height: 400px;
+    }
+    @media screen and (max-width: 670px){
+        header{
+        min-height: 200px;
+        }
+    }
+</style>
+<header></header>
 <div class="section white">
     <div class="row container">
         <h2 class="header">How to Get Away with Murder</h2>
@@ -51,14 +62,9 @@
     </div>
 </div>
 
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.parallax');
-        var instances = M.Parallax.init(elems);
-      });
-</script>
+</html>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </body>
 </html>
