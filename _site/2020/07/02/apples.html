@@ -24,18 +24,42 @@
     </ul>
   </div>
 </nav>
-    <div class="container">
-    <h3>All About Apples</h3>
-<p>02 Jul 2020 - Jill</p>
-
-<p>An apple is a sweet, edible fruit produced by an apple tree.</p>
+    <div class="">
+    <div class="parallax-container">
+    <div class="parallax"><img class="parallax-img" src="https://www.dw.com/image/47425871_401.jpg"></div>
+</div>
+<div class="section white">
+    <div class="row container">
+        <h2 class="header">All About Apples</h2>
+        <h6>02 Jul 2020</h6>
+        <br/>
+        <p class="grey-text text-darken-3 lighten-3"><p>An apple is a sweet, edible fruit produced by an apple tree.</p>
 
 <p>Apple trees are cultivated worldwide, and are the most widely grown species in
 the genus Malus. The tree originated in Central Asia, where its wild ancestor,
 Malus sieversii, is still found today. Apples have been grown for thousands of
 years in Asia and Europe, and were brought to North America by European
 colonists.</p>
+</p>
+    </div>
+    <div class="row container">
+        
+        <div class="chip">Fruits</div>
+        
+        <div class="chip">Healthy</div>
+        
+        <div class="chip">Nutrition</div>
+        
+    </div>
+</div>
 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.parallax');
+        var instances = M.Parallax.init(elems);
+      });
+</script>
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </body>

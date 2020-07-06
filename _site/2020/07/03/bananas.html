@@ -24,11 +24,16 @@
     </ul>
   </div>
 </nav>
-    <div class="container">
-    <h3>All About Bananas</h3>
-<p>03 Jul 2020 - Arjun</p>
-
-<p>A banana is an edible fruit – botanically a berry – produced by several kinds
+    <div class="">
+    <div class="parallax-container">
+    <div class="parallax"><img class="parallax-img" src="https://images.agoramedia.com/everydayhealth/gcms/All-About-Bananas-Nutrition-Facts-Health-Benefits-Recipes-and-More-RM-722x406.jpg"></div>
+</div>
+<div class="section white">
+    <div class="row container">
+        <h2 class="header">All About Bananas</h2>
+        <h6>03 Jul 2020</h6>
+        <br/>
+        <p class="grey-text text-darken-3 lighten-3"><p>A banana is an edible fruit – botanically a berry – produced by several kinds
 of large herbaceous flowering plants in the genus Musa.</p>
 
 <p>In some countries, bananas used for cooking may be called “plantains”,
@@ -36,7 +41,26 @@ distinguishing them from dessert bananas. The fruit is variable in size, color,
 and firmness, but is usually elongated and curved, with soft flesh rich in
 starch covered with a rind, which may be green, yellow, red, purple, or brown
 when ripe.</p>
+</p>
+    </div>
+    <div class="row container">
+        
+        <div class="chip">Fruits</div>
+        
+        <div class="chip">Healthy</div>
+        
+        <div class="chip">Nutrition</div>
+        
+    </div>
+</div>
 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.parallax');
+        var instances = M.Parallax.init(elems);
+      });
+</script>
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </body>

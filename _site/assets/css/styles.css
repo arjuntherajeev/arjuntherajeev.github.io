@@ -6,4 +6,8 @@
 
 .comp-color-bg:hover { background-color: black; }
 
+.parallax-container { height: 400px; }
+
+.parallax-img { height: auto; max-width: 100%; }
+
 /*# sourceMappingURL=styles.css.map */

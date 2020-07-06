@@ -1,7 +1,27 @@
 ---
-layout: default
+layout: default_no_container
 ---
-<h3>{{ page.full_title }}</h3>
-<p>{{ page.date | date_to_string }} - {{ page.author | capitalize }}</p>
+<div class="parallax-container">
+    <div class="parallax"><img class="parallax-img" src="{{page.image_url}}"></div>
+</div>
+<div class="section white">
+    <div class="row container">
+        <h2 class="header">{{page.full_title}}</h2>
+        <h6>{{ page.date | date_to_string }}</h6>
+        <br/>
+        <p class="grey-text text-darken-3 lighten-3">{{content}}</p>
+    </div>
+    <div class="row container">
+        {% for tag in page.tags %}
+        <div class="chip">{{tag }}</div>
+        {% endfor %}
+    </div>
+</div>
 
-{{ content }}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.parallax');
+        var instances = M.Parallax.init(elems);
+      });
+</script>
