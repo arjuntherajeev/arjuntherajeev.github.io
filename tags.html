@@ -1,0 +1,22 @@
+---
+layout: default
+---
+<div class="col s12 m12 l12">
+    <!-- <h3>&nbsp;</h3> -->
+    <!-- <br/> -->
+    {% capture tags %}
+      {% for tag in site.tags %}
+        {{ tag[0] }}
+      {% endfor %}
+    {% endcapture %}
+    {% assign sortedtags = tags | split:' ' | sort %}
+    
+    {% for tag in sortedtags %}
+      <h5 class="chip" id="{{tag}}">{{ tag }}</h5>
+      <ul>
+      {% for post in site.tags[tag] %}
+        <li><a href="{{post.url}}">{{ post.full_title }}</a></li>
+      {% endfor %}
+      </ul>
+    {% endfor %}  
+  </div>

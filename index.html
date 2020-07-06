@@ -3,45 +3,53 @@
 layout: default
 title: Diary of Arjun
 ---
-<h3>Welcome to <b>Diary of Arjun</b></h3>
+<!-- <h3>Welcome to <b>Diary of Arjun</b></h3> -->
 <!-- <p>Personal blog and website</p> -->
 <div class="row">
-    <div class="col s12 m12 l6">
+    <div class="col s12 m12 l12">
       <!-- Blank :) Happy! You're gonna have to hold on! -->
     </div>
-    <div class="col s12 m12 l6">
-        <div class="card">
-        <div class="card-image waves-effect waves-block waves-light">
-            <img onclick="window.location='/about'" src="assets/images/moi.jpg">
-            <span class="card-title">Meet Arjun</span>
-            <!-- <a href="/about" class="btn-floating halfway-fab waves-effect waves-light comp-color-bg"><i class="material-icons">launch</i></a> -->
+    <style>
+      header{
+          background: url('assets/images/moi.jpg');
+          background-size: cover;
+          background-position: center;
+          min-height: 430px;
+      }
+
+    </style>
+      <div class="row">
+        <div class="col s12 m7 l7">
+          <header>
+
+          </header>
         </div>
-        <div class="card-content">
-            <!-- <span class="card-title grey-text text-darken-4">Meet Arjun</span> -->
-            <p>What is my favourite colour? My favourite city? do I like <code>Python</code> or <code>Java</code> (or both)? Answers to these and so much more!</p>
+        <div class="col s12 m5 l5">
+          <h4 class="">Welcome to <br/><b>Diary of Arjun</b></h4>
+          <h6>Adventures and learnings of a programmer, analyst, photographer, guitarist, and cyber security consultant</h6>
+          {%- comment -%} <p>A blog about the adventures of a young programmer</p> {%- endcomment -%}
+          <br/>
+          <p class="">
+            <i>
+            Aliquam eu aliquam risus, et vulputate diam. Sed consequat sed nisi id viverra. In at dui blandit, placerat risus id, sodales massa. Nam pretium turpis quis lobortis volutpat. Aenean elementum fermentum vulputate. Phasellus blandit posuere libero sed ornare. Donec in malesuada odio, nec consectetur quam.
+            </i>
+          </p>
         </div>
-        </div>
-    </div>
+      </div>
 </div>
-<h3>Read my <b>Latest Posts</b></h3>
+<h4>Read my <b>Latest Posts</b></h4>
 <div class="row">
-    {% for post in site.posts limit:4 %}
-    <div class="col s12 m12 l6">
-        <div class="card medium">
-            <div class="card-image waves-effect waves-block waves-light">
-              <img onclick="window.location='{{post.url}}'" src="{{post.image_url}}">
-            </div>
-            <div class="card-content">
-              <span class="card-title grey-text text-darken-4 truncate">{{post.full_title}}</span>
-                <!-- <p>{{ post.date | date_to_long_string }}</p> -->
-                <p class="truncate">{{post.excerpt}}</p>
-            </div>
-            <div class="card-action">
-                {% for tag in post.tags %}
-                <div class="chip">{{tag }}</div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    {% endfor %}
+  {% for post in site.posts limit:4 %}
+  <div class="col s12 m12 l6">
+      <div class="card medium">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img onclick="window.location='{{post.url}}'" src="{{post.image_url}}">
+          </div>
+          <div class="card-content">
+            <span class="card-title grey-text text-darken-4 truncate"><b>{{post.full_title}}</b></span>
+              <p class="truncate">{{post.excerpt}}</p>
+          </div>
+      </div>
   </div>
+  {% endfor %}
+</div>
