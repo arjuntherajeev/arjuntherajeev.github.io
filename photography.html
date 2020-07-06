@@ -1,20 +1,28 @@
 ---
-layout: default
-title: Photography
+layout: default_no_container
+title: Photos
 ---
-<h3>Photography</h3>
-{% assign apple_url='https://www.dw.com/image/47425871_401.jpg' %}
-{% assign green_mango_url='https://cdn.cdnparenting.com/articles/2019/03/09122917/653583370-H-696x476.jpg' %}
 
-<div class="carousel">
-    <a class="carousel-item" href="#one!"><img src="{{apple_url}}"></a>
-    <a class="carousel-item" href="#three!"><img src="{{apple_url}}"></a>
-    <a class="carousel-item" href="#two!"><img src="{{green_mango_url}}"></a>
-</div>
+ <div class="container">
+  	{%- comment -%} <h1>Materialize Image Gallery</h1> {%- endcomment -%}
+      {%- comment -%} {{site.data.photos}} {%- endcomment -%}
+  	<div class="row card z-depth-0">
+        {% for item in site.data.photos %}
+            <div class="col s12 m6 l4 card small valign-wrapper z-depth-0">
+                <img data-caption="{{item.image_title}}" src="{{item.image_url}}" class="materialboxed responsive-img card">
+            </div>
+            <div class="col s12 m6 l4 card small valign-wrapper z-depth-0">
+                <img data-caption="{{item.image_title}}" src="{{item.image_url}}" class="materialboxed responsive-img card">
+            </div>
+        {% endfor %}
+  	 </div>
+  </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.carousel');
-        var instances = M.Carousel.init(elems);
-      });
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.slider');
+    var instances = M.Slider.init(elems);
+    var elems = document.querySelectorAll('.materialboxed');
+    var instances = M.Materialbox.init(elems);
+});
 </script>
