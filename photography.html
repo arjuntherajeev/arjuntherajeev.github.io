@@ -1,0 +1,20 @@
+---
+layout: default
+title: Photography
+---
+<h3>Photography</h3>
+{% assign apple_url='https://www.dw.com/image/47425871_401.jpg' %}
+{% assign green_mango_url='https://cdn.cdnparenting.com/articles/2019/03/09122917/653583370-H-696x476.jpg' %}
+
+<div class="carousel">
+    <a class="carousel-item" href="#one!"><img src="{{apple_url}}"></a>
+    <a class="carousel-item" href="#two!"><img src="{{green_mango_url}}"></a>
+    <a class="carousel-item" href="#three!"><img src="{{apple_url}}"></a>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.carousel');
+        var instances = M.Carousel.init(elems, options);
+      });
+</script>
