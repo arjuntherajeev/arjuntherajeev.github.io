@@ -25,7 +25,7 @@ layout: default_no_container
     </div>
     <div class="row container">
         {% for tag in page.tags %}
-        <div class="chip">{{tag }}</div>
+        <div onclick="window.location='/tags.html#{{tag | slugify}}'" class="chip waves-effect waves-block waves-light">{{tag }}</div>
         {% endfor %}
     </div>
 </div>
