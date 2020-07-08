@@ -1,15 +1,25 @@
 ---
-full_title: "VulnHub: The Necromancer: 1 Walkthrough"
+full_title: "Entry 0x02 - VulnHub: The Necromancer: 1 Walkthrough"
 date: "2019-05-26"
 coverImage: "necromancer-00.png"
 layout: post
+tags:
+- Beginner
+- CTF
+- Kali
+- Linux
+- Vulnhub
+- Walkthrough
+- Writeup
+- Security
 ---
 
 **The Necromancer: 1** is a challenge posted on [VulnHub](https://www.vulnhub.com/entry/the-necromancer-1,154/) created by [Xerubus](https://www.vulnhub.com/author/xerubus,117/). This is a write-up of my experience solving this awesome CTF challenge.
 
 With my Attack Machine (**Kali Linux**) and Victim Machine (**Necromancer**) set up and running, I decided to get down to solving this challenge.
+{: class="flow-text"}
 
-> Read more about my set up and environment [here](https://diaryof0x41.wordpress.com/2019/05/25/entry-0x01-my-first-post/)
+> Read more about my set up and environment [here](/2019/05/25/entry-0x01-my-first-post.html/)
 
 I decided to start my journey with the classic `netdiscover`. My Kali Linux VM has an IP of `192.168.56.102` according to `ifconfig`. With this knowledge and the fact that I set up **host-only networking** for my VMs, I decided to run the following command: `netdiscover -r 192.168.56.0/24`.
 

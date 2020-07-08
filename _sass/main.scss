@@ -2,12 +2,15 @@
     color: #B02769;
   }
 
+$comp-color-value: #3BB027;
+$code-color: transparent;
+
 .comp-color {
-  color: #3BB027;
+  color: $comp-color-value;
 }
 
 .comp-color-bg {
-  background-color: #3BB027;
+  background-color: $comp-color-value;
 }
 
 .comp-color-bg:hover {
@@ -16,4 +19,12 @@
 
 img {
   max-width: 100%;
+}
+
+a {
+  color: $comp-color-value;
+}
+
+code {
+  background-color: $code-color;
 }

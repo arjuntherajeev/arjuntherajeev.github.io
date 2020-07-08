@@ -4,10 +4,15 @@ date: "2019-05-25"
 coverImage: "screen-shot-2019-05-25-at-11.59.40-pm.png"
 layout: post
 tags: 
-- A
-- B
-- C
+- Beginner
+- CTF
+- Kali
+- Linux
+- Vulnhub
+- VM
 ---
+
+Hello reader,
 
 For the past few months or so, I have been playing with [VulnHub](https://www.vulnhub.com/).
 

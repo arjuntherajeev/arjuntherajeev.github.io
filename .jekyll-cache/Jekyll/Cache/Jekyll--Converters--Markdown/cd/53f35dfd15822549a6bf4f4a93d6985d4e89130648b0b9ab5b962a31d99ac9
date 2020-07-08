@@ -1,9 +1,9 @@
-I"��<p><strong>The Necromancer: 1</strong> is a challenge posted on <a href="https://www.vulnhub.com/entry/the-necromancer-1,154/">VulnHub</a> created by <a href="https://www.vulnhub.com/author/xerubus,117/">Xerubus</a>. This is a write-up of my experience solving this awesome CTF challenge.</p>
+I"��<p><strong>The Necromancer: 1</strong> is a challenge posted on <a href="https://www.vulnhub.com/entry/the-necromancer-1,154/">VulnHub</a> created by <a href="https://www.vulnhub.com/author/xerubus,117/">Xerubus</a>. This is a write-up of my experience solving this awesome CTF challenge.</p>
 
 <p>With my Attack Machine (<strong>Kali Linux</strong>) and Victim Machine (<strong>Necromancer</strong>) set up and running, I decided to get down to solving this challenge.</p>
 
 <blockquote>
-  <p>Read more about my set up and environment <a href="https://diaryof0x41.wordpress.com/2019/05/25/entry-0x01-my-first-post/">here</a></p>
+  <p>Read more about my set up and environment <a href="/2019/05/25/entry-0x01-my-first-post.html/">here</a></p>
 </blockquote>
 
 <p>I decided to start my journey with the classic <code class="language-plaintext highlighter-rouge">netdiscover</code>. My Kali Linux VM has an IP of <code class="language-plaintext highlighter-rouge">192.168.56.102</code> according to <code class="language-plaintext highlighter-rouge">ifconfig</code>. With this knowledge and the fact that I set up <strong>host-only networking</strong> for my VMs, I decided to run the following command: <code class="language-plaintext highlighter-rouge">netdiscover -r 192.168.56.0/24</code>.</p>

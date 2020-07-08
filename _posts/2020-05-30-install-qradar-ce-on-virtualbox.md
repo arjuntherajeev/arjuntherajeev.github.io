@@ -3,6 +3,8 @@ full_title: "How to install QRadar CE V7.3.3 on VirtualBox"
 date: "2020-05-30"
 coverImage: "screen-shot-2020-05-29-at-8.21.38-pm.png"
 layout: post
+tags: 
+- hyo
 ---
 
 [IBM QRadar SIEM](https://www.ibm.com/products/qradar-siem) is a world-class SIEM tool used by organizations for monitoring and correlating logs from different systems. QRadar can quickly alert SOC Analysts about potential malicious activity and prompt them to take appropriate action.

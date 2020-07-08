@@ -7,8 +7,8 @@
 	],
 	"sourcesContent": [
 		"@import \"main\";",
-		".analog-color {\r\n    color: #B02769;\r\n  }\r\n\r\n.comp-color {\r\n  color: #3BB027;\r\n}\r\n\r\n.comp-color-bg {\r\n  background-color: #3BB027;\r\n}\r\n\r\n.comp-color-bg:hover {\r\n  background-color: black;\r\n}\r\n\r\nimg {\r\n  max-width: 100%;\r\n}"
+		".analog-color {\r\n    color: #B02769;\r\n  }\r\n\r\n$comp-color-value: #3BB027;\r\n$code-color: transparent;\r\n\r\n.comp-color {\r\n  color: $comp-color-value;\r\n}\r\n\r\n.comp-color-bg {\r\n  background-color: $comp-color-value;\r\n}\r\n\r\n.comp-color-bg:hover {\r\n  background-color: black;\r\n}\r\n\r\nimg {\r\n  max-width: 100%;\r\n}\r\n\r\na {\r\n  color: $comp-color-value;\r\n}\r\n\r\ncode {\r\n  background-color: $code-color;\r\n}\r\n"
 	],
 	"names": [],
-	"mappings": "ACAA,AAAA,aAAa,CAAC,EACV,KAAK,EAAE,OAAO,GACf;;AAEH,AAAA,WAAW,CAAC,EACV,KAAK,EAAE,OAAO,GACf;;AAED,AAAA,cAAc,CAAC,EACb,gBAAgB,EAAE,OAAO,GAC1B;;AAED,AAAA,cAAc,CAAC,KAAK,CAAC,EACnB,gBAAgB,EAAE,KAAK,GACxB;;AAED,AAAA,GAAG,CAAC,EACF,SAAS,EAAE,IAAI,GAChB"
+	"mappings": "ACAA,AAAA,aAAa,CAAC,EACV,KAAK,EAAE,OAAO,GACf;;AAKH,AAAA,WAAW,CAAC,EACV,KAAK,EAJY,OAAO,GAKzB;;AAED,AAAA,cAAc,CAAC,EACb,gBAAgB,EARC,OAAO,GASzB;;AAED,AAAA,cAAc,CAAC,KAAK,CAAC,EACnB,gBAAgB,EAAE,KAAK,GACxB;;AAED,AAAA,GAAG,CAAC,EACF,SAAS,EAAE,IAAI,GAChB;;AAED,AAAA,CAAC,CAAC,EACA,KAAK,EApBY,OAAO,GAqBzB;;AAED,AAAA,IAAI,CAAC,EACH,gBAAgB,EAvBL,WAAW,GAwBvB"
 }

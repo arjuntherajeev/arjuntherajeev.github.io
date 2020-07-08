@@ -1,51 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Entry 0x01 - My First Post</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
-
-  <body class="">
-    <nav>
-  <div class="nav-wrapper black"><ul id="nav-mobile" class="left">
-      
-        <li ><a href="/">Home</a></li>
-      
-        <li ><a href="/about.html">About</a></li>
-      
-        <li ><a href="/blog.html">Blog</a></li>
-      
-    </ul>
-    <ul id="nav-mobile" class="right">
-      <li><a href="https://youtube.com"><i class="material-icons">library_music</i></a></li>
-    </ul>
-  </div>
-</nav>
-    <div class="">
-    <style>
-    header{
-        background: url('/assets/images/screen-shot-2019-05-25-at-11.59.40-pm.png');
-        background-size: cover;
-        background-position: center;
-        min-height: 430px;
-    }
-    @media screen and (max-width: 670px){
-        header{
-        min-height: 200px;
-        }
-    }
-</style>
-<header>
-</header>
-<div class="white">
-    <div class="row container">
-        <h3 class="header">Entry 0x01 - My First Post</h3>
-        <h6>Posted on <b>25 May 2019</b></h6>
-        <br/>
-        <p class="grey-text text-darken-3 lighten-3"><p>Hello reader,</p>
+I"=
+<p>Hello reader,</p>
 
 <p>For the past few months or so, I have been playing with <a href="https://www.vulnhub.com/">VulnHub</a>.</p>
 
@@ -71,27 +25,4 @@
 <p>The past few months have been superb. I have learnt tremendously and owe most of my knowledge to well-written walkthroughs.</p>
 
 <p>Here’s to owning more VMs and finding more flags!</p>
-</p>
-    </div>
-    <div class="row container">
-        
-        <div onclick="window.location='/tags.html#beginner'" class="chip waves-effect waves-block waves-light">Beginner</div>
-        
-        <div onclick="window.location='/tags.html#ctf'" class="chip waves-effect waves-block waves-light">CTF</div>
-        
-        <div onclick="window.location='/tags.html#kali'" class="chip waves-effect waves-block waves-light">Kali</div>
-        
-        <div onclick="window.location='/tags.html#linux'" class="chip waves-effect waves-block waves-light">Linux</div>
-        
-        <div onclick="window.location='/tags.html#vulnhub'" class="chip waves-effect waves-block waves-light">Vulnhub</div>
-        
-        <div onclick="window.location='/tags.html#vm'" class="chip waves-effect waves-block waves-light">VM</div>
-        
-    </div>
-</div>
-
-</html>
-    </div>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </body>
-</html>
+:ET

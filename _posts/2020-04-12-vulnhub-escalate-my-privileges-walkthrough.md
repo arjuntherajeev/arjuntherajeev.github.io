@@ -9,7 +9,7 @@ coverImage: "screen-shot-2020-04-13-at-12.49.33-am.png"
 
 With my Attack Machine (**Kali Linux**) and Victim Machine (**Escalate My Privileges: 1**) set up and running, I decided to get down to solving this challenge.
 
-> Read more about my set up and environment [here](https://diaryof0x41.wordpress.com/2019/05/25/entry-0x01-my-first-post/)
+> Read more about my set up and environment [here](/2019/05/25/entry-0x01-my-first-post.html/)
 
 I decided to start my journey by noting down the IP address of our victim machine. We are lucky that the author decided to display it directly on the login screen of the CentOS server.
 

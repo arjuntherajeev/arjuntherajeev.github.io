@@ -3,7 +3,7 @@
 <p>With my Attack Machine (<strong>Kali Linux</strong>) and Victim Machine (<strong>DC: 3</strong>) set up and running, I decided to get down to solving this challenge.</p>
 
 <blockquote>
-  <p>Read more about my set up and environment <a href="https://diaryof0x41.wordpress.com/2019/05/25/entry-0x01-my-first-post/">here</a></p>
+  <p>Read more about my set up and environment <a href="/2019/05/25/entry-0x01-my-first-post.html/">here</a></p>
 </blockquote>
 
 <p>I decided to start my journey with <code class="language-plaintext highlighter-rouge">netdiscover</code> to complete the <em>host discovery</em> phase as follows: <code class="language-plaintext highlighter-rouge">netdiscover -r 192.168.56.0/24</code></p>

@@ -1,9 +1,9 @@
-I"�A<p><strong>DC: 6</strong> is a challenge posted on <a href="https://www.vulnhub.com/entry/dc-6,315/">VulnHub</a> created by <a href="https://www.vulnhub.com/author/dcau,610/">DCAU</a>. This is a write-up of my experience solving this awesome CTF challenge.</p>
+I"�A<p><strong>DC: 6</strong> is a challenge posted on <a href="https://www.vulnhub.com/entry/dc-6,315/">VulnHub</a> created by <a href="https://www.vulnhub.com/author/dcau,610/">DCAU</a>. This is a write-up of my experience solving this awesome CTF challenge.</p>
 
 <p>With my Attack Machine (<strong>Kali Linux</strong>) and Victim Machine (<strong>DC: 6</strong>) set up and running, I decided to get down to solving this challenge.</p>
 
 <blockquote>
-  <p>Read more about my set up and environment <a href="https://diaryof0x41.wordpress.com/2019/05/25/entry-0x01-my-first-post/">here</a></p>
+  <p>Read more about my set up and environment <a href="/2019/05/25/entry-0x01-my-first-post.html/">here</a></p>
 </blockquote>
 
 <p>I decided to start my journey with <code class="language-plaintext highlighter-rouge">netdiscover</code> to complete the <em>host discovery</em> phase as follows: <code class="language-plaintext highlighter-rouge">netdiscover -r 192.168.56.0/24</code></p>
