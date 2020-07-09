@@ -1,51 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Entry 0x07 - Vulnhub: Escalate My Privileges: 1 Walkthrough</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
-
-  <body class="">
-    <nav>
-  <div class="nav-wrapper black"><ul id="nav-mobile" class="left">
-      
-        <li ><a href="/">Home</a></li>
-      
-        <li ><a href="/about.html">About</a></li>
-      
-        <li ><a href="/blog.html">Blog</a></li>
-      
-    </ul>
-    <ul id="nav-mobile" class="right">
-      <li><a href="https://youtube.com"><i class="material-icons">library_music</i></a></li>
-    </ul>
-  </div>
-</nav>
-    <div class="">
-    <style>
-    header{
-        background: url('/assets/images/screen-shot-2020-04-13-at-12.49.33-am.png');
-        background-size: cover;
-        background-position: center;
-        min-height: 430px;
-    }
-    @media screen and (max-width: 670px){
-        header{
-        min-height: 200px;
-        }
-    }
-</style>
-<header>
-</header>
-<div class="white">
-    <div class="row container flow-text">
-        <h3 class="header">Entry 0x07 - Vulnhub: Escalate My Privileges: 1 Walkthrough</h3>
-        <h6>Posted on <b>12 April 2020</b></h6>
-        <br/>
-        <p class="grey-text text-darken-3 lighten-3"><p><strong>Escalate My Privileges: 1</strong> is a challenge posted on <a href="https://www.vulnhub.com/entry/escalate-my-privileges-1,448/">VulnHub</a> created by <a href="https://www.vulnhub.com/author/akanksha-sachin-verma,672/">Akanksha Sachin Verma</a>. This is a write-up of my experience solving this awesome CTF challenge.</p>
+I"Æ2<p><strong>Escalate My Privileges: 1</strong> is a challenge created by Akanksha Sachin Verma. This is a write-up of my experience solving this awesome CTF challenge.</p>
 
 <p>With my Attack Machine (<strong>Kali Linux</strong>) and Victim Machine (<strong>Escalate My Privileges: 1</strong>) set up and running, I decided to get down to solving this challenge.</p>
 
@@ -212,38 +165,5 @@ md5(rootroot1)
 
 <p>I look forward to solving more challenges in the <a href="https://www.vulnhub.com/series/escalate-my-privileges,291/">Escalate My Privileges</a> series.</p>
 
-<p>If you enjoyed reading this write-up, please check out my other <a href="/tags#vulnhub">Vulnhub walkthroughs</a>.</p>
-</p>
-    </div>
-    <div class="row container">
-        
-        <div onclick="window.location='/tags.html#beginner'" class="chip waves-effect waves-block waves-light">Beginner</div>
-        
-        <div onclick="window.location='/tags.html#ctf'" class="chip waves-effect waves-block waves-light">CTF</div>
-        
-        <div onclick="window.location='/tags.html#kali'" class="chip waves-effect waves-block waves-light">Kali</div>
-        
-        <div onclick="window.location='/tags.html#linux'" class="chip waves-effect waves-block waves-light">Linux</div>
-        
-        <div onclick="window.location='/tags.html#vulnhub'" class="chip waves-effect waves-block waves-light">Vulnhub</div>
-        
-        <div onclick="window.location='/tags.html#walkthrough'" class="chip waves-effect waves-block waves-light">Walkthrough</div>
-        
-        <div onclick="window.location='/tags.html#writeup'" class="chip waves-effect waves-block waves-light">Writeup</div>
-        
-        <div onclick="window.location='/tags.html#security'" class="chip waves-effect waves-block waves-light">Security</div>
-        
-    </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.materialboxed');
-    var instances = M.Materialbox.init(elems);
-    });
-</script>
-</html>
-    </div>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </body>
-</html>
+<p>If you enjoyed reading this write-up, please check out my other <a href="/tags#vulnhub/">Vulnhub walkthroughs</a>.</p>
+:ET

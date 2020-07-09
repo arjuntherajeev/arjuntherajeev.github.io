@@ -1,11 +1,20 @@
 ---
-full_title: "Vulnhub: Escalate My Privileges: 1 Walkthrough"
+full_title: "Entry 0x07 - Vulnhub: Escalate My Privileges: 1 Walkthrough"
 date: "2020-04-12"
 layout: post
 coverImage: "screen-shot-2020-04-13-at-12.49.33-am.png"
+tags:
+- Beginner
+- CTF
+- Kali
+- Linux
+- Vulnhub
+- Walkthrough
+- Writeup
+- Security
 ---
 
-**Escalate My Privileges: 1** is a challenge created by Akanksha Sachin Verma. This is a write-up of my experience solving this awesome CTF challenge.
+**Escalate My Privileges: 1** is a challenge posted on [VulnHub](https://www.vulnhub.com/entry/escalate-my-privileges-1,448/) created by [Akanksha Sachin Verma](https://www.vulnhub.com/author/akanksha-sachin-verma,672/). This is a write-up of my experience solving this awesome CTF challenge.
 
 With my Attack Machine (**Kali Linux**) and Victim Machine (**Escalate My Privileges: 1**) set up and running, I decided to get down to solving this challenge.
 
@@ -61,8 +70,10 @@ What does it contain? I decided to find out...
 
 The `Credentials.txt` file contains the following text:
 
+```
 my password is
 md5(rootroot1)
+```
 
 Woohoo! A password... but how to use it?
 
@@ -76,7 +87,8 @@ But first - I decided to compute the `MD5` hash of the password string - `rootro
 
 Great! We have our password!
 
-I decided to try logging into the victim machine as `armour` using the command: `ssh armour@192.168.56.120`
+I decided to try logging into the victim machine as `armour` using the command: 
+`ssh armour@192.168.56.120`
 
 ![Screen Shot 2020-04-13 at 8.29.01 PM](/assets/images/screen-shot-2020-04-13-at-8.29.01-pm.png)
 
@@ -164,4 +176,4 @@ I am writing a Vulnhub walkthrough after almost 7 months and had to do a LOT of 
 
 I look forward to solving more challenges in the [Escalate My Privileges](https://www.vulnhub.com/series/escalate-my-privileges,291/) series.
 
-If you enjoyed reading this write-up, please check out my other [Vulnhub walkthroughs](https://diaryof0x41.wordpress.com/category/vulnhub/).
+If you enjoyed reading this write-up, please check out my other [Vulnhub walkthroughs](/tags#vulnhub).
