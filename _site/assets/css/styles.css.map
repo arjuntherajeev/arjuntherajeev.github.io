@@ -7,8 +7,8 @@
 	],
 	"sourcesContent": [
 		"@import \"main\";",
-		".analog-color {\r\n    color: #B02769;\r\n  }\r\n\r\n$comp-color-value: #3BB027;\r\n$code-color: transparent;\r\n\r\n.comp-color {\r\n  color: $comp-color-value;\r\n}\r\n\r\n.comp-color-bg {\r\n  background-color: $comp-color-value;\r\n}\r\n\r\n.comp-color-bg:hover {\r\n  background-color: black;\r\n}\r\n\r\nimg {\r\n  max-width: 100%;\r\n}\r\n\r\na {\r\n  color: $comp-color-value;\r\n}\r\n\r\ncode {\r\n  background-color: $code-color;\r\n}"
+		".analog-color {\r\n    color: #B02769;\r\n  }\r\n\r\n$comp-color-value: #3BB027;\r\n$code-color: transparent;\r\n\r\n.comp-color {\r\n  color: $comp-color-value;\r\n}\r\n\r\n.comp-color-bg {\r\n  background-color: $comp-color-value;\r\n}\r\n\r\n.comp-color-bg:hover {\r\n  background-color: black;\r\n}\r\n\r\nimg {\r\n  max-width: 100%;\r\n}\r\n\r\na {\r\n  color: $comp-color-value;\r\n}\r\n\r\ncode {\r\n  background-color: $code-color;\r\n}\r\n\r\n.flow-text {\r\n  // font-size: 1.3em;\r\n  font-size: 3vh;\r\n}\r\n\r\ncode {\r\n  word-wrap: break-word;\r\n}\r\n\r\nblockquote {\r\n  border-left: 5px solid $comp-color-value;\r\n}\r\n\r\n.chip {\r\n  \r\n}"
 	],
 	"names": [],
-	"mappings": "ACAA,AAAA,aAAa,CAAC,EACV,KAAK,EAAE,OAAO,GACf;;AAKH,AAAA,WAAW,CAAC,EACV,KAAK,EAJY,OAAO,GAKzB;;AAED,AAAA,cAAc,CAAC,EACb,gBAAgB,EARC,OAAO,GASzB;;AAED,AAAA,cAAc,CAAC,KAAK,CAAC,EACnB,gBAAgB,EAAE,KAAK,GACxB;;AAED,AAAA,GAAG,CAAC,EACF,SAAS,EAAE,IAAI,GAChB;;AAED,AAAA,CAAC,CAAC,EACA,KAAK,EApBY,OAAO,GAqBzB;;AAED,AAAA,IAAI,CAAC,EACH,gBAAgB,EAvBL,WAAW,GAwBvB"
+	"mappings": "ACAA,AAAA,aAAa,CAAC,EACV,KAAK,EAAE,OAAO,GACf;;AAKH,AAAA,WAAW,CAAC,EACV,KAAK,EAJY,OAAO,GAKzB;;AAED,AAAA,cAAc,CAAC,EACb,gBAAgB,EARC,OAAO,GASzB;;AAED,AAAA,cAAc,CAAC,KAAK,CAAC,EACnB,gBAAgB,EAAE,KAAK,GACxB;;AAED,AAAA,GAAG,CAAC,EACF,SAAS,EAAE,IAAI,GAChB;;AAED,AAAA,CAAC,CAAC,EACA,KAAK,EApBY,OAAO,GAqBzB;;AAED,AAAA,IAAI,CAAC,EACH,gBAAgB,EAvBL,WAAW,GAwBvB;;AAED,AAAA,UAAU,CAAC,EAET,SAAS,EAAE,GAAG,GACf;;AAED,AAAA,IAAI,CAAC,EACH,SAAS,EAAE,UAAU,GACtB;;AAED,AAAA,UAAU,CAAC,EACT,WAAW,EAAE,GAAG,CAAC,KAAK,CArCL,OAAO,GAsCzB"
 }
