@@ -1,8 +1,18 @@
 ---
-full_title: "VulnHub: DC: 3 Walkthrough"
+full_title: "Entry 0x04 - VulnHub: DC: 3 Walkthrough"
 date: "2019-06-03"
 coverImage: "dc-3-00.png"
 layout: post
+tags:
+- Beginner
+- CTF
+- Kali
+- Linux
+- Vulnhub
+- Walkthrough
+- Writeup
+- Security
+- DC-Series
 ---
 
 **DC: 3** is a challenge posted on [VulnHub](https://www.vulnhub.com/entry/dc-3,312/) created by [DCAU](https://www.vulnhub.com/author/dcau,610/). This is a write-up of my experience solving this awesome CTF challenge.
@@ -246,6 +256,7 @@ Finally! Awesome!
 
 That was a really interesting challenge! Props to @DCAU for coming up with a great challenge revolving around Joomla.
 
-I really learnt a lot about Joomla and better understood the usage of Linux kernel exploits for _privilege escalation_ in CTFs. TL;DR - be ready for tons of trial and error.
+I really learnt a lot about Joomla and better understood the usage of Linux kernel exploits for _privilege escalation_ in CTFs. 
+**TL;DR** - be ready for tons of trial and error.
 
-If you enjoyed reading this, please check out my [DC: 6 walkthrough](https://diaryof0x41.wordpress.com/2019/05/29/vulnhub-dc-6-walkthrough/) which is another challenge by @DCAU in the [DC series](https://www.vulnhub.com/series/dc,199/).
+If you enjoyed reading this, please check out my [DC: 6 walkthrough](/2019/05/29/vulnhub-dc-6-walkthrough/) which is another challenge by @DCAU in the [DC series](https://www.vulnhub.com/series/dc,199/).
