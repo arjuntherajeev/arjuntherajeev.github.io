@@ -71,7 +71,7 @@ The real way to go about this challenge requires an open mind and "outside the b
 
 At the footer, there is some text saying **@DC7USER** 
 
-In my initial look, I assumed it was the author's Twitter handle. Upon closer inspection, something looked fishy. I decided to browse to the URL `[http://twitter.com/DC7USER](http://twitter.com/DC7USER)`
+In my initial look, I assumed it was the author's Twitter handle. Upon closer inspection, something looked fishy. I decided to browse to the URL [http://twitter.com/DC7USER](http://twitter.com/DC7USER)
 
 ![Screen Shot 2019-09-02 at 11.32.32 PM.png](/assets/images/screen-shot-2019-09-02-at-11.32.32-pm.png)
 
