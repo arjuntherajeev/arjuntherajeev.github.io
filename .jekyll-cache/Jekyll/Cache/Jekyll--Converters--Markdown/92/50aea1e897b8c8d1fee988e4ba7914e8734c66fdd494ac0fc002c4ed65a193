@@ -1,51 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Entry 0x02 - VulnHub: The Necromancer: 1 Walkthrough</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
-
-  <body class="">
-    <nav>
-  <div class="nav-wrapper black"><ul id="nav-mobile" class="left">
-      
-        <li ><a href="/">Home</a></li>
-      
-        <li ><a href="/about.html">About</a></li>
-      
-        <li ><a href="/blog.html">Blog</a></li>
-      
-    </ul>
-    <ul id="nav-mobile" class="right">
-      <li><a href="https://youtube.com"><i class="material-icons">library_music</i></a></li>
-    </ul>
-  </div>
-</nav>
-    <div class="">
-    <style>
-    header{
-        background: url('/assets/images/necromancer-00.png');
-        background-size: cover;
-        background-position: center;
-        min-height: 430px;
-    }
-    @media screen and (max-width: 670px){
-        header{
-        min-height: 200px;
-        }
-    }
-</style>
-<header>
-</header>
-<div class="white">
-    <div class="row container">
-        <h3 class="header">Entry 0x02 - VulnHub: The Necromancer: 1 Walkthrough</h3>
-        <h6>Posted on <b>26 May 2019</b></h6>
-        <br/>
-        <p class="grey-text text-darken-3 lighten-3"><p class="flow-text"><strong>The Necromancer: 1</strong> is a challenge posted on <a href="https://www.vulnhub.com/entry/the-necromancer-1,154/">VulnHub</a> created by <a href="https://www.vulnhub.com/author/xerubus,117/">Xerubus</a>. This is a write-up of my experience solving this awesome CTF challenge.</p>
+I"�<p class="flow-text"><strong>The Necromancer: 1</strong> is a challenge posted on <a href="https://www.vulnhub.com/entry/the-necromancer-1,154/">VulnHub</a> created by <a href="https://www.vulnhub.com/author/xerubus,117/">Xerubus</a>. This is a write-up of my experience solving this awesome CTF challenge.</p>
 
 <p class="flow-text">With my Attack Machine (<strong>Kali Linux</strong>) and Victim Machine (<strong>Necromancer</strong>) set up and running, I decided to get down to solving this challenge.</p>
 
@@ -55,37 +8,37 @@
 
 <p class="flow-text">I decided to start my journey with the classic <code class="language-plaintext highlighter-rouge">netdiscover</code>. My Kali Linux VM has an IP of <code class="language-plaintext highlighter-rouge">192.168.56.102</code> according to <code class="language-plaintext highlighter-rouge">ifconfig</code>. With this knowledge and the fact that I set up <strong>host-only networking</strong> for my VMs, I decided to run the following command: <code class="language-plaintext highlighter-rouge">netdiscover -r 192.168.56.0/24</code>.</p>
 
-<p class="materialboxed"><img src="/assets/images/screen-shot-2019-05-26-at-4.35.00-pm.png" alt="Screen Shot 2019-05-26 at 4.35.00 PM" /></p>
+<p><img src="/assets/images/screen-shot-2019-05-26-at-4.35.00-pm.png" alt="Screen Shot 2019-05-26 at 4.35.00 PM" /></p>
 
 <p class="flow-text">Now we can see that the IP of the victim machine is <code class="language-plaintext highlighter-rouge">192.168.56.101</code>. Great!</p>
 
 <p class="flow-text">The next step involves finding a way to communicate with the Victim Machine. I decided to use the trusty <code class="language-plaintext highlighter-rouge">nmap</code> with an aim to find any open ports on the machine.</p>
 
-<p class="flow-text">Let’s start with the <em>common</em> ports: <code class="language-plaintext highlighter-rouge">nmap -F 192.168.56.101</code></p>
+<p>Let’s start with the <em>common</em> ports: <code class="language-plaintext highlighter-rouge">nmap -F 192.168.56.101</code></p>
 
-<p class="materialboxed"><img src="/assets/images/screen-shot-2019-05-26-at-4.41.29-pm.png" alt="Screen Shot 2019-05-26 at 4.41.29 PM" /></p>
+<p><img src="/assets/images/screen-shot-2019-05-26-at-4.41.29-pm.png" alt="Screen Shot 2019-05-26 at 4.41.29 PM" /></p>
 
-<p class="flow-text">Hmm, that’s strange. No open ports. What if some obscure port is open? The only way is to scan <em>every</em> port from 1-65535: <code class="language-plaintext highlighter-rouge">nmap -p- 192.168.56.101</code></p>
+<p>Hmm, that’s strange. No open ports. What if some obscure port is open? The only way is to scan <em>every</em> port from 1-65535: <code class="language-plaintext highlighter-rouge">nmap -p- 192.168.56.101</code></p>
 
-<p class="flow-text">Gee, still nothing. I decided to explore other avenues. There just <em>had</em> to be either some channel of communication or existing communication between the machines.</p>
+<p>Gee, still nothing. I decided to explore other avenues. There just <em>had</em> to be either some channel of communication or existing communication between the machines.</p>
 
-<p class="flow-text">With this is mind, I decided to fire up <strong>Wireshark</strong> and capture network traffic on <code class="language-plaintext highlighter-rouge">eth0</code>.</p>
+<p>With this is mind, I decided to fire up <strong>Wireshark</strong> and capture network traffic on <code class="language-plaintext highlighter-rouge">eth0</code>.</p>
 
-<p class="materialboxed"><img src="/assets/images/screen-shot-2019-05-26-at-4.53.50-pm.png" alt="Screen Shot 2019-05-26 at 4.53.50 PM" /></p>
+<p><img src="/assets/images/screen-shot-2019-05-26-at-4.53.50-pm.png" alt="Screen Shot 2019-05-26 at 4.53.50 PM" /></p>
 
-<p class="flow-text">The packet capture on Wireshark showed us traffic from the Victim Machine (<code class="language-plaintext highlighter-rouge">192.168.56.101</code>) to our Attack Machine (<code class="language-plaintext highlighter-rouge">192.168.56.102</code>) to destination port <code class="language-plaintext highlighter-rouge">4444</code>.</p>
+<p>The packet capture on Wireshark showed us traffic from the Victim Machine (<code class="language-plaintext highlighter-rouge">192.168.56.101</code>) to our Attack Machine (<code class="language-plaintext highlighter-rouge">192.168.56.102</code>) to destination port <code class="language-plaintext highlighter-rouge">4444</code>.</p>
 
-<p class="flow-text">Okay, there’s some communication going on. But what exactly? I needed a way to <em>listen</em> for the traffic to Kali Linux on port <code class="language-plaintext highlighter-rouge">4444</code>. I decided to go with netcat: <code class="language-plaintext highlighter-rouge">nc -lvp 4444</code></p>
+<p>Okay, there’s some communication going on. But what exactly? I needed a way to <em>listen</em> for the traffic to Kali Linux on port <code class="language-plaintext highlighter-rouge">4444</code>. I decided to go with netcat: <code class="language-plaintext highlighter-rouge">nc -lvp 4444</code></p>
 
-<p class="materialboxed"><img src="/assets/images/screen-shot-2019-05-26-at-7.48.55-pm.png" alt="Screen Shot 2019-05-26 at 7.48.55 PM" /></p>
+<p><img src="/assets/images/screen-shot-2019-05-26-at-7.48.55-pm.png" alt="Screen Shot 2019-05-26 at 7.48.55 PM" /></p>
 
-<p class="flow-text">Boom! We got something… This looks like <strong>Base 64</strong> encoding to me. I tried to decode it using the terminal itself with the handy <code class="language-plaintext highlighter-rouge">base64 -d</code> command: <code class="language-plaintext highlighter-rouge">echo &lt;message&gt; | base64 -d</code></p>
+<p>Boom! We got something… This looks like <strong>Base 64</strong> encoding to me. I tried to decode it using the terminal itself with the handy <code class="language-plaintext highlighter-rouge">base64 -d</code> command: <code class="language-plaintext highlighter-rouge">echo &lt;message&gt; | base64 -d</code></p>
 
-<p class="materialboxed"><img src="/assets/images/screen-shot-2019-05-26-at-8.00.02-pm.png" alt="Screen Shot 2019-05-26 at 8.00.02 PM" /></p>
+<p><img src="/assets/images/screen-shot-2019-05-26-at-8.00.02-pm.png" alt="Screen Shot 2019-05-26 at 8.00.02 PM" /></p>
 
-<p class="flow-text">Yes! The Necromancer has a message for us! If we read it carefully, we can pick up 2 important points:</p>
+<p>Yes! The Necromancer has a message for us! If we read it carefully, we can pick up 2 important points:</p>
 
-<ol class="flow-text">
+<ol>
   <li>The first flag (flag 1) is <code class="language-plaintext highlighter-rouge">e6078b9b1aac915d11b9fd59791030bf</code></li>
   <li>A clue on how to proceed - <code class="language-plaintext highlighter-rouge">Chant the string of flag1 - u666</code></li>
 </ol>
@@ -412,37 +365,4 @@
 <p>I have to admit that certain parts (like the <code class="language-plaintext highlighter-rouge">SNMP</code>) were challenging for me because of my lack of experience with <code class="language-plaintext highlighter-rouge">snmpwalk</code>, <code class="language-plaintext highlighter-rouge">snmp-check</code>, and <code class="language-plaintext highlighter-rouge">snmpset</code> but it was a great learning experience.</p>
 
 <p>I respect <a href="https://www.vulnhub.com/author/xerubus,117/">Xerubus</a> for helping me keep my sanity with the brute-force parts. The wordlist <code class="language-plaintext highlighter-rouge">rockyou.txt</code> is pretty long and agonizing to wait until completion. Passwords like <code class="language-plaintext highlighter-rouge">12345678</code> take seconds to find!</p>
-</p>
-    </div>
-    <div class="row container">
-        
-        <div onclick="window.location='/tags.html#beginner'" class="chip waves-effect waves-block waves-light">Beginner</div>
-        
-        <div onclick="window.location='/tags.html#ctf'" class="chip waves-effect waves-block waves-light">CTF</div>
-        
-        <div onclick="window.location='/tags.html#kali'" class="chip waves-effect waves-block waves-light">Kali</div>
-        
-        <div onclick="window.location='/tags.html#linux'" class="chip waves-effect waves-block waves-light">Linux</div>
-        
-        <div onclick="window.location='/tags.html#vulnhub'" class="chip waves-effect waves-block waves-light">Vulnhub</div>
-        
-        <div onclick="window.location='/tags.html#walkthrough'" class="chip waves-effect waves-block waves-light">Walkthrough</div>
-        
-        <div onclick="window.location='/tags.html#writeup'" class="chip waves-effect waves-block waves-light">Writeup</div>
-        
-        <div onclick="window.location='/tags.html#security'" class="chip waves-effect waves-block waves-light">Security</div>
-        
-    </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.materialboxed');
-    var instances = M.Materialbox.init(elems);
-    });
-</script>
-</html>
-    </div>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </body>
-</html>
+:ET

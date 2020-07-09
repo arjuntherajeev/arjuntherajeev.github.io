@@ -13,46 +13,65 @@ tags:
 - Writeup
 - Security
 ---
-
+{: .flow-text}
 **The Necromancer: 1** is a challenge posted on [VulnHub](https://www.vulnhub.com/entry/the-necromancer-1,154/) created by [Xerubus](https://www.vulnhub.com/author/xerubus,117/). This is a write-up of my experience solving this awesome CTF challenge.
 
+{: .flow-text}
 With my Attack Machine (**Kali Linux**) and Victim Machine (**Necromancer**) set up and running, I decided to get down to solving this challenge.
-{: class="flow-text"}
 
+{: .flow-text}
 > Read more about my set up and environment [here](/2019/05/25/entry-0x01-my-first-post.html/)
 
+{: .flow-text}
 I decided to start my journey with the classic `netdiscover`. My Kali Linux VM has an IP of `192.168.56.102` according to `ifconfig`. With this knowledge and the fact that I set up **host-only networking** for my VMs, I decided to run the following command: `netdiscover -r 192.168.56.0/24`.
 
+{: .materialboxed}
 ![Screen Shot 2019-05-26 at 4.35.00 PM](/assets/images/screen-shot-2019-05-26-at-4.35.00-pm.png)
 
+{: .flow-text}
 Now we can see that the IP of the victim machine is `192.168.56.101`. Great!
 
+{: .flow-text}
 The next step involves finding a way to communicate with the Victim Machine. I decided to use the trusty `nmap` with an aim to find any open ports on the machine.
 
+{: .flow-text}
 Let's start with the _common_ ports: `nmap -F 192.168.56.101`
 
+{: .materialboxed}
 ![Screen Shot 2019-05-26 at 4.41.29 PM](/assets/images/screen-shot-2019-05-26-at-4.41.29-pm.png)
 
+{: .flow-text}
 Hmm, that's strange. No open ports. What if some obscure port is open? The only way is to scan _every_ port from 1-65535: `nmap -p- 192.168.56.101`
 
+{: .flow-text}
 Gee, still nothing. I decided to explore other avenues. There just _had_ to be either some channel of communication or existing communication between the machines.
 
+{: .flow-text}
 With this is mind, I decided to fire up **Wireshark** and capture network traffic on `eth0`.
 
+{: .materialboxed}
 ![Screen Shot 2019-05-26 at 4.53.50 PM](/assets/images/screen-shot-2019-05-26-at-4.53.50-pm.png)
 
+
+{: .flow-text}
 The packet capture on Wireshark showed us traffic from the Victim Machine (`192.168.56.101`) to our Attack Machine (`192.168.56.102`) to destination port `4444`.
 
+{: .flow-text}
 Okay, there's some communication going on. But what exactly? I needed a way to _listen_ for the traffic to Kali Linux on port `4444`. I decided to go with netcat: `nc -lvp 4444`
 
+{: .materialboxed}
 ![Screen Shot 2019-05-26 at 7.48.55 PM](/assets/images/screen-shot-2019-05-26-at-7.48.55-pm.png)
 
 Boom! We got something... This looks like **Base 64** encoding to me. I tried to decode it using the terminal itself with the handy `base64 -d` command: `echo <message> | base64 -d`
+{: .flow-text}
 
+{: .materialboxed}
 ![Screen Shot 2019-05-26 at 8.00.02 PM](/assets/images/screen-shot-2019-05-26-at-8.00.02-pm.png)
 
+{: .flow-text}
 Yes! The Necromancer has a message for us! If we read it carefully, we can pick up 2 important points:
 
+{: .flow-text}
 1. The first flag (flag 1) is `e6078b9b1aac915d11b9fd59791030bf`
 2. A clue on how to proceed - `Chant the string of flag1 - u666`
 
