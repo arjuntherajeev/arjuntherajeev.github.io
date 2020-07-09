@@ -1,8 +1,18 @@
 ---
-full_title: "VulnHub: DC: 6 Walkthrough"
+full_title: "Entry 0x03 - VulnHub: DC: 6 Walkthrough"
 date: "2019-05-29"
 coverImage: "dc-6-00.png"
 layout: post
+tags:
+- Beginner
+- CTF
+- Kali
+- Linux
+- Vulnhub
+- Walkthrough
+- Writeup
+- Security
+- DC-Series
 ---
 
 **DC: 6** is a challenge posted on [VulnHub](https://www.vulnhub.com/entry/dc-6,315/) created by [DCAU](https://www.vulnhub.com/author/dcau,610/). This is a write-up of my experience solving this awesome CTF challenge.
@@ -66,7 +76,7 @@ But wait... there's a **clue** from the creator (@DCAU)...
 
 > OK, this isn't really a clue as such, but more of some "we don't want to spend five years waiting for a certain process to finish" kind of advice for those who just want to get on with the job.
 > 
-> cat /usr/share/wordlists/rockyou.txt | grep k01 > passwords.txt That should save you a few years. ;-)
+> `cat /usr/share/wordlists/rockyou.txt | grep k01 > passwords.txt` That should save you a few years. ;-)
 
 You're the man (or woman), @DCAU!
 

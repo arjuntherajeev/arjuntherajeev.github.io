@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Entry 0x02 - VulnHub: The Necromancer: 1 Walkthrough</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body class="">
+    <nav>
+  <div class="nav-wrapper black"><ul id="nav-mobile" class="left">
+      
+        <li ><a href="/">Home</a></li>
+      
+        <li ><a href="/about.html">About</a></li>
+      
+        <li ><a href="/blog.html">Blog</a></li>
+      
+    </ul>
+    <ul id="nav-mobile" class="right">
+      <li><a href="https://youtube.com"><i class="material-icons">library_music</i></a></li>
+    </ul>
+  </div>
+</nav>
+    <div class="">
+    <style>
+    header{
+        background: url('/assets/images/necromancer-00.png');
+        background-size: cover;
+        background-position: center;
+        min-height: 430px;
+    }
+    @media screen and (max-width: 670px){
+        header{
+        min-height: 200px;
+        }
+    }
+</style>
+<header>
+</header>
+<div class="white">
+    <div class="row container flow-text">
+        <h3 class="header">Entry 0x02 - VulnHub: The Necromancer: 1 Walkthrough</h3>
+        <h6>Posted on <b>26 May 2019</b></h6>
+        <br/>
+        <p class="grey-text text-darken-3 lighten-3"><p><strong>The Necromancer: 1</strong> is a challenge posted on <a href="https://www.vulnhub.com/entry/the-necromancer-1,154/">VulnHub</a> created by <a href="https://www.vulnhub.com/author/xerubus,117/">Xerubus</a>. This is a write-up of my experience solving this awesome CTF challenge.</p>
+
+<p>With my Attack Machine (<strong>Kali Linux</strong>) and Victim Machine (<strong>Necromancer</strong>) set up and running, I decided to get down to solving this challenge.</p>
+
+<blockquote>
+  <p>Read more about my set up and environment <a href="/2019/05/25/entry-0x01-my-first-post.html/">here</a></p>
+</blockquote>
+
+<p>I decided to start my journey with the classic <code class="language-plaintext highlighter-rouge">netdiscover</code>. My Kali Linux VM has an IP of <code class="language-plaintext highlighter-rouge">192.168.56.102</code> according to <code class="language-plaintext highlighter-rouge">ifconfig</code>. With this knowledge and the fact that I set up <strong>host-only networking</strong> for my VMs, I decided to run the following command: <code class="language-plaintext highlighter-rouge">netdiscover -r 192.168.56.0/24</code>.</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-4.35.00-pm.png" alt="Screen Shot 2019-05-26 at 4.35.00 PM" /></p>
+
+<p>Now we can see that the IP of the victim machine is <code class="language-plaintext highlighter-rouge">192.168.56.101</code>. Great!</p>
+
+<p>The next step involves finding a way to communicate with the Victim Machine. I decided to use the trusty <code class="language-plaintext highlighter-rouge">nmap</code> with an aim to find any open ports on the machine.</p>
+
+<p>Let’s start with the <em>common</em> ports: <code class="language-plaintext highlighter-rouge">nmap -F 192.168.56.101</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-4.41.29-pm.png" alt="Screen Shot 2019-05-26 at 4.41.29 PM" /></p>
+
+<p>Hmm, that’s strange. No open ports. What if some obscure port is open? The only way is to scan <em>every</em> port from 1-65535: <code class="language-plaintext highlighter-rouge">nmap -p- 192.168.56.101</code></p>
+
+<p>Gee, still nothing. I decided to explore other avenues. There just <em>had</em> to be either some channel of communication or existing communication between the machines.</p>
+
+<p>With this is mind, I decided to fire up <strong>Wireshark</strong> and capture network traffic on <code class="language-plaintext highlighter-rouge">eth0</code>.</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-4.53.50-pm.png" alt="Screen Shot 2019-05-26 at 4.53.50 PM" /></p>
+
+<p>The packet capture on Wireshark showed us traffic from the Victim Machine (<code class="language-plaintext highlighter-rouge">192.168.56.101</code>) to our Attack Machine (<code class="language-plaintext highlighter-rouge">192.168.56.102</code>) to destination port <code class="language-plaintext highlighter-rouge">4444</code>.</p>
+
+<p>Okay, there’s some communication going on. But what exactly? I needed a way to <em>listen</em> for the traffic to Kali Linux on port <code class="language-plaintext highlighter-rouge">4444</code>. I decided to go with netcat: <code class="language-plaintext highlighter-rouge">nc -lvp 4444</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-7.48.55-pm.png" alt="Screen Shot 2019-05-26 at 7.48.55 PM" /></p>
+
+<p>Boom! We got something… This looks like <strong>Base 64</strong> encoding to me. I tried to decode it using the terminal itself with the handy <code class="language-plaintext highlighter-rouge">base64 -d</code> command: <code class="language-plaintext highlighter-rouge">echo &lt;message&gt; | base64 -d</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-8.00.02-pm.png" alt="Screen Shot 2019-05-26 at 8.00.02 PM" /></p>
+
+<p>Yes! The Necromancer has a message for us! If we read it carefully, we can pick up 2 important points:</p>
+
+<ol>
+  <li>The first flag (flag 1) is <code class="language-plaintext highlighter-rouge">e6078b9b1aac915d11b9fd59791030bf</code></li>
+  <li>A clue on how to proceed - <code class="language-plaintext highlighter-rouge">Chant the string of flag1 - u666</code></li>
+</ol>
+
+<p>Easy, <code class="language-plaintext highlighter-rouge">the string of flag1</code> must refer to the flag and <code class="language-plaintext highlighter-rouge">u666</code> must refer to port <code class="language-plaintext highlighter-rouge">666</code> via UDP (User Datagram Protocol). I decided to continue using netcat: <code class="language-plaintext highlighter-rouge">echo e6078b9b1aac915d11b9fd59791030bf | nc -u 192.168.56.101 666</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-8.10.56-pm.png" alt="Screen Shot 2019-05-26 at 8.10.56 PM" /></p>
+
+<p>Oh boy, that never worked. Try in a <em>different tongue</em>? What do you mean, Necromancer?</p>
+
+<p>This string wasn’t Base 64 encoding. It looked like a hash to me. With the help of my trusty <a href="https://www.tunnelsup.com/hash-analyzer/">Hash Analyzer</a>, it was clear that the flag was an MD5 or MD4 hash. Okay, we need to <em>decrypt</em> the hash. No big deal.</p>
+
+<p>Well, I was not really going to decrypt it. Instead, I went over to my trusted <a href="https://www.md5online.org/md5-decrypt.html">MD5 online website</a> in hopes of finding the matching hash in their database.</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-8.18.21-pm.png" alt="Screen Shot 2019-05-26 at 8.18.21 PM" /></p>
+
+<p>Yay! The <em>un-hashed</em> string is <code class="language-plaintext highlighter-rouge">opensesame</code>.</p>
+
+<p>I proceeded to send <em>this</em> to the Necromancer using netcat: <code class="language-plaintext highlighter-rouge">echo opensesame | nc -u 192.168.56.101 666</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-8.21.42-pm.png" alt="Screen Shot 2019-05-26 at 8.21.42 PM" /></p>
+
+<p>Awesome. We got the second flag. Flag 2 is <code class="language-plaintext highlighter-rouge">c39cd4df8f2e35d20d92c2e44de5f7c6</code>.</p>
+
+<p>But <strong>wait</strong>, there’s another clue hidden in the message - <code class="language-plaintext highlighter-rouge">Squinting your eyes from the light coming from the object, you can see the formation looks like the number 80.</code></p>
+
+<p>Almost instantly I thought of HTTP (port <code class="language-plaintext highlighter-rouge">80</code>). Did the message mean that port 80 is now open for traffic? The last line in the message increased my confidence: <code class="language-plaintext highlighter-rouge">666 is closed.</code></p>
+
+<p>I decided to verify my hunch using <code class="language-plaintext highlighter-rouge">nmap</code>. But this time I chose to be <em>specific</em> with port <code class="language-plaintext highlighter-rouge">80</code>: <code class="language-plaintext highlighter-rouge">nmap -p 80 192.168.56.101</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-8.36.27-pm.png" alt="Screen Shot 2019-05-26 at 8.36.27 PM.png" /></p>
+
+<p>Yes, port <code class="language-plaintext highlighter-rouge">80</code> was open for business. Time to hit the browser!</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-8.42.18-pm.png" alt="Screen Shot 2019-05-26 at 8.42.18 PM" /></p>
+
+<p>First things first, I checked the source code (<code class="language-plaintext highlighter-rouge">CTRL + U</code>). It did not reveal anything exciting except: <code class="language-plaintext highlighter-rouge">&lt;img src="/pics/pileoffeathers.jpg"&gt;</code></p>
+
+<p>Hmm, an image file. I decided to download this <em>image</em> and dissect. Who knows what treasures could be hidden…</p>
+
+<p>I decided to start with the <code class="language-plaintext highlighter-rouge">file</code> command: <code class="language-plaintext highlighter-rouge">file pileoffeathers.jpg</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-9.20.39-pm.png" alt="Screen Shot 2019-05-26 at 9.20.39 PM" /></p>
+
+<p>Nothing exciting here. I decided to try again with the <code class="language-plaintext highlighter-rouge">binwalk</code> tool: <code class="language-plaintext highlighter-rouge">binwalk pileoffeathers.jpg</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-9.23.19-pm.png" alt="Screen Shot 2019-05-26 at 9.23.19 PM" /></p>
+
+<p>Oh my! I can see the words <code class="language-plaintext highlighter-rouge">Zip archive data</code>. Some more details follow:</p>
+
+<ul>
+  <li>Compressed size: <code class="language-plaintext highlighter-rouge">121</code></li>
+  <li>Uncompressed size: <code class="language-plaintext highlighter-rouge">125</code></li>
+  <li>Name: <code class="language-plaintext highlighter-rouge">feathers.txt</code></li>
+</ul>
+
+<p>Obviously, I proceeded with unzipping this <em>pseudo</em> image.</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-9.27.40-pm.png" alt="Screen Shot 2019-05-26 at 9.27.40 PM" /></p>
+
+<p>Let’s have a look at <code class="language-plaintext highlighter-rouge">feathers.txt</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-9.29.43-pm.png" alt="Screen Shot 2019-05-26 at 9.29.43 PM" /></p>
+
+<p>Once again, Base 64: <code class="language-plaintext highlighter-rouge">ZmxhZzN7OWFkM2Y2MmRiN2I5MWMyOGI2ODEzNzAwMDM5NDYzOWZ9IC0gQ3Jvc3MgdGhlIGNoYXNtIGF0IC9hbWFnaWNicmlkZ2VhcHBlYXJzYXR0aGVjaGFzbQ==</code></p>
+
+<p>Decoding this Base 64 string gave me: <code class="language-plaintext highlighter-rouge">flag3{9ad3f62db7b91c28b68137000394639f} - Cross the chasm at /amagicbridgeappearsatthechasm</code></p>
+
+<p>Woo! We got the third flag. Flag 3 is <code class="language-plaintext highlighter-rouge">9ad3f62db7b91c28b68137000394639f</code> and a hint on how to proceed. <code class="language-plaintext highlighter-rouge">Cross the chasm at /amagicbridgeappearsatthechasm</code> must refer to a URL. Back to the browser with <code class="language-plaintext highlighter-rouge">http://192.168.56.101/amagicbridgeappearsatthechasm</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-9.48.22-pm.png" alt="Screen Shot 2019-05-26 at 9.48.22 PM" /></p>
+
+<p>You know the drill. Look at source code, download the image, <code class="language-plaintext highlighter-rouge">binwalk</code> it and beat the Necromancer. Only, there was absolutely nothing! Did the Necromancer get the best of me?</p>
+
+<p>In an attempt to beat the Necromancer, I decided to run the trust <code class="language-plaintext highlighter-rouge">dirb</code> (a web content scanner). You know… in case a hidden URL is revealed or something.</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-10.04.17-pm.png" alt="Screen Shot 2019-05-26 at 10.04.17 PM" /></p>
+
+<p>There appears to be nothing apart from <code class="language-plaintext highlighter-rouge">index.html</code>. I did not bother trying with another wordlist. Back to the message…</p>
+
+<p><code class="language-plaintext highlighter-rouge">There must be a magical item that could protect you from the necromancer's spell.</code></p>
+
+<p>Hmm, I never really knew much about Necromancers or <em>magical items</em> that could defeat them. Google to the rescue!</p>
+
+<p>With lots of reading, trial and error, and plain guessing… I came up with the word <code class="language-plaintext highlighter-rouge">talisman</code>.</p>
+
+<blockquote>
+  <p>What’s a <em>talisman</em>? According to Google, <em>an object, typically an inscribed ring or stone, that is thought to have magic powers and to bring good luck.</em></p>
+</blockquote>
+
+<p>Okay, we have the <em>magical item that could protect us from the necromancer’s spell</em>. How do I use it?</p>
+
+<p>Practically speaking, there is no form or inputs on the HTML web page.</p>
+
+<p>Hence, I decided to manipulate the URL: <code class="language-plaintext highlighter-rouge">http://192.168.56.101/amagicbridgeappearsatthechasm/talisman</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-11.15.29-pm.png" alt="Screen Shot 2019-05-26 at 11.15.29 PM.png" /></p>
+
+<p>Well look what we have here! A binary file!</p>
+
+<p>After setting the right permissions (<code class="language-plaintext highlighter-rouge">chmod +x talisman</code>), I ran it…</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-26-at-11.18.55-pm.png" alt="Screen Shot 2019-05-26 at 11.18.55 PM.png" /></p>
+
+<p>Okay. So, the program demanded user input. <code class="language-plaintext highlighter-rouge">Do you want to wear the talisman?</code></p>
+
+<p>I typed <code class="language-plaintext highlighter-rouge">yes</code> and the program exited with the message: <strong>Nothing happens</strong>. I tried other strings and words but nothing worked. Time to reverse engineer this program…</p>
+
+<p>In my past experiences with binary exploitation, I have used <code class="language-plaintext highlighter-rouge">gdb</code>. I decided to fire up <code class="language-plaintext highlighter-rouge">gdb</code> with the <code class="language-plaintext highlighter-rouge">talisman</code> program: <code class="language-plaintext highlighter-rouge">gdb ./talisman</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-2.41.00-pm.png" alt="Screen Shot 2019-05-27 at 2.41.00 PM.png" /></p>
+
+<p>Now, I wanted to have a look at the <code class="language-plaintext highlighter-rouge">main()</code> function which is the entry point of any program. Inside <code class="language-plaintext highlighter-rouge">gdb</code>, I typed: <code class="language-plaintext highlighter-rouge">disassemble main</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-2.42.47-pm.png" alt="Screen Shot 2019-05-27 at 2.42.47 PM" /></p>
+
+<p>A quick read through the <strong>Assembly</strong> code reveals a function call to the function <code class="language-plaintext highlighter-rouge">wearTalisman()</code>. Typically, I have seen programs which have some <code class="language-plaintext highlighter-rouge">if-conditional</code> as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if input == password:
+    call correct()
+else:
+    call incorrect()
+</code></pre></div></div>
+
+<p>However, in the above Assembly code, I could not see any <code class="language-plaintext highlighter-rouge">CMP</code> (compare) or <code class="language-plaintext highlighter-rouge">JMP</code> (jump) Assembly instructions. I concluded that there is <strong>no</strong> checking user input.</p>
+
+<p>What next? I decided to review the functions within the program. This can be done within <code class="language-plaintext highlighter-rouge">gdb</code> using: <code class="language-plaintext highlighter-rouge">info functions</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-2.49.06-pm.png" alt="Screen Shot 2019-05-27 at 2.49.06 PM.png" /></p>
+
+<p>Interesting. The function <code class="language-plaintext highlighter-rouge">chantToBreakSpell()</code> looks like it might be the solution. Now, if <code class="language-plaintext highlighter-rouge">main()</code>is making a call to <code class="language-plaintext highlighter-rouge">wearTalisman()</code>… how about we break at <code class="language-plaintext highlighter-rouge">main()</code> and simply call <code class="language-plaintext highlighter-rouge">chantToBreakSpell()</code> instead?</p>
+
+<p>I decided to set a breakpoint on <code class="language-plaintext highlighter-rouge">main()</code> as follows: <code class="language-plaintext highlighter-rouge">break main</code> Then, I ran the program with the command: <code class="language-plaintext highlighter-rouge">run</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-2.53.55-pm.png" alt="Screen Shot 2019-05-27 at 2.53.55 PM.png" /></p>
+
+<p>Okay, it hit the breakpoint. The program is at <code class="language-plaintext highlighter-rouge">main()</code>. I tried making a call to <code class="language-plaintext highlighter-rouge">chantToBreakSpell()</code> as follows: <code class="language-plaintext highlighter-rouge">jump chantToBreakSpell</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-2.56.02-pm.png" alt="Screen Shot 2019-05-27 at 2.56.02 PM.png" /></p>
+
+<p>Wow! We got the fourth flag. Flag 4 is <code class="language-plaintext highlighter-rouge">ea50536158db50247e110a6c89fcf3d3</code>. There’s more… a hint to proceed… <code class="language-plaintext highlighter-rouge">Chant these words at u31337</code>.</p>
+
+<p>I decided to work with my trusty netcat once again: <code class="language-plaintext highlighter-rouge">echo ea50536158db50247e110a6c89fcf3d3 | nc -u 192.168.56.101 31337</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-3.00.39-pm.png" alt="Screen Shot 2019-05-27 at 3.00.39 PM" /></p>
+
+<p>MD5? Again? Back to my trusted <a href="https://www.md5online.org/md5-decrypt.html">MD5 online website</a> in hopes of finding the matching hash in their database. <img src="/assets/images/screen-shot-2019-05-27-at-3.02.21-pm.png" alt="Screen Shot 2019-05-27 at 3.02.21 PM.png" /></p>
+
+<p>Found it - <code class="language-plaintext highlighter-rouge">blackmagic</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-3.03.53-pm.png" alt="Screen Shot 2019-05-27 at 3.03.53 PM.png" /></p>
+
+<p>Another flag! We got the fifth flag. Flag 5 is <code class="language-plaintext highlighter-rouge">0766c36577af58e15545f099a3b15e60</code>. We also got a clue on how to proceed:</p>
+
+<p><code class="language-plaintext highlighter-rouge">Above them, a word etched in blood on the wall.</code> <code class="language-plaintext highlighter-rouge">/thenecromancerwillabsorbyoursoul</code></p>
+
+<p>Based on what we saw earlier, I guess that this belongs in a URL as follows: <code class="language-plaintext highlighter-rouge">http://192.168.56.101/thenecromancerwillabsorbyoursoul</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-3.10.08-pm.png" alt="Screen Shot 2019-05-27 at 3.10.08 PM" /></p>
+
+<p>Wait… there’s more if you scroll down…</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-3.11.09-pm.png" alt="Screen Shot 2019-05-27 at 3.11.09 PM.png" /></p>
+
+<p>We got the sixth flag! Flag 6 is <code class="language-plaintext highlighter-rouge">b1c3ed8f1db4258e4dcb0ce565f6dc03</code>.</p>
+
+<p>Reading through the message reveals 2 important points:</p>
+
+<ol>
+  <li>In the sentence - <code class="language-plaintext highlighter-rouge">It's the necromancer!</code> there is a reference link in the word <code class="language-plaintext highlighter-rouge">necromancer</code> to 
+<code class="language-plaintext highlighter-rouge">
+http://192.168.56.101/thenecromancerwillabsorbyoursoul/necromancer
+</code> 
+which will download a binary file.</li>
+  <li>In the sentence -  <code class="language-plaintext highlighter-rouge">Looking closer at the skill, you can see u161 engraved into the forehead.</code> there is a hint that some traffic is passing through UDP port <code class="language-plaintext highlighter-rouge">161</code>.</li>
+</ol>
+
+<p>I decided to start with the <code class="language-plaintext highlighter-rouge">necromancer</code> binary file. I changed the permission to executable using <code class="language-plaintext highlighter-rouge">chmod +x necromancer</code> and ran it using: <code class="language-plaintext highlighter-rouge">./necromancer</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-3.59.43-pm.png" alt="Screen Shot 2019-05-27 at 3.59.43 PM.png" /></p>
+
+<p>Uh oh! Not a binary? What?</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-4.00.44-pm.png" alt="Screen Shot 2019-05-27 at 4.00.44 PM.png" /></p>
+
+<p>Bzip2 compression! Not a problem. Easy enough to decompress it with: <code class="language-plaintext highlighter-rouge">bzip2 -d necromancer</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-6.37.24-pm.png" alt="Screen Shot 2019-05-27 at 6.37.24 PM" /></p>
+
+<p>Okay, we now have <code class="language-plaintext highlighter-rouge">necromancer.out</code>. Let’s see what is inside…</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-6.38.51-pm.png" alt="Screen Shot 2019-05-27 at 6.38.51 PM.png" /></p>
+
+<p>Maybe the Necromancer can read that. I couldn’t!</p>
+
+<p>I decided to investigate the file further using the <code class="language-plaintext highlighter-rouge">file</code> command: <code class="language-plaintext highlighter-rouge">file necromancer.out</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-6.40.43-pm.png" alt="Screen Shot 2019-05-27 at 6.40.43 PM.png" /></p>
+
+<p>A POSIX tar archive, huh? Naturally, I unzipped it to find a <code class="language-plaintext highlighter-rouge">.cap</code> file.</p>
+
+<p>I decided to open <code class="language-plaintext highlighter-rouge">necromancer.cap</code> with my trusty friend, Wireshark using: <code class="language-plaintext highlighter-rouge">wireshark necromancer.cap</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-6.56.23-pm.png" alt="Screen Shot 2019-05-27 at 6.56.23 PM.png" /> Looking at the packet capture, I understood that it was Wi-Fi traffic. With a <code class="language-plaintext highlighter-rouge">.cap</code> file and the knowledge that Wi-Fi traffic exists within it, I decided to go with my trusty tool - <code class="language-plaintext highlighter-rouge">aircrack-ng</code> with hopes of breaking the password.</p>
+
+<p>Since we are cracking passwords, we need a proper wordlist. I decided to go with the infamous <code class="language-plaintext highlighter-rouge">rockyou.txt</code>. My only concern with <code class="language-plaintext highlighter-rouge">rockyou.txt</code> is that it is huge and the brute-force could take ages.</p>
+
+<p>I proceeded with <code class="language-plaintext highlighter-rouge">aircrack-ng</code> as follows: <code class="language-plaintext highlighter-rouge">aircrack-ng -w /usr/share/wordlists/rockyou.txt necromancer.cap</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-6.55.46-pm.png" alt="Screen Shot 2019-05-27 at 6.55.46 PM.png" /></p>
+
+<p>Well Necromancer, <code class="language-plaintext highlighter-rouge">death2all</code>… really?</p>
+
+<p>I got the password but was unsure what exactly to do with it. All this while, we have ignored the second clue -<code class="language-plaintext highlighter-rouge">Looking closer at the skill, you can see u161 engraved into the forehead.</code></p>
+
+<p>Something about <code class="language-plaintext highlighter-rouge">u161</code> bothered me. I tried communicating the password to that port as follows: <code class="language-plaintext highlighter-rouge">echo death2all | nc -u 192.168.56.101 161</code> … but got nothing!</p>
+
+<p>It was then I decided to run <code class="language-plaintext highlighter-rouge">nmap</code> again… just for the heck of it as follows: <code class="language-plaintext highlighter-rouge">nmap -p 161 192.168.56.101</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-7.09.50-pm.png" alt="Screen Shot 2019-05-27 at 7.09.50 PM.png" /></p>
+
+<p>That’s when it hit me. I was dealing with <code class="language-plaintext highlighter-rouge">SNMP</code>.</p>
+
+<p>I am going to admit. I did not know much about <code class="language-plaintext highlighter-rouge">SNMP</code> and its relevance to CTFs so I spent some time reading <code class="language-plaintext highlighter-rouge">snmp-check</code> and <code class="language-plaintext highlighter-rouge">snmpwalk</code> which are tools provided in Kali Linux. I decided to give <code class="language-plaintext highlighter-rouge">snmp-check</code> a try with different community strings…</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-7.17.38-pm.png" alt="Screen Shot 2019-05-27 at 7.17.38 PM.png" /></p>
+
+<p>Oho, <code class="language-plaintext highlighter-rouge">death2all</code> was the community string after all!</p>
+
+<p>The message tells us us that <em>the door</em> is locked and it must be unlocked. There is a unique word - <code class="language-plaintext highlighter-rouge">death2allrw</code>. Is that another community string?</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-7.22.54-pm.png" alt="Screen Shot 2019-05-27 at 7.22.54 PM.png" /></p>
+
+<p>Jackpot!</p>
+
+<p>That’s a lot of information. I felt like a kid inside a candy shop…</p>
+
+<p>Not for long though. The message still haunted me - <code class="language-plaintext highlighter-rouge">The door is Locked. If you choose to defeat me, the door must be Unlocked.</code></p>
+
+<p>How can I unlock the door, Necromancer? Time to Google!</p>
+
+<p>With lots of Googling and reading (<a href="https://penturalabs.wordpress.com/2010/10/07/secure-your-snmp/">this</a>, <a href="https://tools.kali.org/information-gathering/snmp-check">this</a>, and <a href="https://www.comparitech.com/net-admin/snmpwalk-examples-windows-linux/">this</a>), I learnt about <code class="language-plaintext highlighter-rouge">SNMP</code> and <code class="language-plaintext highlighter-rouge">MIB</code>. Basically, there is a way to change information displayed in the <code class="language-plaintext highlighter-rouge">MIB</code> using the <code class="language-plaintext highlighter-rouge">snmpset</code> command. However, this requires something called <code class="language-plaintext highlighter-rouge">ObjectID</code> or <code class="language-plaintext highlighter-rouge">OID</code> of the field we wish to change.</p>
+
+<p>In the above screenshot, I figured that we needed to change the <code class="language-plaintext highlighter-rouge">Location</code> field from <code class="language-plaintext highlighter-rouge">Locked</code> to <code class="language-plaintext highlighter-rouge">Unlocked</code>. But I could not spot its <code class="language-plaintext highlighter-rouge">OID</code>. Hence, I decided to go with <code class="language-plaintext highlighter-rouge">snmpwalk</code> instead as follows: <code class="language-plaintext highlighter-rouge">snmpwalk -c death2allrw 192.168.56.101</code></p>
+
+<p>This gave me an error: <code class="language-plaintext highlighter-rouge">snmpwalk: No securityName specified</code></p>
+
+<p>With some Googling, I found <a href="https://www.svennd.be/snmp-error-snmpwalk-no-securityname-specified/">this</a> and tried with a different version: <code class="language-plaintext highlighter-rouge">snmpwalk -v 2c -c death2allrw 192.168.56.101</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-8.43.29-pm.png" alt="Screen Shot 2019-05-27 at 8.43.29 PM.png" /></p>
+
+<p>Got it! The <code class="language-plaintext highlighter-rouge">OID</code> for the <code class="language-plaintext highlighter-rouge">Location</code> field is <code class="language-plaintext highlighter-rouge">iso.3.6.1.2.1.1.6.0</code>. Time to use <code class="language-plaintext highlighter-rouge">snmpset</code> as follows: <code class="language-plaintext highlighter-rouge">snmpset -v 2c -c death2allrw 192.168.56.101 .1.3.6.1.2.1.1.6.0 s Unlocked</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-8.51.15-pm.png" alt="Screen Shot 2019-05-27 at 8.51.15 PM.png" /></p>
+
+<p>Awesome! That command took tons of Googling and trial-and-error.</p>
+
+<p>Now that we <em>unlocked the door</em>, I decided to check the <code class="language-plaintext highlighter-rouge">SNMP</code> information again using <code class="language-plaintext highlighter-rouge">snmp-check</code>:</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-8.53.47-pm.png" alt="Screen Shot 2019-05-27 at 8.53.47 PM.png" /></p>
+
+<p>Finally, the seventh flag! Flag 7 is <code class="language-plaintext highlighter-rouge">9e5494108d10bbd5f9e7ae52239546c4</code> and a clue - <code class="language-plaintext highlighter-rouge">t22</code> which obviously refers to TCP port <code class="language-plaintext highlighter-rouge">22</code>. Hello SSH, my old friend!</p>
+
+<p>With all the excitement, the first thing I tried was to log in to SSH as <code class="language-plaintext highlighter-rouge">root</code> with the flag as the password…</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-8.59.04-pm.png" alt="Screen Shot 2019-05-27 at 8.59.04 PM" /></p>
+
+<p>Obviously, this never worked.</p>
+
+<p>I decided that I needed to figure out a username for my SSH adventure. After some more trial and error, I decided the brute-force was the way to go. Hello <code class="language-plaintext highlighter-rouge">rockyou.txt</code>!</p>
+
+<p>I went with my trusty <code class="language-plaintext highlighter-rouge">hydra</code> to brute-force the <strong>username</strong> as follows: <code class="language-plaintext highlighter-rouge">hydra -L /usr/share/wordlists/rockyou.txt -p 9e5494108d10bbd5f9e7ae52239546c4 192.168.56.101 ssh</code></p>
+
+<p>While waiting for the brute-force to finish, it hit me that the flag is an MD5 string. So I went back to my trusted <a href="https://www.md5online.org/md5-decrypt.html">MD5 online website</a> in hopes of finding the matching hash in their database and I did….</p>
+
+<p><code class="language-plaintext highlighter-rouge">9e5494108d10bbd5f9e7ae52239546c4 = demonslayer</code></p>
+
+<p>Here goes <code class="language-plaintext highlighter-rouge">hydra</code>: <code class="language-plaintext highlighter-rouge">hydra -L /usr/share/wordlists/rockyou.txt -p demonslayer 192.168.56.101 ssh</code></p>
+
+<p>Without much luck on the username… I decided that I was probably doing it wrong. Maybe <code class="language-plaintext highlighter-rouge">demonslayer</code> is the username?</p>
+
+<p>I decided to fire up <code class="language-plaintext highlighter-rouge">hydra</code> again with <code class="language-plaintext highlighter-rouge">rockyou.txt</code> as my wordlist as follows: <code class="language-plaintext highlighter-rouge">hydra -l demonslayer -P /usr/share/wordlists/rockyou.txt 192.168.56.101 ssh</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-9.08.29-pm.png" alt="Screen Shot 2019-05-27 at 9.08.29 PM.png" /></p>
+
+<p>Got it! <code class="language-plaintext highlighter-rouge">12345678</code> … really <code class="language-plaintext highlighter-rouge">demonslayer</code>? Time to SSH!</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-9.10.01-pm.png" alt="Screen Shot 2019-05-27 at 9.10.01 PM.png" /></p>
+
+<p>I have to say… it was a proud moment for me!</p>
+
+<p>So… <code class="language-plaintext highlighter-rouge">whoami</code>? Well, I am <code class="language-plaintext highlighter-rouge">demonslayer</code> with a mission to <em>escalate</em> my privileges and get <code class="language-plaintext highlighter-rouge">root</code>.</p>
+
+<p>First things first… I decided to run an <code class="language-plaintext highlighter-rouge">ls -l</code> in my current directory:</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-9.14.17-pm.png" alt="Screen Shot 2019-05-27 at 9.14.17 PM.png" /></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">ls -l</code> revealed <code class="language-plaintext highlighter-rouge">flag8.txt</code> and a peek at its contents revealed something interesting - <code class="language-plaintext highlighter-rouge">Defend yourself! Counter attack the Necromancer's spells at u777!</code></p>
+
+<p>I decided to go with netcat as follows: <code class="language-plaintext highlighter-rouge">nc -u localhost 777</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-9.28.00-pm.png" alt="Screen Shot 2019-05-27 at 9.28.00 PM.png" /></p>
+
+<p>I messed up! Turns out the Necromancer is super serious because I couldn’t even connect to SNMP anymore. Time to go backwards…</p>
+
+<p>After a painful trip backwards and running way too many old commands, I decided to give the Q and A session another try. This time, I kept Google really handy!</p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-9.38.38-pm.png" alt="Screen Shot 2019-05-27 at 9.38.38 PM.png" /></p>
+
+<p>Got it! A close call there but boy was that hard!</p>
+
+<p>We can see the tenth flag. Flag 10 is <code class="language-plaintext highlighter-rouge">8dc6486d2c63cafcdc6efbba2be98ee4</code>.</p>
+
+<p>Back to trying privilege escalation… My Linux senses were tingling. One of the most common things I try is checking my <code class="language-plaintext highlighter-rouge">sudo</code> privileges as a user. This is done as follows: <code class="language-plaintext highlighter-rouge">sudo -l</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-9.49.40-pm.png" alt="Screen Shot 2019-05-27 at 9.49.40 PM.png" /></p>
+
+<p>Wow! Are you seeing what I am seeing? <code class="language-plaintext highlighter-rouge">(ALL) NOPASSWD: /bin/cat /root/flag11.txt</code></p>
+
+<p>This means that we can run <code class="language-plaintext highlighter-rouge">/bin/cat /root/flag11.txt</code> as <code class="language-plaintext highlighter-rouge">root</code>… and that’s what I did next: <code class="language-plaintext highlighter-rouge">sudo cat /root/flag11.txt</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-05-27-at-9.51.49-pm.png" alt="Screen Shot 2019-05-27 at 9.51.49 PM.png" /></p>
+
+<p>Finally! We got the eleventh and final flag. Flag 11 is <code class="language-plaintext highlighter-rouge">42c35828545b926e79a36493938ab1b1</code></p>
+
+<p>For what it was worth… flag 11 decrypts to <code class="language-plaintext highlighter-rouge">hackergod</code>.</p>
+
+<h3 id="my-thoughts">My Thoughts</h3>
+
+<p>That was amazing. Seriously, I had a blast and learnt a plethora of things by solving this challenge. I also learnt a little bit about the Necromancer. He’s a scary guy.</p>
+
+<p>I have to admit that certain parts (like the <code class="language-plaintext highlighter-rouge">SNMP</code>) were challenging for me because of my lack of experience with <code class="language-plaintext highlighter-rouge">snmpwalk</code>, <code class="language-plaintext highlighter-rouge">snmp-check</code>, and <code class="language-plaintext highlighter-rouge">snmpset</code> but it was a great learning experience.</p>
+
+<p>I respect <a href="https://www.vulnhub.com/author/xerubus,117/">Xerubus</a> for helping me keep my sanity with the brute-force parts. The wordlist <code class="language-plaintext highlighter-rouge">rockyou.txt</code> is pretty long and agonizing to wait until completion. Passwords like <code class="language-plaintext highlighter-rouge">12345678</code> take seconds to find!</p>
+</p>
+    </div>
+    <div class="row container">
+        
+        <div onclick="window.location='/tags.html#beginner'" class="chip waves-effect waves-block waves-light">Beginner</div>
+        
+        <div onclick="window.location='/tags.html#ctf'" class="chip waves-effect waves-block waves-light">CTF</div>
+        
+        <div onclick="window.location='/tags.html#kali'" class="chip waves-effect waves-block waves-light">Kali</div>
+        
+        <div onclick="window.location='/tags.html#linux'" class="chip waves-effect waves-block waves-light">Linux</div>
+        
+        <div onclick="window.location='/tags.html#vulnhub'" class="chip waves-effect waves-block waves-light">Vulnhub</div>
+        
+        <div onclick="window.location='/tags.html#walkthrough'" class="chip waves-effect waves-block waves-light">Walkthrough</div>
+        
+        <div onclick="window.location='/tags.html#writeup'" class="chip waves-effect waves-block waves-light">Writeup</div>
+        
+        <div onclick="window.location='/tags.html#security'" class="chip waves-effect waves-block waves-light">Security</div>
+        
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.materialboxed');
+    var instances = M.Materialbox.init(elems);
+    });
+</script>
+</html>
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+</html>
