@@ -77,7 +77,7 @@ In my initial look, I assumed it was the author's Twitter handle. Upon closer in
 
 Ka-ching!
 
-Ooh, a GitHub link. I proceeded by following the GitHub URL to `[https://github.com/Dc7User/](https://github.com/Dc7User/)`
+Ooh, a GitHub link. I proceeded by following the GitHub URL to [https://github.com/Dc7User/](https://github.com/Dc7User/)
 
 ![Screen Shot 2019-09-02 at 11.34.39 PM.png](/assets/images/screen-shot-2019-09-02-at-11.34.39-pm.png)
 
