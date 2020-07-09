@@ -19,7 +19,7 @@ tags:
 
 With my Attack Machine (**Kali Linux**) and Victim Machine (**DC: 6**) set up and running, I decided to get down to solving this challenge.
 
-> Read more about my set up and environment [here](/2019/05/25/entry-0x01-my-first-post.html/)
+> Read more about my set up and environment [here](/2019/05/25/entry-0x01-my-first-post.html)
 
 I decided to start my journey with `netdiscover` to complete the _host discovery_ phase as follows: `netdiscover -r 192.168.56.0/24`
 
