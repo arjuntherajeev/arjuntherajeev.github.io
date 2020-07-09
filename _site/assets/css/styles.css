@@ -16,6 +16,8 @@ code { background-color: transparent; }
 
 code { word-wrap: break-word; }
 
+pre { overflow-x: auto; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word; }
+
 blockquote { border-left: 5px solid #3BB027; }
 
 /*# sourceMappingURL=styles.css.map */

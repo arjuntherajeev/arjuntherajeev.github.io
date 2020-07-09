@@ -259,4 +259,4 @@ That was a really interesting challenge! Props to @DCAU for coming up with a gre
 I really learnt a lot about Joomla and better understood the usage of Linux kernel exploits for _privilege escalation_ in CTFs. 
 **TL;DR** - be ready for tons of trial and error.
 
-If you enjoyed reading this, please check out my [DC: 6 walkthrough](/2019/05/29/vulnhub-dc-6-walkthrough/) which is another challenge by @DCAU in the [DC series](https://www.vulnhub.com/series/dc,199/).
+If you enjoyed reading this, please check out my [DC: 6 walkthrough](/2019/05/29/vulnhub-dc-6-walkthrough) which is another challenge by @DCAU in the [DC series](https://www.vulnhub.com/series/dc,199/).

@@ -1,0 +1,379 @@
+I"ye<p>In this tutorial, we will learn how to use <a href="https://pandas.pydata.org/">Pandas</a> - a <em>must-have</em> Python module for Data Analysis and Data Visualization with a real-world example from the Cyber Security domain.</p>
+
+<blockquote>
+  <p>Note: Ransomware Tracker is no longer operational since <strong>08 December 2019</strong>. It is still recommended that readers leverage the concepts and Jupyter Notebook available in this tutorial.</p>
+</blockquote>
+
+<h3 id="introduction">Introduction</h3>
+
+<p><a href="https://ransomwaretracker.abuse.ch/">Ransomware Tracker</a> by <a href="https://www.abuse.ch/">abuse.ch</a> is a website which tracks and monitors hosts and URLs associated with known Ransomware.</p>
+
+<p>The website maintains a <em>tracker</em> which is frequently updated with threat intelligence associated with known Ransomware families. The screenshot below shows an interactive table on the Ransomware Tracker website populated with Ransomware threat intelligence.</p>
+
+<p><img src="/assets/images/screen-shot-2019-06-19-at-8.24.04-pm.png" alt="Screen Shot 2019-06-19 at 8.24.04 PM.png" /></p>
+
+<p>The most interesting feature of Ransomware Tracker is the availability of a <a href="https://ransomwaretracker.abuse.ch/feeds/csv/">feed</a> in the CSV (Comma Separated Values) format which allows us to easily capture and utilize this intelligence.</p>
+
+<p>The screenshot below shows the Ransomware Tracker data in its raw CSV format accessible via the URL - <code class="language-plaintext highlighter-rouge">https://ransomwaretracker.abuse.ch/feeds/csv/</code></p>
+
+<p><img src="/assets/images/screen-shot-2019-06-19-at-8.30.22-pm.png" alt="Screen Shot 2019-06-19 at 8.30.22 PM.png" /></p>
+
+<p>Our objective is to read, parse, and generate insights from this Ransomware Tracker data using Python with Pandas.</p>
+
+<h3 id="getting-started">Getting Started</h3>
+
+<p>For the purpose of this tutorial, we will use a <a href="https://jupyter.org/">Jupyter Notebook</a> to write Python code and produce output. <a href="https://www.dataquest.io/blog/jupyter-notebook-tutorial/">Here</a> is a complete, easy to understand introduction to Jupyter Notebooks and how to get started.</p>
+
+<p>The first step is to fetch the data.</p>
+
+<p>As mentioned earlier, our data resides online as a CSV document. Pandas provides us with the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html">read_csv</a> function to read CSV data and store it into a <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html">DataFrame</a> structure.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import pandas as pd
+url = "https://ransomwaretracker.abuse.ch/feeds/csv/"
+df = pd.read_csv(url, skiprows=8, encoding="latin-1")
+</code></pre></div></div>
+
+<p>We start by importing the Pandas module and reference it as <code class="language-plaintext highlighter-rouge">pd</code> instead of <code class="language-plaintext highlighter-rouge">pandas</code>. This is a personal preference but is commonly seen in tutorials online.</p>
+
+<p>Next, we initialize a variable <code class="language-plaintext highlighter-rouge">url</code> with the Ransomware Tracker CSV URL. This variable has a data type of <code class="language-plaintext highlighter-rouge">str</code>.</p>
+
+<p>Finally, we make a function call to <code class="language-plaintext highlighter-rouge">pd.read_csv</code> with arguments as follows</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">url</code> - location where our CSV feed resides (required)</li>
+  <li><code class="language-plaintext highlighter-rouge">skiprows</code> - number of rows to skip from the top of the CSV document (in our case the first 8 lines are comments)</li>
+  <li>​<code class="language-plaintext highlighter-rouge">encoding</code> - text encoding to be used</li>
+</ul>
+
+<p>Now, we have <code class="language-plaintext highlighter-rouge">df</code> (our DataFrame) with the data loaded from the URL. Let us validate the data and its structure.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df.shape
+# (13866, 10)
+df.head()
+</code></pre></div></div>
+
+<p><img src="/assets/images/screen-shot-2019-06-21-at-4.34.48-pm.png" alt="Screen Shot 2019-06-21 at 4.34.48 PM.png" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">df.head()</code> prints the first 5 rows of the DataFrame by default. You can change this by specifying the required number of rows as an argument. Hence, <code class="language-plaintext highlighter-rouge">df.head(n)</code> will print the first <code class="language-plaintext highlighter-rouge">n</code> rows of the DataFrame.</p>
+
+<p>Next, we validate the bottom values of the DataFrame. This is good practice for large datasets such as Ransomware Tracker with over 13,000 rows of data.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df.tail()
+</code></pre></div></div>
+
+<p><img src="/assets/images/screen-shot-2019-06-22-at-12.00.58-pm.png" alt="Screen Shot 2019-06-22 at 12.00.58 PM.png" /></p>
+
+<p>In our output, we can confirm the following facts:</p>
+
+<ol>
+  <li>The DataFrame recognized the header names</li>
+  <li>All fields are parsed correctly and unavailable fields are replaced with <code class="language-plaintext highlighter-rouge">NaN</code> value</li>
+  <li>The last row is a comment and needs to be removed</li>
+</ol>
+
+<p>To remove the last row of the DataFrame, we can use a simple one-liner from Pandas:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df.drop(df.tail(1).index, inplace=True)
+df.tail()
+</code></pre></div></div>
+
+<p><img src="/assets/images/screen-shot-2019-06-22-at-12.09.31-pm.png" alt="Screen Shot 2019-06-22 at 12.09.31 PM.png" /></p>
+
+<p>Great!</p>
+
+<p>Now, the <code class="language-plaintext highlighter-rouge">df.shape</code> command should return <code class="language-plaintext highlighter-rouge">(13865, 10)</code> since we removed the last row of the DataFrame.</p>
+
+<h3 id="data-transformation">Data Transformation</h3>
+
+<p>The next step involves manipulating and transforming the data in our DataFrame.</p>
+
+<p>Let’s start with fixing the header names (also known as <em>column</em> <em>names</em>) of the DataFrame. To do this, we start by retrieving the list of existing header names.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>list(df.columns)
+'''
+['# Firstseen (UTC)',
+ 'Threat',
+ 'Malware',
+ 'Host',
+ 'URL',
+ 'Status',
+ 'Registrar',
+ 'IP address(es)',
+ 'ASN(s)',
+ 'Country']
+'''
+</code></pre></div></div>
+
+<p>I decided to make the DataFrame easier to read and comprehend with the following header name changes.</p>
+
+<ul>
+  <li><strong>Old:</strong> <code class="language-plaintext highlighter-rouge"># Firstseen (UTC)</code></li>
+  <li><strong>New:</strong> <code class="language-plaintext highlighter-rouge">Firstseen</code></li>
+  <li><strong>Old:</strong> <code class="language-plaintext highlighter-rouge">IP address(es)</code></li>
+  <li><strong>New:</strong> <code class="language-plaintext highlighter-rouge">IPs</code></li>
+  <li><strong>Old:</strong> <code class="language-plaintext highlighter-rouge">ASN(s)</code></li>
+  <li><strong>New:</strong> <code class="language-plaintext highlighter-rouge">ASNs</code></li>
+</ul>
+
+<p>To accomplish this, we can use the <code class="language-plaintext highlighter-rouge">df.rename</code> function as follows.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>columns = {'# Firstseen (UTC)': 'Firstseen', 'IP address(es)': 'IPs', 'ASN(s)':'ASNs'}
+df = df.rename(columns=columns)
+df.head()
+</code></pre></div></div>
+
+<p><img src="/assets/images/screen-shot-2019-06-21-at-5.50.48-pm.png" alt="Screen Shot 2019-06-21 at 5.50.48 PM" /></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Firstseen</code> column in our DataFrame can provide us with a treasure of knowledge.</p>
+
+<p>However, the values available consist of a date and time. We simply want the date. This requires a transformation of the values in the <code class="language-plaintext highlighter-rouge">Firstseen</code> column in our DataFrame.</p>
+
+<p>Before we apply the solution in the context of the DataFrame, let us shift perspective. Consider a value from the <code class="language-plaintext highlighter-rouge">Firsteen</code> column. For example - <code class="language-plaintext highlighter-rouge">2018-08-12 00:46:13</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s_dt = '2018-08-12 00:46:13'
+type(s_dt)
+# str
+</code></pre></div></div>
+
+<p>The goal is to transform this value into our desired format. I choose to change the format to <code class="language-plaintext highlighter-rouge">12-08-2018</code>. How can we do this?</p>
+
+<p>Python provides us with a useful module called <code class="language-plaintext highlighter-rouge">datetime</code> for this exact purpose. We can leverage the <code class="language-plaintext highlighter-rouge">datetime.strptime</code> function to convert <code class="language-plaintext highlighter-rouge">s_dt</code> (a <code class="language-plaintext highlighter-rouge">str</code> object) to a <code class="language-plaintext highlighter-rouge">datetime</code> object as follows.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import datetime
+o_dt = datetime.datetime.strptime(s_dt,'%Y-%m-%d %H:%M:%S')
+type(o_dt)
+# datetime.datetime
+</code></pre></div></div>
+
+<p>Now, we construct our desired format <code class="language-plaintext highlighter-rouge">DD-MM-YYYY</code> using the <code class="language-plaintext highlighter-rouge">datetime.strftime</code> function and <code class="language-plaintext highlighter-rouge">o_dt</code> (the <code class="language-plaintext highlighter-rouge">datetime</code> object) as follows.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s1_dt = o_dt.strftime("%d-%m-%Y")
+s1_dt
+# '12-08-2018'
+type(s1_dt)
+# str
+</code></pre></div></div>
+
+<p>Easy! We successfully transformed one string but what about an entire DataFrame column?</p>
+
+<p>To achieve this, we can use the <code class="language-plaintext highlighter-rouge">df.apply</code> function which applies a function along an axis of the DataFrame. For the function aspect, I choose to construct a <a href="https://www.w3schools.com/python/python_lambda.asp">lambda function</a> (popularly known as <em>anonymous functions</em>).</p>
+
+<p>df[‘Firstseen’] = df[‘Firstseen’].apply(lambda x: datetime.datetime.strptime(x,’%Y-%m-%d %H:%M:%S’).strftime(“%d-%m-%Y”))
+df.head()</p>
+
+<p><img src="/assets/images/screen-shot-2019-06-22-at-12.58.25-pm.png" alt="Screen Shot 2019-06-22 at 12.58.25 PM.png" /></p>
+
+<p>Voila! Let us dissect the above command…</p>
+
+<p>df[‘Firstseen’].apply(lambda x: datetime.datetime.strptime(x,’%Y-%m-%d %H:%M:%S’).strftime(“%d-%m-%Y”))</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">df['Firsteen']</code> refers to the column <code class="language-plaintext highlighter-rouge">Firstseen</code> in the DataFrame <code class="language-plaintext highlighter-rouge">df</code></li>
+  <li><code class="language-plaintext highlighter-rouge">lambda x: datetime.datetime.strptime(x,'%Y-%m-%d %H:%M:%S').strftime("%d-%m-%Y")</code> is our <em>lambda function</em>
+    <ul>
+      <li>The <code class="language-plaintext highlighter-rouge">x</code> in <code class="language-plaintext highlighter-rouge">lambda x</code> references <em>each</em> element in the <code class="language-plaintext highlighter-rouge">Firsteen</code> column</li>
+      <li><code class="language-plaintext highlighter-rouge">datetime.datetime.strptime(x,'%Y-%m-%d %H:%M:%S')</code> converts each <code class="language-plaintext highlighter-rouge">x</code> (<code class="language-plaintext highlighter-rouge">str</code> object) to a <code class="language-plaintext highlighter-rouge">datetime</code> object using the provided format</li>
+      <li><code class="language-plaintext highlighter-rouge">strftime("%d-%m-%Y")</code> then converts each <code class="language-plaintext highlighter-rouge">datetime</code> object back to <code class="language-plaintext highlighter-rouge">str</code> in the provided format (<code class="language-plaintext highlighter-rouge">DD-MM-YYYY</code>)</li>
+    </ul>
+  </li>
+  <li>We apply this <em>lambda function</em> across the entire <code class="language-plaintext highlighter-rouge">Firstseen</code> column using <code class="language-plaintext highlighter-rouge">df.apply</code> function</li>
+</ul>
+
+<p>The biggest takeaway is to always achieve the desired transformation at the element-level before attempting to manipulate the DataFrame.</p>
+
+<h3 id="querying">Querying</h3>
+
+<p>The next step is to query the DataFrame and generate valuable insights. In this step, I aim to use Pandas to perform operations on the DataFrame, extract output, and visualize the results.</p>
+
+<h4 id="query-1">Query 1</h4>
+
+<p>I decided to define query 1 as follows: <em>Number of entries per threat</em></p>
+
+<p>In this query, we want to categorize our dataset based on the <code class="language-plaintext highlighter-rouge">Threat</code> field. This basically involves a group by operation followed by aggregation and sorting. I write the query as follows.</p>
+
+<p>df.groupby(‘Threat’).size().sort_values(ascending=False)
+‘’’
+Threat
+Distribution Site    11297
+Payment Site          1660
+C2                     908
+dtype: int64
+‘’’</p>
+
+<p>Interesting! The output indicates the existence of 3 threats - <code class="language-plaintext highlighter-rouge">Distribution Site</code>, <code class="language-plaintext highlighter-rouge">Payment Site</code> and <code class="language-plaintext highlighter-rouge">C2</code> (Command and Control Site). As seen in the Python query, we utilize a variety of Pandas functions to manipulate the data.</p>
+
+<p>Now, how about a visualization?</p>
+
+<p>Visualization of data in Python can be achieved with a variety of libraries such as Matplotlib, Seaborn, and ggplot. Read more <a href="https://www.fusioncharts.com/blog/best-python-data-visualization-libraries/">here</a>.</p>
+
+<p>Pandas comes with an in-built <code class="language-plaintext highlighter-rouge">df.plot</code> function exposing useful plotting abilities. In fact, <code class="language-plaintext highlighter-rouge">df.plot</code> basically refers to Matplotlib in the backend for visualization.</p>
+
+<p>Let’s create a simple horizontal bar graph to illustrate the different categories of threats and their counts. The query is as follows.</p>
+
+<p>df.groupby([‘Threat’]).size().sort_values(ascending=False).plot(kind=’barh’)</p>
+
+<p><img src="/assets/images/screen-shot-2019-07-12-at-5.26.37-pm-e1563370050540.png" alt="screen-shot-2019-07-12-at-5.26.37-pm.png" /></p>
+
+<p> </p>
+
+<p>The <code class="language-plaintext highlighter-rouge">df.plot</code> function is an effective tool to generate useful graphs. In our simple example above, we specified the argument <code class="language-plaintext highlighter-rouge">kind=barh</code> to indicate a <strong>horizontal bar graph.</strong></p>
+
+<h4 id="query-2">Query 2</h4>
+
+<p>For the next query, I decided to play with the <code class="language-plaintext highlighter-rouge">Firstseen</code> field of the DataFrame. A valuable tip is to always attempt trend analysis if the dataset contains date/time fields.</p>
+
+<p>I decided to define query 2 as follows: <em>Yearly</em> <em>trend in malware</em></p>
+
+<p>This query is slightly more complex as compared to the previous one. The first transformation involves creating a new DataFrame column called <code class="language-plaintext highlighter-rouge">Firstseen_year</code> in which the “year” from the <code class="language-plaintext highlighter-rouge">Firstseen</code> element is captured and stored. We accomplish this by using a custom defined lambda function.</p>
+
+<p>df[‘Firstseen_year’] = df[‘Firstseen’].apply(lambda x: datetime.datetime.strptime(x,’%d-%m-%Y’).strftime(“%Y”))</p>
+
+<p>Before we continue, let us understand the <code class="language-plaintext highlighter-rouge">dtypes</code> or data types of elements within our DataFrame using the following command.</p>
+
+<p>df.dtypes
+‘’’
+Firstseen         object
+Threat            object
+Malware           object
+Host              object
+URL               object
+Status            object
+Registrar         object
+IPs               object
+ASNs              object
+Country           object
+Firstseen_year    object
+dtype: object
+‘’’</p>
+
+<p>As seen above, <strong>all</strong> the elements are of <code class="language-plaintext highlighter-rouge">object</code> data type which is equivalent to <code class="language-plaintext highlighter-rouge">str</code> data type in Python. When working with date/time elements, it is <strong>strongly recommended</strong> to ensure a suitable data type. This especially matters for operations such as <strong>sorting</strong>.</p>
+
+<p>One mechanism to change the <code class="language-plaintext highlighter-rouge">dtype</code> of a column is to use the <code class="language-plaintext highlighter-rouge">df.astype</code> function as follows.</p>
+
+<p>df[‘Firstseen_year’] = df[‘Firstseen_year’].astype(‘datetime64[ns]’)
+df.dtypes
+‘’’
+Firstseen                 object
+Threat                    object
+Malware                   object
+Host                      object
+URL                       object
+Status                    object
+Registrar                 object
+IPs                       object
+ASNs                      object
+Country                   object
+Firstseen_year    datetime64[ns]
+dtype: object
+‘’’</p>
+
+<p>Great! Our DataFrame column <code class="language-plaintext highlighter-rouge">Firstseen_year</code> now has data type as <code class="language-plaintext highlighter-rouge">datetime64[ns]</code>.</p>
+
+<p>Although this is the correct way to work with date/time elements, it is important to note that <em>side-effects</em> are plenty. Let us take a look at the contents of the DataFrame <code class="language-plaintext highlighter-rouge">df</code>.</p>
+
+<p>df[[‘Firstseen’,’Firstseen_year’]].head()</p>
+
+<p><img src="/assets/images/screen-shot-2019-07-14-at-11.30.11-am.png" alt="Screen Shot 2019-07-14 at 11.30.11 AM.png" /></p>
+
+<p>As we can see, once we extract <code class="language-plaintext highlighter-rouge">2018</code> from <code class="language-plaintext highlighter-rouge">12-08-2018</code> and convert it to the <code class="language-plaintext highlighter-rouge">datetime64[ns]</code> data type, we end up with <code class="language-plaintext highlighter-rouge">2018-01-01</code>.</p>
+
+<p>While it makes sense… it does not meet our desired format i.e., <strong>year</strong> only. This means that we absolutely require <code class="language-plaintext highlighter-rouge">2018</code> instead of <code class="language-plaintext highlighter-rouge">2018-01-01</code> and the like. But how?</p>
+
+<p>Simple!</p>
+
+<p>Since <code class="language-plaintext highlighter-rouge">df['Firstseen_year']</code> is of the data type <code class="language-plaintext highlighter-rouge">datetime64[ns]</code>, we can extract the “year” part of the date/time object as follows.</p>
+
+<p>df[‘Firstseen_year’] = df[‘Firstseen_year’].dt.year
+df[[‘Firstseen’,’Firstseen_year’]].head()</p>
+
+<p><img src="/assets/images/screen-shot-2019-07-14-at-10.21.19-pm.png" alt="Screen Shot 2019-07-14 at 10.21.19 PM.png" /></p>
+
+<p>Wait, what about the data types?</p>
+
+<p>df.dtypes
+‘’’
+Firstseen         object
+Threat            object
+Malware           object
+Host              object
+URL               object
+Status            object
+Registrar         object
+IPs               object
+ASNs              object
+Country           object
+Firstseen_year     int64
+dtype: object
+‘’’</p>
+
+<p>As we can see, <code class="language-plaintext highlighter-rouge">Firstseen_year</code> column has <code class="language-plaintext highlighter-rouge">int64</code> values. Now, operations such as <strong>sorting</strong> can be achieved accurately. Back to the query!</p>
+
+<p>ax = df[[‘Firstseen_year’,’Malware’]].groupby(‘Firstseen_year’).count().sort_values(by=’Firstseen_year’, ascending=False).plot(kind=’area’, figsize=(20,5))
+ax.set_xlabel(“Firstseen Year”)
+ax.set_ylabel(“Number of Malware”)
+ax.set_title(“Yearly Malware Trend - Ransomware Tracker”)</p>
+
+<p><img src="/assets/images/screen-shot-2019-07-14-at-10.44.51-pm.png" alt="Screen Shot 2019-07-14 at 10.44.51 PM.png" /></p>
+
+<p>The above query includes many useful features of the <code class="language-plaintext highlighter-rouge">df.plot</code> function. This is an example of an <strong>area</strong> graph. The <code class="language-plaintext highlighter-rouge">figsize=(20,5)</code> argument indicates the size of the graph produced as output.</p>
+
+<p>No graph is complete without appropriate <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> labels. The <code class="language-plaintext highlighter-rouge">set_xlabel</code> and <code class="language-plaintext highlighter-rouge">set_ylabel</code> functions play a significant role in helping us define these labels.</p>
+
+<h4 id="query-3">Query 3</h4>
+
+<p>For the next query, I decided to focus on a slightly more complex query. This time, I decided to utilize two fields - <code class="language-plaintext highlighter-rouge">Firstseen_year</code> and <code class="language-plaintext highlighter-rouge">Threat</code>.</p>
+
+<p>Query 3 can be defined as follows: <em>Number of malware per threat per year</em></p>
+
+<p>To achieve this query, we simply require two <em>group-by</em> instructions followed by aggregation.</p>
+
+<p>df.groupby([‘Firstseen_year’,’Threat’]).size()
+‘’’
+Firstseen_year  Threat         <br />
+2015            C2                      37
+2016            C2                     709
+                Distribution Site    10441
+                Payment Site          1346
+2017            C2                     140
+                Distribution Site      843
+                Payment Site           314
+2018            C2                      22
+                Distribution Site       13
+dtype: int64
+‘’’</p>
+
+<p>The insights generated here is extremely valuable. Finding <em>correlations</em> between different columns and fields is typically achieved using the <code class="language-plaintext highlighter-rouge">df.groupby</code> function. Visualizing the results would be the icing on the cake!</p>
+
+<p>Let’s visualize the data as follows.</p>
+
+<p>ax = df.groupby([‘Firstseen_year’,’Threat’]).size().unstack().plot(kind=’area’,stacked=True,figsize=(20,5))
+ax.set_xlabel(“Firstseen Year”)
+ax.set_ylabel(“Number of Malware”)
+ax.set_title(“Malware per Threat per Year - Ransomware Tracker”)</p>
+
+<p><img src="/assets/images/screen-shot-2019-07-17-at-5.26.57-pm.png" alt="Screen Shot 2019-07-17 at 5.26.57 PM.png" /></p>
+
+<p>The above query showcases an area plot described by <code class="language-plaintext highlighter-rouge">kind='area'</code> as argument to the function <code class="language-plaintext highlighter-rouge">df.plot</code>. The <em>stacking</em> is achieved with the argument <code class="language-plaintext highlighter-rouge">stacked=True</code> and makes the graph easier to visualize.</p>
+
+<p>Again, we utilize the <code class="language-plaintext highlighter-rouge">set_xlabel</code> and <code class="language-plaintext highlighter-rouge">set_ylabel</code> functions to correctly label the graph. This is always recommended!</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>In this tutorial, we explored <a href="https://pandas.pydata.org/">Pandas</a> - the <em>defacto</em> Python module in a Data Analyst’s toolkit.</p>
+
+<p>Using the practical example of <a href="https://ransomwaretracker.abuse.ch/">Ransomware Tracker data</a>, we went through the steps involved in ingesting, cleaning, parsing, querying, and visualizing data to generate powerful insights.</p>
+
+<blockquote>
+  <p>You can view and download a Jupyter Notebook with everything highlighted in this tutorial from <a href="https://nbviewer.jupyter.org/github/arjuntherajeev/jupyter_notebooks/blob/master/Ransomware_Tracker_Tutorial.ipynb">here</a>.</p>
+</blockquote>
+
+<p>Key takeaways include:</p>
+
+<ul>
+  <li>Always be curious about data. In Cyber Security, we are surrounded by tons of valuable data - logs, threat intelligence, etc. You never know what you will find.</li>
+  <li>Leverage modern technologies such as Python, Jupyter Notebooks, GitHub, etc. to write code, visualize graphs, and share with others.</li>
+  <li>Within Python, explore numerous visualization libraries and modules such as Seaborn, Plotly, Bokeh, Matplotlib, etc. Depending on the scenario, one of them could provide much more value over the other.</li>
+  <li>Try to correlate with various datasets. For more advanced analytics, play with multiple datasets. In our example, we used only one dataset - Ransomware Tracker feed. In the real-world, you might face multiple datasets. As challenging as it sounds, the reward (insights generated) are usually worth it.</li>
+</ul>
+
+<p>I hope you enjoyed reading this. Please leave a comment or email me with questions.</p>
+:ET
