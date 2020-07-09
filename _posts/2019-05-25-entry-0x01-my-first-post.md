@@ -9,7 +9,6 @@ tags:
 - Kali
 - Linux
 - Vulnhub
-- VM
 ---
 
 Hello reader,

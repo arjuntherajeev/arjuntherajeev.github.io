@@ -1,11 +1,20 @@
 ---
-full_title: "How to install QRadar CE V7.3.3 on VirtualBox"
+full_title: "Entry 0x08 - How to install IBM QRadar CE V7.3.3 on VirtualBox"
 date: "2020-05-30"
-coverImage: "screen-shot-2020-05-29-at-8.21.38-pm.png"
+coverImage: "screen-shot-2020-05-29-at-8.08.37-pm.png"
 layout: post
-tags: 
-- hyo
+tags:
+- Beginner
+- QRadar
+- SIEM 
+- IBM
+- Security
+- Tutorial
+- VM
+- VirtualBox
 ---
+
+In this tutorial, we will learn how to install [IBM QRadar Community Edition V7.3.3](https://developer.ibm.com/qradar/ce/) on VirtualBox.
 
 [IBM QRadar SIEM](https://www.ibm.com/products/qradar-siem) is a world-class SIEM tool used by organizations for monitoring and correlating logs from different systems. QRadar can quickly alert SOC Analysts about potential malicious activity and prompt them to take appropriate action.
 
@@ -19,19 +28,24 @@ In this tutorial, we will explore how to install and setup QRadar CE V7.3.3 on [
 
 ### Pre-requisites
 
-- Download the QRadar CE V7.3.3 OVA from the [official website](https://developer.ibm.com/qradar/ce/) (You will need to create an IBM account to complete the download)
+- Download the QRadar CE V7.3.3 OVA from the [official website](https://developer.ibm.com/qradar/ce/) 
+> You will need to create an IBM account to complete the download
+
 - Download and install VirtualBox from the [official website](https://www.virtualbox.org/)
-    - I am using VirtualBox 6.0 but the latest VirtualBox release is 6.1
-    - I am running VirtualBox on my MacBook Pro with macOS Mojave
+> I am using VirtualBox 6.0 on my MacBook Pro with macOS Mojave
+
 - According to IBM, the minimum system requirements are: 
-    - 8 GB RAM (10 GB is recommended)
-    - 250 GB free disk space
-    - 2 CPU cores (6 cores is recommended)
-    - At least one network adapter with Internet connection
+
+```
+    8 GB RAM (10 GB is recommended)
+    250 GB free disk space
+    2 CPU cores (6 cores is recommended)
+    At least one network adapter with Internet connection
+```
 
 ### 1\. Verify the QRadar CE OVA
 
-Once the QRadar CE V7.3.3 OVA is downloaded, let us start by verifying the integrity of the file. IBM provides a button on the [QRadar CE page](https://developer.ibm.com/qradar/ce/) called **SHA256 Sum for OVA**. Click on it to open a `.txt` file with the SHA256 checksum. Use your checksum utility of choice to generate the SHA256 checksum for the downloaded OVA file. I will use `shasum` utility accessible via the Mac terminal. 
+Once the **QRadar CE V7.3.3 OVA** is downloaded, let us start by verifying the integrity of the file. IBM provides a button on the [QRadar CE page](https://developer.ibm.com/qradar/ce/) called **SHA256 Sum for OVA**. Click on it to open a `.txt` file with the SHA256 checksum. Use your checksum utility of choice to generate the SHA256 checksum for the downloaded OVA file. I will use `shasum` utility accessible via the Mac terminal. 
 
 ![Screen Shot 2020-05-29 at 8.08.16 PM](/assets/images/screen-shot-2020-05-29-at-8.08.16-pm.png)
 
@@ -187,5 +201,3 @@ Here are some other useful resources: 
 - [Jose Bravo Videos on YouTube](https://www.youtube.com/user/jbravovideos/videos)
 
 Please reach out if you have any questions or comments.
-
-Keep an eye out for more QRadar posts!

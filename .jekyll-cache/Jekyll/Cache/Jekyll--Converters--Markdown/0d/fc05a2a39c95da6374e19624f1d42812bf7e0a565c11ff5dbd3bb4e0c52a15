@@ -1,51 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Entry 0x08 - How to install IBM QRadar CE V7.3.3 on VirtualBox</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
-
-  <body class="">
-    <nav>
-  <div class="nav-wrapper black"><ul id="nav-mobile" class="left">
-      
-        <li ><a href="/">Home</a></li>
-      
-        <li ><a href="/about.html">About</a></li>
-      
-        <li ><a href="/blog.html">Blog</a></li>
-      
-    </ul>
-    <ul id="nav-mobile" class="right">
-      <li><a href="https://youtube.com"><i class="material-icons">library_music</i></a></li>
-    </ul>
-  </div>
-</nav>
-    <div class="">
-    <style>
-    header{
-        background: url('/assets/images/screen-shot-2020-05-29-at-8.08.37-pm.png');
-        background-size: cover;
-        background-position: center;
-        min-height: 430px;
-    }
-    @media screen and (max-width: 670px){
-        header{
-        min-height: 200px;
-        }
-    }
-</style>
-<header>
-</header>
-<div class="white">
-    <div class="row container flow-text">
-        <h3 class="header">Entry 0x08 - How to install IBM QRadar CE V7.3.3 on VirtualBox</h3>
-        <h6>Posted on <b>30 May 2020</b></h6>
-        <br/>
-        <p class="grey-text text-darken-3 lighten-3"><p>In this tutorial, we will learn how to install <a href="https://developer.ibm.com/qradar/ce/">IBM QRadar Community Edition V7.3.3</a> on VirtualBox.</p>
+I"¨<<p>In this tutorial, we will learn how to install <a href="https://developer.ibm.com/qradar/ce/">IBM QRadar CE</a> on VirtualBox.</p>
 
 <p><a href="https://www.ibm.com/products/qradar-siem">IBM QRadar SIEM</a> is a world-class SIEM tool used by organizations for monitoring and correlating logs from different systems. QRadar can quickly alert SOC Analysts about potential malicious activity and prompt them to take appropriate action.</p>
 
@@ -241,37 +194,4 @@
 </ul>
 
 <p>Please reach out if you have any questions or comments.</p>
-</p>
-    </div>
-    <div class="row container">
-        
-        <div onclick="window.location='/tags.html#beginner'" class="chip waves-effect waves-block waves-light">Beginner</div>
-        
-        <div onclick="window.location='/tags.html#qradar'" class="chip waves-effect waves-block waves-light">QRadar</div>
-        
-        <div onclick="window.location='/tags.html#siem'" class="chip waves-effect waves-block waves-light">SIEM</div>
-        
-        <div onclick="window.location='/tags.html#ibm'" class="chip waves-effect waves-block waves-light">IBM</div>
-        
-        <div onclick="window.location='/tags.html#security'" class="chip waves-effect waves-block waves-light">Security</div>
-        
-        <div onclick="window.location='/tags.html#tutorial'" class="chip waves-effect waves-block waves-light">Tutorial</div>
-        
-        <div onclick="window.location='/tags.html#vm'" class="chip waves-effect waves-block waves-light">VM</div>
-        
-        <div onclick="window.location='/tags.html#virtualbox'" class="chip waves-effect waves-block waves-light">VirtualBox</div>
-        
-    </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.materialboxed');
-    var instances = M.Materialbox.init(elems);
-    });
-</script>
-</html>
-    </div>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </body>
-</html>
+:ET
