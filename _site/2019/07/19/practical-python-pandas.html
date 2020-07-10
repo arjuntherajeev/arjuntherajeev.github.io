@@ -21,7 +21,7 @@
       
     </ul>
     <ul id="nav-mobile" class="right">
-      <li><a href="https://youtube.com"><i class="material-icons">library_music</i></a></li>
+      <li><a class="tooltipped" data-position="bottom" data-tooltip="Send me an email" href="mailto:arjuntherajeev@gmail.com?subject=Hello%2C+I+just+visited+diaryofarjun.com"><i class="material-icons">mail</i></a></li>
     </ul>
   </div>
 </nav>
@@ -87,11 +87,11 @@ df = pd.read_csv(url, skiprows=8, encoding="latin-1")
 
 <p>Finally, we make a function call to <code class="language-plaintext highlighter-rouge">pd.read_csv</code> with arguments as follows</p>
 
-<ul>
+<ol>
   <li><code class="language-plaintext highlighter-rouge">url</code> - location where our CSV feed resides (required)</li>
   <li><code class="language-plaintext highlighter-rouge">skiprows</code> - number of rows to skip from the top of the CSV document (in our case the first 8 lines are comments)</li>
   <li>​<code class="language-plaintext highlighter-rouge">encoding</code> - text encoding to be used</li>
-</ul>
+</ol>
 
 <p>Now, we have <code class="language-plaintext highlighter-rouge">df</code> (our DataFrame) with the data loaded from the URL. Let us validate the data and its structure.</p>
 
@@ -216,7 +216,7 @@ df.head()
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df['Firstseen'].apply(lambda x: datetime.datetime.strptime(x,'%Y-%m-%d %H:%M:%S').strftime("%d-%m-%Y"))
 </code></pre></div></div>
 <p>Here:</p>
-<ul>
+<ol>
   <li><code class="language-plaintext highlighter-rouge">df['Firsteen']</code> refers to the column <code class="language-plaintext highlighter-rouge">Firstseen</code> in the DataFrame <code class="language-plaintext highlighter-rouge">df</code></li>
   <li><code class="language-plaintext highlighter-rouge">lambda x: datetime.datetime.strptime(x,'%Y-%m-%d %H:%M:%S').strftime("%d-%m-%Y")</code> is our <em>lambda function</em>
     <ul>
@@ -226,7 +226,7 @@ df.head()
     </ul>
   </li>
   <li>We apply this <em>lambda function</em> across the entire <code class="language-plaintext highlighter-rouge">Firstseen</code> column using <code class="language-plaintext highlighter-rouge">df.apply</code> function</li>
-</ul>
+</ol>
 
 <p>The biggest takeaway is to always achieve the desired transformation at the element-level before attempting to manipulate the DataFrame.</p>
 
