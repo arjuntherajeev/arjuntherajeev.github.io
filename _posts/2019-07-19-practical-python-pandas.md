@@ -56,9 +56,9 @@ Next, we initialize a variable `url` with the Ransomware Tracker CSV URL. This 
 
 Finally, we make a function call to `pd.read_csv` with arguments as follows
 
-- `url` - location where our CSV feed resides (required)
-- `skiprows` - number of rows to skip from the top of the CSV document (in our case the first 8 lines are comments)
-- ​`encoding` - text encoding to be used
+1. `url` - location where our CSV feed resides (required)
+2. `skiprows` - number of rows to skip from the top of the CSV document (in our case the first 8 lines are comments)
+3. ​`encoding` - text encoding to be used
 
 Now, we have `df` (our DataFrame) with the data loaded from the URL. Let us validate the data and its structure.
 
@@ -189,12 +189,12 @@ Voila! Let us dissect the above command...
 df['Firstseen'].apply(lambda x: datetime.datetime.strptime(x,'%Y-%m-%d %H:%M:%S').strftime("%d-%m-%Y"))
 ```
 Here:
-- `df['Firsteen']` refers to the column `Firstseen` in the DataFrame `df`
-- `lambda x: datetime.datetime.strptime(x,'%Y-%m-%d %H:%M:%S').strftime("%d-%m-%Y")` is our _lambda function_
+1. `df['Firsteen']` refers to the column `Firstseen` in the DataFrame `df`
+2. `lambda x: datetime.datetime.strptime(x,'%Y-%m-%d %H:%M:%S').strftime("%d-%m-%Y")` is our _lambda function_
     - The `x` in `lambda x` references _each_ element in the `Firsteen` column
     - `datetime.datetime.strptime(x,'%Y-%m-%d %H:%M:%S')` converts each `x` (`str` object) to a `datetime` object using the provided format
     - `strftime("%d-%m-%Y")` then converts each `datetime` object back to `str` in the provided format (`DD-MM-YYYY`)
-- We apply this _lambda function_ across the entire `Firstseen` column using `df.apply` function
+3. We apply this _lambda function_ across the entire `Firstseen` column using `df.apply` function
 
 The biggest takeaway is to always achieve the desired transformation at the element-level before attempting to manipulate the DataFrame.
 

@@ -24,8 +24,6 @@ QRadar Community Edition is a version of QRadar which is great for enthusiasts a
 
 > Community Edition is a fully-featured free version of QRadar that is low memory, low EPS, and includes a perpetual license. This version is limited to 50 events per second and 5,000 network flows a minute, supports apps, but is based on a smaller footprint for non-enterprise use.
 
-In this tutorial, we will explore how to install and setup QRadar CE V7.3.3 on [VirtualBox](https://www.virtualbox.org/).
-
 ### Pre-requisites
 
 - Download the QRadar CE V7.3.3 OVA from the [official website](https://developer.ibm.com/qradar/ce/) 
