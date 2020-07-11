@@ -36,16 +36,17 @@ title: Diary of Arjun
 
 <h4>Read my <b>Latest Posts</b></h4>
 <div class="row">
-{% for post in site.posts limit:6 %}
-<div class="col s12 m6 l4">
-  <div class="card medium">
-    <div onclick="window.location='{{post.url}}'" class="card-image cool-image waves-effect waves-block waves-light" style="background-image:url(/assets/images/{{post.coverImage}}); background-size:cover;background-position:center;">
-    </div>
-    <div class="card-content transparent ">
-      <span class="flow-text grey-text text-darken-5 left">{{post.date | date_to_string}}</span>
-      <span class="flow-text grey-text text-darken-4 left">{{post.full_title}}</span>
+  {% for post in site.posts limit:6 %}
+  <div class="col s12 m6 l4">
+    <div class="card medium">
+      <div onclick="window.location='{{post.url}}'" class="card-image cool-image waves-effect waves-block waves-light" style="background-image:url(/assets/images/{{post.coverImage}}); background-size:cover;background-position:center;">
+      </div>
+      <div class="card-content transparent ">
+        <span class="flow-text grey-text text-darken-5 left">{{post.date | date_to_string}}</span>
+        <span class="flow-text grey-text text-darken-4 left">{{post.full_title}}</span>
+      </div>
     </div>
   </div>
-</div>
-{% endfor %}
+  {% endfor %}
+  <a href="/blog" class="waves-effect waves-light btn right black white-text text-darken-4">More Posts</a>
 </div>
