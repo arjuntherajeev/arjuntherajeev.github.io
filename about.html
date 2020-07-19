@@ -7,9 +7,8 @@ title: About Arjun
     <div class="col s12 m12 l6">
         <div class="section">
             <h4>About <b>Me</b></h4>
-            
             <p class="flow-text">Based in <b>Dubai</b></p>
-            <p class="flow-text">Aliquam eu aliquam risus, et vulputate diam. Sed consequat sed nisi id viverra. In at dui blandit, placerat risus id, sodales massa. Nam pretium turpis quis lobortis volutpat. Aenean elementum fermentum vulputate. Phasellus blandit posuere libero sed ornare. Donec in malesuada odio, nec consectetur quam.</p>
+            <p class="flow-text">A little about moi.</p>
         </div>
         <div class="divider"></div>
     </div>
@@ -17,23 +16,50 @@ title: About Arjun
         <div class="section">
             <h4>My <b>Skills</b></h4>
             <p></p>
-            <div class="chip">
-                <img src="https://materializecss.com/images/yuna.jpg" alt="Contact Person">
-                Jane Doe
-            </div>
-            <div class="chip">
-                <img src="https://materializecss.com/images/yuna.jpg" alt="Contact Person">
-                Jane Doe
-            </div>
+            <a href="#modal_programming" class="modal-trigger"><div class="waves-effect waves-light chip">Programming<i class="material-icons close" style="pointer-events:none;">open_in_full</i></div></a>
+            <a href="#modal_data_science" class="modal-trigger"><div class="waves-effect waves-light chip">Data Science<i class="material-icons close" style="pointer-events:none;">open_in_full</i></div></a>
+            <a href="#modal_security" class="modal-trigger"><div class="waves-effect waves-light chip">Security<i class="material-icons close" style="pointer-events:none;">open_in_full</i></div></a>
         </div>
 
         <div class="divider"></div>
     </div>
 </div>
 
+<div id="modal_programming" class="modal bottom-sheet">
+    <div class="modal-content">
+    <h4>Programming</h4>
+    <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
+
+<div id="modal_data_science" class="modal bottom-sheet">
+    <div class="modal-content">
+    <h4>Data Science</h4>
+    <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
+
+<div id="modal_security" class="modal bottom-sheet">
+    <div class="modal-content">
+    <h4>Security</h4>
+    <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.collapsible');
-        var instances = M.Collapsible.init(elems);
+        M.Collapsible.init(elems);
+        var elems2 = document.querySelectorAll('.modal');
+        M.Modal.init(elems2);
       });
 </script>
