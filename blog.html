@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Diary of Arjun - Blog
+title: Blog - Diary of Arjun
 ---
 <div class="row">
 
@@ -10,7 +10,7 @@ title: Diary of Arjun - Blog
     <div onclick="window.location='{{post.url}}'" class="card-image cool-image waves-effect waves-block waves-light" style="background-image:url(/assets/images/{{post.coverImage}}); background-size:cover;background-position:center;">
     </div>
     <div class="card-content transparent ">
-      <span class="flow-text grey-text text-darken-5 left">{{post.date | date_to_string}}</span>
+      <span class="flow-text grey-text text-darken-5 left">{{post.date | date_to_string}}</span><br/>
       <span class="flow-text grey-text text-darken-4 left">{{post.full_title}}</span>
     </div>
   </div>
