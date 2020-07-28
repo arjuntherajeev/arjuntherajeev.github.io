@@ -168,7 +168,7 @@ We did it! We got root! Heck yes!
 
 Is that `MD5`? 😏
 
-### My Thoughts
+#### My Thoughts
 
 That was a great challenge from [Akanksha Sachin Verma](https://www.vulnhub.com/author/akanksha-sachin-verma,672/)! I really enjoyed going back to the basics. **Privilege escalation** is one of those areas where practice is everything and this challenge seems to be straightforward enough for a beginner (with boatloads of trial-and-error of course 😁)
 

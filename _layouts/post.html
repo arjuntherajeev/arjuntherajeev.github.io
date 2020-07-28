@@ -1,6 +1,19 @@
 ---
 layout: default_no_container
 ---
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        //document.getElementsByTagName("img")[0].className += "materialboxed"
+        //document.getElementsByTagName("img")[1].className += "materialboxed"
+        //document.getElementsByTagName("img")[2].className += "materialboxed"
+        var arrImg = document.getElementsByTagName("img");
+        for (i = 0; i < arrImg.length; i++) {
+            document.getElementsByTagName("img")[i].className += "materialboxed";
+          }
+        var elems = document.querySelectorAll('.materialboxed');
+        var instances = M.Materialbox.init(elems);
+        });
+</script>
 <style>
     header{
         background: url('/assets/images/{{page.coverImage}}');
@@ -18,7 +31,7 @@ layout: default_no_container
 </header>
 <div class="white">
     <div class="row container flow-text">
-        <h3 class="header">{{page.full_title}}</h3>
+        <h4 class="header">{{page.full_title}}</h4>
         <h6>Posted on <b>{{ page.date | date_to_long_string }}</b></h6>
         <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="{{page.full_title}}" data-url="https://diaryofarjun.com{{page.url}}" data-via="arjuntherajeev" data-related="arjuntherajeev" data-show-count="false">Tweet</a>        
         <br/>
@@ -31,10 +44,3 @@ layout: default_no_container
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.materialboxed');
-    var instances = M.Materialbox.init(elems);
-    });
-</script>
-</html>

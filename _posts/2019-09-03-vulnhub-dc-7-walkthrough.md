@@ -324,7 +324,7 @@ Once this was done, I simply monitored my temporary directory `/tmp/arj` for a 
 
 Yeah! There you have it. We did it :)
 
-### My Thoughts
+#### My Thoughts
 
 That was absolutely crazy! I never expected anything less from @DCAU.
 

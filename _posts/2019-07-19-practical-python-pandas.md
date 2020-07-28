@@ -20,7 +20,7 @@ In this tutorial, we will learn how to use [Pandas](https://pandas.pydata.org/)�
 
 > Note: Ransomware Tracker is no longer operational since **08 December 2019**. It is still recommended that readers leverage the concepts and Jupyter Notebook available in this tutorial.
 
-### Introduction
+#### Introduction
 
 [Ransomware Tracker](https://ransomwaretracker.abuse.ch/) by [abuse.ch](https://www.abuse.ch/) is a website which tracks and monitors hosts and URLs associated with known Ransomware.
 
@@ -36,7 +36,7 @@ The screenshot below shows the Ransomware Tracker data in its raw CSV format acc
 
 Our objective is to read, parse, and generate insights from this Ransomware Tracker data using Python with Pandas.
 
-### Getting Started
+#### Getting Started
 
 For the purpose of this tutorial, we will use a [Jupyter Notebook](https://jupyter.org/) to write Python code and produce output. [Here](https://www.dataquest.io/blog/jupyter-notebook-tutorial/) is a complete, easy to understand introduction to Jupyter Notebooks and how to get started.
 
@@ -99,7 +99,7 @@ Great!
 
 Now, the `df.shape` command should return `(13865, 10)` since we removed the last row of the DataFrame.
 
-### Data Transformation
+#### Data Transformation
 
 The next step involves manipulating and transforming the data in our DataFrame.
 
@@ -198,11 +198,11 @@ Here:
 
 The biggest takeaway is to always achieve the desired transformation at the element-level before attempting to manipulate the DataFrame.
 
-### Querying
+#### Querying
 
 The next step is to query the DataFrame and generate valuable insights. In this step, I aim to use Pandas to perform operations on the DataFrame, extract output, and visualize the results.
 
-#### Query 1
+##### Query 1
 
 I decided to define query 1 as follows: _Number of entries per threat_ 
 
@@ -237,7 +237,7 @@ df.groupby(['Threat']).size().sort_values(ascending=False).plot(kind='barh')
 
 The `df.plot` function is an effective tool to generate useful graphs. In our simple example above, we specified the argument `kind=barh` to indicate a **horizontal bar graph.**
 
-#### Query 2
+##### Query 2
 
 For the next query, I decided to play with the `Firstseen` field of the DataFrame. A valuable tip is to always attempt trend analysis if the dataset contains date/time fields.
 
@@ -352,7 +352,7 @@ The above query includes many useful features of the `df.plot` function. This 
 
 No graph is complete without appropriate `x` and `y` labels. The `set_xlabel` and `set_ylabel` functions play a significant role in helping us define these labels.
 
-#### Query 3
+##### Query 3
 
 For the next query, I decided to focus on a slightly more complex query. This time, I decided to utilize two fields - `Firstseen_year` and `Threat`.
 
@@ -394,7 +394,7 @@ The above query showcases an area plot described by `kind='area'` as argument t
 
 Again, we utilize the `set_xlabel` and `set_ylabel` functions to correctly label the graph. This is always recommended!
 
-### Conclusion
+#### Conclusion
 
 In this tutorial, we explored [Pandas](https://pandas.pydata.org/) - the _defacto_ Python module in a Data Analyst's toolkit.
 

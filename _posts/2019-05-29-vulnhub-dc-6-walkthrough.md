@@ -219,7 +219,7 @@ Time to _capture the flag_...
 
 Finally! We did it!
 
-### My Thoughts
+#### My Thoughts
 
 Such an awesome challenge. Huge props to @DCAU for creating an interesting challenge revolving around WordPress!
 

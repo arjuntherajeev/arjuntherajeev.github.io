@@ -252,7 +252,7 @@ Time to get the flag inside `/root/` which was named `the-flag.txt`
 
 Finally! Awesome!
 
-### My Thoughts
+#### My Thoughts
 
 That was a really interesting challenge! Props to @DCAU for coming up with a great challenge revolving around Joomla.
 
