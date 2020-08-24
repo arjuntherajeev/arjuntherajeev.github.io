@@ -4,10 +4,10 @@ title: Home - Diary of Arjun
 ---
 <div class="row">
     <div class="col s12 m12 l12">
-      <!-- Blank :) Happy! You're gonna have to hold on! -->
+        <!-- Blank :) Happy! You're gonna have to hold on! -->
     </div>
     <style>
-        header{
+        header {
             background: url('assets/images/moi.jpg');
             background-size: cover;
             background-position: center;
@@ -15,44 +15,47 @@ title: Home - Diary of Arjun
         }
     </style>
     <div class="row">
-      <div class="col s12 m5 l5">
-        <h4>Welcome to <br/><b>Diary of Arjun</b></h4>
-        <h6>Adventures and learnings of a programmer, analyst, photographer, guitarist, and cyber security consultant</h6>
-        <br/>
-        <p>
-          <i>
-            The woods are lovely, dark and deep,<br/>   
-            But I have promises to keep,<br/>   
-            And miles to go before I sleep,<br/>   
-            And miles to go before I sleep.<br/>
-            <br/>
-            <span class="right-align">Stopping by Woods on a Snowy Evening</span>
-            <br/>
-            <span class="right-align">Robert Frost</span>
-          </i>
-        </p>
-      </div>
-      <div class="col s12 m7 l7">
-          <header>
-            {%- comment -%} Content goes here automatically header{} CSS :) {%- endcomment -%}
-          </header>
+        <div class="col s12 m5 l5">
+            <h4>Welcome to <br /><b>Diary of Arjun</b></h4>
+            <h6>Adventures and learnings of a programmer, analyst, photographer, guitarist, and cyber security
+                consultant</h6>
+            <br />
+            <p>
+                <i>
+                    The woods are lovely, dark and deep,<br />
+                    But I have promises to keep,<br />
+                    And miles to go before I sleep,<br />
+                    And miles to go before I sleep.<br />
+                    <br />
+                    <span class="right-align">Stopping by Woods on a Snowy Evening</span>
+                    <br />
+                    <span class="right-align">Robert Frost</span>
+                </i>
+            </p>
+        </div>
+        <div class="col s12 m7 l7">
+            <header>
+                {%- comment -%} Content goes here automatically header{} CSS :) {%- endcomment -%}
+            </header>
         </div>
     </div>
 </div>
 
 <h4>Read my <b>Latest Posts</b></h4>
 <div class="row">
-  {% for post in site.posts limit:6 %}
-  <div class="col s12 m6 l4">
-    <div class="card medium">
-      <div onclick="window.location='{{post.url}}'" class="card-image cool-image waves-effect waves-block waves-light" style="background-image:url(/assets/images/{{post.coverImage}}); background-size:cover;background-position:center;">
-      </div>
-      <div class="card-content transparent ">
-        <span class="flow-text grey-text text-darken-5 left">{{post.date | date_to_string}}</span>
-        <span class="flow-text grey-text text-darken-4 left">{{post.full_title}}</span>
-      </div>
+    {% for post in site.posts limit:6 %}
+    <div class="col s12 m6 l4">
+        <div class="card medium">
+            <div onclick="window.location='{{post.url}}'"
+                class="card-image cool-image waves-effect waves-block waves-light"
+                style="background-image:url(/assets/images/{{post.coverImage}}); background-size:cover;background-position:center;">
+            </div>
+            <div class="card-content transparent ">
+                <span class="flow-text grey-text text-darken-5 left">{{post.date | date_to_string}}</span>
+                <span class="flow-text grey-text text-darken-4 left">{{post.full_title}}</span>
+            </div>
+        </div>
     </div>
-  </div>
-  {% endfor %}
-  <a href="/blog" class="waves-effect waves-light btn right black white-text text-darken-4">View More Posts</a>
+    {% endfor %}
+    <a href="/blog" class="waves-effect waves-light btn right black white-text text-darken-4">View More Posts</a>
 </div>
