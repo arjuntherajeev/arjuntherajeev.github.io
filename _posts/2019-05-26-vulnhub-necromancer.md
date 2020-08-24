@@ -20,7 +20,7 @@ tags:
 With my Attack Machine (**Kali Linux**) and Victim Machine (**Necromancer**) set up and running, I decided to get down to solving this challenge.
 
 
-> Read more about my set up and environment [here](/2019/05/25/entry-0x01-my-first-post.html)
+> Read more about my set up and environment [here](/blog/my-first-post)
 
 
 I decided to start my journey with the classic `netdiscover`. My Kali Linux VM has an IP of `192.168.56.102` according to `ifconfig`. With this knowledge and the fact that I set up **host-only networking** for my VMs, I decided to run the following command: `netdiscover -r 192.168.56.0/24`.
