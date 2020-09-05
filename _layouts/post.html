@@ -42,7 +42,7 @@ layout: default_no_container
     </div>
     <div class="row container">
         {% for tag in page.tags %}
-        <div onclick="window.location='/tags.html#{{tag | slugify}}'" class="chip waves-effect waves-block waves-light">
+        <div onclick="window.location='/tags#{{tag | slugify}}'" class="chip waves-effect waves-block waves-light">
             {{tag }}</div>
         {% endfor %}
     </div>
