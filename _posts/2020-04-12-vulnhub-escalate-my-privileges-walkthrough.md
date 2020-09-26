@@ -1,5 +1,6 @@
 ---
-full_title: "Entry 0x07 - Vulnhub: Escalate My Privileges: 1 Walkthrough"
+full_title: "Entry 0x07 - VulnHub: Escalate My Privileges: 1 Walkthrough"
+description: "A step-by-step walkthrough of solving the Escalate My Privileges: 1 pentesting challenge from VulnHub."
 date: "2020-04-12"
 layout: post
 coverImage: "screen-shot-2020-04-13-at-12.49.33-am.png"

@@ -2,21 +2,35 @@
 <html>
 
 <head>
-  <title>{{page.full_title}}</title>
+  <title>{{page.full_title}} - Diary of Arjun</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link type="text/css" rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection" />
   <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="canonical" href="{{site.url}}{{page.url}}"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script defer type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <meta name="description" content="{{page.description}}">
+  <meta name="author" content="arjuntherajeev">
+
+  <meta property="og:title" content="{{page.full_title}}" />
+  <meta property="og:url" content="{{site.url}}{{page.url}}" />
+  <meta property="og:image" content="{{site.url}}/assets/images/{{page.coverImage}}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="{{page.description}}" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:description" content="{{page.description}}" />
+  <meta name="twitter:title" content="{{page.full_title}}" />
+  <meta name="twitter:site" content="@arjuntherajeev" />
+  <meta name="twitter:image" content="{{site.url}}/assets/images/{{page.coverImage}}" />
+  <meta name="twitter:creator" content="@arjuntherajeev" />
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-176091793-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-176091793-1');
   </script>
   <script defer src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

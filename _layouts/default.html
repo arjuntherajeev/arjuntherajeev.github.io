@@ -4,19 +4,33 @@
 <head>
   <title>{{page.title}}</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link type="text/css" rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection" />
   <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="canonical" href="{{site.url}}{{page.url}}"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{{page.description}}">
+  <meta name="author" content="arjuntherajeev">
+
+  <meta property="og:title" content="{{page.title}}" />
+  <meta property="og:url" content="{{site.url}}{{page.url}}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="{{page.description}}" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:description" content="{{page.description}}" />
+  <meta name="twitter:title" content="{{page.title}}" />
+  <meta name="twitter:site" content="@arjuntherajeev" />
+  <!-- <meta name="twitter:image" content="{{site.url}}/assets/images/{{page.coverImage}}" /> -->
+  <meta name="twitter:creator" content="@arjuntherajeev" />
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-176091793-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-176091793-1');
-  </script>
+  </script> 
 
 </head>
 

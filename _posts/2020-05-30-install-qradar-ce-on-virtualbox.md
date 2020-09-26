@@ -1,5 +1,6 @@
 ---
 full_title: "Entry 0x08 - How to install IBM QRadar CE V7.3.3 on VirtualBox"
+description: "A step-by-step guide on how to download, install, and set up IBM QRadar Community Edition V7.3.3 on VirtualBox."
 date: "2020-05-30"
 coverImage: "screen-shot-2020-05-29-at-8.08.37-pm.png"
 layout: post

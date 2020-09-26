@@ -1,5 +1,6 @@
 ---
 full_title: "Entry 0x03 - VulnHub: DC: 6 Walkthrough"
+description: "A step-by-step walkthrough of solving the DC: 6 pentesting challenge from VulnHub."
 date: "2019-05-29"
 coverImage: "dc-6-00.png"
 layout: post
