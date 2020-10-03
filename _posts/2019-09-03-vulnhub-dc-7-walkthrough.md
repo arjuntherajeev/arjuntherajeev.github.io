@@ -335,4 +335,4 @@ I owe credit to @DCAU for an initial hint about the Twitter handle. The idea tha
 
 As always, I cannot wait for the next one in the [DC series](https://www.vulnhub.com/series/dc,199/)!
 
-If you enjoyed reading this, please check out my [DC: 6 walkthrough](/2019/05/29/vulnhub-dc-6-walkthrough) and [DC: 3 walkthrough](/2019/06/03/vulnhub-dc-3-walkthrough) which are challenges by @DCAU in the [DC series](https://www.vulnhub.com/series/dc,199/).
+If you enjoyed reading this, please check out my [DC: 6 walkthrough](/blog/vulnhub-dc-6-walkthrough) and [DC: 3 walkthrough](/blog/vulnhub-dc-3-walkthrough) which are challenges by @DCAU in the [DC series](https://www.vulnhub.com/series/dc,199/).
