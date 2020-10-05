@@ -10,6 +10,8 @@ tags:
 - Kali
 - Linux
 - Vulnhub
+sitemap:
+    lastmod: 2020-10-05
 ---
 
 Hello reader,

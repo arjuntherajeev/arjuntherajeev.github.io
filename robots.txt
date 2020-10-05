@@ -1,1 +1,4 @@
 Sitemap: https://diaryofarjun.com/sitemap.xml
+
+User-agent: *
+Disallow: /404.html
