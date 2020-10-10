@@ -1,5 +1,5 @@
 ---
-full_title: "Entry 0x01 - My First Post"
+full_title: "My First Post"
 description: "An introduction to Arjun's beginner pentesting setup and lab environment."
 date: "2019-05-25"
 coverImage: "screen-shot-2019-05-25-at-11.59.40-pm.png"

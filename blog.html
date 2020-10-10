@@ -16,6 +16,7 @@ sitemap:
     <div class="card-content transparent ">
       <p class="flow-text grey-text text-darken-5 ">{{post.date | date_to_string}}</p>
       <p class="flow-text grey-text text-darken-4 ">{{post.full_title}}</p>
+      <a style="visibility: hidden;" href="{{site.url}}{{post.url}}">{{post.full_title}}</a>
     </div>
   </div>
 </div>

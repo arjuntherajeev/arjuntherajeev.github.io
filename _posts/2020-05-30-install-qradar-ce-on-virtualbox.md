@@ -1,5 +1,5 @@
 ---
-full_title: "Entry 0x08 - How to install IBM QRadar CE V7.3.3 on VirtualBox"
+full_title: "How to install IBM QRadar CE V7.3.3 on VirtualBox"
 description: "A step-by-step guide on how to download, install, and set up IBM QRadar Community Edition V7.3.3 on VirtualBox."
 date: "2020-05-30"
 coverImage: "screen-shot-2020-05-29-at-8.08.37-pm.png"
@@ -35,12 +35,11 @@ QRadar Community Edition is a version of QRadar which is great for enthusiasts a
 
 - According to IBM, the minimum system requirements are: 
 
-```
-    8 GB RAM (10 GB is recommended)
-    250 GB free disk space
-    2 CPU cores (6 cores is recommended)
-    At least one network adapter with Internet connection
-```
+- 8 GB RAM (10 GB is recommended)
+- 250 GB free disk space
+- 2 CPU cores (6 cores is recommended)
+- At least one network adapter with Internet connection
+
 
 #### 1\. Verify the QRadar CE OVA
 

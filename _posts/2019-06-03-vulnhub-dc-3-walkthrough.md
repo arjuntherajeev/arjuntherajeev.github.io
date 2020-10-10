@@ -1,5 +1,5 @@
 ---
-full_title: "Entry 0x04 - VulnHub: DC: 3 Walkthrough"
+full_title: "VulnHub: DC: 3 Walkthrough"
 description: "A step-by-step walkthrough of solving the DC: 3 pentesting challenge from VulnHub."
 date: "2019-06-03"
 coverImage: "dc-3-00.png"

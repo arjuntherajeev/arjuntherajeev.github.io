@@ -1,5 +1,5 @@
 ---
-full_title: "Entry 0x05 - Pandas Data Analysis Tutorial: Ransomware Tracker"
+full_title: "Pandas Data Analysis Tutorial: Ransomware Tracker"
 description: "A tutorial introducing Python data analysis with pandas using Ransomware Tracker data."
 date: "2019-07-19"
 layout: post

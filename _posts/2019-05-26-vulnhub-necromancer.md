@@ -1,5 +1,5 @@
 ---
-full_title: "Entry 0x02 - VulnHub: The Necromancer: 1 Walkthrough"
+full_title: "VulnHub: The Necromancer: 1 Walkthrough"
 description: "A step-by-step walkthrough of solving the Necromancer pentesting challenge from VulnHub."
 date: "2019-05-26"
 coverImage: "necromancer-00.png"

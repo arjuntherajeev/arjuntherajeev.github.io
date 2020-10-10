@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Diary of Arjun - Arjun's Software and Security Blog
-description: Adventures and learnings of a programmer, analyst, and cyber security consultant.
+description: Adventures and learnings of a programmer, analyst, guitarist, and cyber security consultant.
 sitemap:
   priority: 1.0
   changefreq: weekly
@@ -21,7 +21,7 @@ sitemap:
     <div class="row flow-text">
         <div class="col s12 m5 l5">
             <h4>Welcome to <br /><b>Diary of Arjun</b></h4>
-            <h5>Adventures and learnings of a programmer, analyst, and cyber security consultant</h5>
+            <h5>Adventures and learnings of a programmer, analyst, guitarist, and cyber security consultant</h5>
             <br />
             <p>
                 <i>
@@ -56,6 +56,7 @@ sitemap:
             <div class="card-content transparent ">
                 <p class="flow-text grey-text text-darken-5 ">{{post.date | date_to_string}}</p>
                 <p class="flow-text grey-text text-darken-4 ">{{post.full_title}}</p>
+                <a style="visibility: hidden;" href="{{site.url}}{{post.url}}">{{post.full_title}}</a>
             </div>
         </div>
     </div>
