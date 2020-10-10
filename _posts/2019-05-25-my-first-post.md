@@ -11,7 +11,7 @@ tags:
 - Linux
 - Vulnhub
 sitemap:
-    lastmod: 2020-10-05
+    lastmod: 2020-10-10
 ---
 
 Hello reader,

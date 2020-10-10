@@ -15,6 +15,8 @@ tags:
 - Ransomware-Tracker
 - Security
 - Tutorial
+sitemap:
+    lastmod: 2020-10-10
 ---
 
 In this tutorial, we will learn how to use [Pandas](https://pandas.pydata.org/) - a _must-have_ Python module for Data Analysis and Data Visualization with a real-world example from the Cyber Security domain.

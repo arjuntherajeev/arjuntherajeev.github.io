@@ -14,6 +14,8 @@ tags:
 - Writeup
 - Security
 - DC-Series
+sitemap:
+    lastmod: 2020-10-10
 ---
 
 **DC: 6** is a challenge posted on [VulnHub](https://www.vulnhub.com/entry/dc-6,315/) created by [DCAU](https://www.vulnhub.com/author/dcau,610/). This is a write-up of my experience solving this awesome CTF challenge.

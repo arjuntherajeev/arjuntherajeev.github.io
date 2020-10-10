@@ -13,6 +13,8 @@ tags:
 - Walkthrough
 - Writeup
 - Security
+sitemap:
+    lastmod: 2020-10-10
 ---
 
 **Escalate My Privileges: 1** is a challenge posted on [VulnHub](https://www.vulnhub.com/entry/escalate-my-privileges-1,448/) created by [Akanksha Sachin Verma](https://www.vulnhub.com/author/akanksha-sachin-verma,672/). This is a write-up of my experience solving this awesome CTF challenge.

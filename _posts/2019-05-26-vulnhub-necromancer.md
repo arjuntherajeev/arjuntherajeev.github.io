@@ -14,7 +14,7 @@ tags:
 - Writeup
 - Security
 sitemap:
-    lastmod: 2020-10-05
+    lastmod: 2020-10-10
 ---
 
 **The Necromancer: 1** is a challenge posted on [VulnHub](https://www.vulnhub.com/entry/the-necromancer-1,154/) created by [Xerubus](https://www.vulnhub.com/author/xerubus,117/). This is a write-up of my experience solving this awesome CTF challenge.
