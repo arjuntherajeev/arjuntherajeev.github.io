@@ -27,7 +27,7 @@ QRadar Community Edition is a version of QRadar which is great for enthusiasts a
 
 > Community Edition is a fully-featured free version of QRadar that is low memory, low EPS, and includes a perpetual license. This version is limited to 50 events per second and 5,000 network flows a minute, supports apps, but is based on a smaller footprint for non-enterprise use.
 
-#### Pre-requisites
+## Pre-requisites
 
 - Download the QRadar CE V7.3.3 OVA from the [official website](https://developer.ibm.com/qradar/ce/) 
 > You will need to create an IBM account to complete the download
@@ -43,7 +43,7 @@ QRadar Community Edition is a version of QRadar which is great for enthusiasts a
 - At least one network adapter with Internet connection
 
 
-#### 1\. Verify the QRadar CE OVA
+## 1\. Verify the QRadar CE OVA
 
 Once the **QRadar CE V7.3.3 OVA** is downloaded, let us start by verifying the integrity of the file. IBM provides a button on the [QRadar CE page](https://developer.ibm.com/qradar/ce/) called **SHA256 Sum for OVA**. Click on it to open a `.txt` file with the SHA256 checksum. Use your checksum utility of choice to generate the SHA256 checksum for the downloaded OVA file. I will use `shasum` utility accessible via the Mac terminal. 
 
@@ -55,7 +55,7 @@ Once the **QRadar CE V7.3.3 OVA** is downloaded, let us start by verifying the i
 
 As seen in the screenshot above, the integrity of the OVA file has been confirmed. 
 
-#### 2\. Import QRadar CE OVA into VirtualBox
+## 2\. Import QRadar CE OVA into VirtualBox
 
 The next step is to launch VirtualBox.
 
@@ -77,7 +77,7 @@ The storage is 250 GB is by default and the number of processors is 2. I will in
 
 I will leave the networking settings as the default - Bridged mode. Please take care when changing the networking settings as it is important to ensure that the VM has access to the Internet.  
 
-#### 3\. Launch QRadar CE VM
+## 3\. Launch QRadar CE VM
 
 The next step is to launch the VM by clicking on **Start**. 
 
@@ -117,7 +117,7 @@ You will be prompted to enter the new **admin** password. This is the password 
 
 The next step is to verify the installation and access the QRadar CE user interface.
 
-#### 4\. Verify the QRadar CE Installation
+## 4\. Verify the QRadar CE Installation
 
 The easiest way to verify if the QRadar CE user interface is up and running is to use the `curl` command on the CentOS VM.
 
@@ -183,7 +183,7 @@ Once we provide confirmation, a message should appear saying **System Time is up
 
 ![Screen Shot 2020-05-30 at 3.40.29 PM](/assets/images/screen-shot-2020-05-30-at-3.40.29-pm.png)
 
-#### Conclusion & What's Next
+## Conclusion & What's Next
 
 In this tutorial, we installed QRadar CE V7.3.3 on VirtualBox and completed basic configuration of the system time. QRadar CE offers SIEM Administrators, SOC Analysts, and enthusiasts the power to experiment and practice real-world concepts in a test environment. 
 
