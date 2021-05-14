@@ -1,6 +1,6 @@
 ---
 full_title: "Notes: BHIS Emergency Ransomware Webcast (11 May 2021)"
-description: "A step-by-step guide on how to download, install, and set up IBM QRadar Community Edition V7.3.3 on VirtualBox."
+description: "Notes from Black Hills Information Security webcast following Colonial Pipeline Ransomware attack by DarkSide."
 date: "2021-05-13"
 coverImage: "ran_pic.jpeg"
 layout: post
