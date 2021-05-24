@@ -14,10 +14,16 @@ tags:
 - VM
 - VirtualBox
 sitemap:
-    lastmod: 2020-10-10
+    lastmod: 2021-05-24
 ---
 
 In this tutorial, we will learn how to install [IBM QRadar Community Edition V7.3.3](https://developer.ibm.com/qradar/ce/) on VirtualBox.
+
+> Note: IBM has issued a [flash notice](https://www.ibm.com/support/pages/node/6395080) for QRadar Administrators.
+>
+> According to IBM: QRadar development has recently identified a defect in the product licensing function, which may cause the deployment to stop functioning. All QRadar versions are affected by this issue.
+> 
+> QRadar CE Administrators must SSH into QRadar as `root` and run the single-line command for QRadar CE as detailed in the [flash notice](https://www.ibm.com/support/pages/node/6395080). Once completed, wait 5 minutes for the changes to complete. Administrators are not required to restart any services for this change as the file loads automatically. Log in to the QRadar Console. Click the Log Activity tab and verify Events are received correctly. 
 
 [IBM QRadar SIEM](https://www.ibm.com/products/qradar-siem) is a world-class SIEM tool used by organizations for monitoring and correlating logs from different systems. QRadar can quickly alert SOC Analysts about potential malicious activity and prompt them to take appropriate action.
 
