@@ -11,3 +11,5 @@ gem "webrick", "~> 1.7"
 gem "public_suffix", "~> 4.0"
 
 gem "listen", "~> 3.2"
+
+gem 'jekyll-toc'

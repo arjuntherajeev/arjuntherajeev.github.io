@@ -1,2 +1,16 @@
 twitter_username: arjuntherajeev
 permalink: /blog/:title
+plugins:
+  - jekyll-toc
+
+# _config.yml
+toc:
+  min_level: 2
+  max_level: 6
+  ordered_list: true
+  no_toc_section_class: no_toc_section
+  list_id: toc
+  list_class: section-nav
+  sublist_class: ''
+  item_class: toc-entry
+  item_prefix: toc-

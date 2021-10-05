@@ -12,6 +12,7 @@ layout: default_no_container
         }
         var elems = document.querySelectorAll('.materialboxed');
         var instances = M.Materialbox.init(elems);
+        
     });
 </script>
 <style>
@@ -38,7 +39,7 @@ layout: default_no_container
             data-text="{{page.full_title}}" data-url="https://diaryofarjun.com{{page.url}}" data-via="arjuntherajeev"
             data-related="arjuntherajeev" data-show-count="false">Tweet</a>
         <br />
-        <p class="grey-text text-darken-3 lighten-3">{{content}}</p>
+        <p class="grey-text text-darken-3 lighten-3">{{content | toc}}</p>
     </div>
     <div class="row container">
         {% for tag in page.tags %}
