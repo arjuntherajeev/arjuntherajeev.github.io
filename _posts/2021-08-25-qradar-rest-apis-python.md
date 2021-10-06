@@ -1,6 +1,6 @@
 ---
 full_title: "QRadar REST APIs with Python"
-description: ""
+description: "A tutorial on how to get started with QRadar REST APIs and write basic Python scripts using Jupyter Notebook."
 date: "2021-10-06"
 coverImage: "screen-shot-2020-05-29-at-8.08.37-pm.png"
 layout: post
@@ -16,6 +16,8 @@ tags:
 - Python
 - Jupyter
 - requests
+- pandas
+- API
 sitemap:
     lastmod: 2021-10-06
 toc: true
