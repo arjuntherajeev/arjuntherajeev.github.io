@@ -27,7 +27,7 @@ There are basically 2 types of machines required to proceed with the challenges
 1. Attack Machine
 2. Victim Machine
 
-**Attack Machine** refers to a machine loaded with the tools and software ready to _attack_ the vulnerable machine. I use an image of **Kali Linux** imported into VirtualBox as my attack machine. You can download Kali Linux for VMware or VirtualBox from the [Offensive Security website](https://www.offensive-security.com/kali-linux-vm-vmware-virtualbox-image-download/). Kali Linux comes with an excellent collection of tools (scripts, wordlists, frameworks, etc.) which can readily assist you in the various stages of attacking the vulnerable machine.
+**Attack Machine** refers to a machine loaded with the tools and software ready to _attack_ the vulnerable machine. I use an image of **Kali Linux** imported into VirtualBox as my attack machine. You can download Kali Linux for VMware or VirtualBox from the [Kali website](https://www.kali.org/get-kali/#kali-virtual-machines). Kali Linux comes with an excellent collection of tools (scripts, wordlists, frameworks, etc.) which can readily assist you in the various stages of attacking the vulnerable machine.
 
 **Victim Machine** refers to the vulnerable VM downloaded from the VulnHub website. Most challenges provide both - VMWare and VirtualBox images for convenience.
 

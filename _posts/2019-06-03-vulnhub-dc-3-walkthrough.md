@@ -178,7 +178,7 @@ I decided to try exploiting SUID executables - ones which can be executed with 
 
 ![Screen Shot 2019-06-03 at 4.41.58 PM.png](/assets/images/screen-shot-2019-06-03-at-4.41.58-pm.png)
 
-`/bin/ntfs-3g` looked interesting. Some [Googling](https://www.rapid7.com/db/modules/exploit/linux/local/ntfs3g_priv_esc) revealed that it is possible to escalate privileges with `ntfs-3g`.
+`/bin/ntfs-3g` looked interesting. Some [Googling](https://www.rapid7.com/db/modules/exploit/linux/local/ntfs3g_priv_esc/) revealed that it is possible to escalate privileges with `ntfs-3g`.
 
 I immediately looked up any available exploits using `searchsploit` using the command: `searchsploit ntfs 3g`
 

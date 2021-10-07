@@ -1,8 +1,10 @@
 ---
 layout: default
-title: Tags
+title: Tags - Diary of Arjun
+description: All the tags and their corresponding posts in one single page.
 ---
 <div class="col s12 m12 l12">
+  <h1>Tags on <br /><b>Diary of Arjun</b></h1>
     {% capture tags %}
       {% for tag in site.tags %}
         {{ tag[0] }}
@@ -18,4 +20,4 @@ title: Tags
       {% endfor %}
       </ul>
     {% endfor %}  
-  </div>
+</div>
