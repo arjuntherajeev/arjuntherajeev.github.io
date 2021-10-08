@@ -2,6 +2,7 @@ twitter_username: arjuntherajeev
 permalink: /blog/:title
 plugins:
   - jekyll-toc
+url: https://diaryofarjun.com
 
 # _config.yml
 toc:

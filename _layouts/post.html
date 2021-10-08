@@ -15,6 +15,28 @@ layout: default_no_container
         
     });
 </script>
+<script type="application/ld+json">
+    { 
+        "@context": "https://schema.org", 
+        "@type": "BlogPosting",
+        "headline": "{{page.full_title}}",
+        "alternativeHeadline": "{{page.description}}",
+        "image": "{{site.url}}/assets/images/{{page.coverImage}}",
+        "editor": "Arjun",
+        "url": "{{site.url}}{{page.url}}",
+        "datePublished": "{{page.date}}",
+        "dateCreated": "{{page.date}}",
+        "dateModified": "{{page.sitemap.lastmod}}",
+        "description": "{{page.description}}",
+        "author": 
+        {
+            "@type": "Person",
+            "name": "Arjun",
+            "url": "https://diaryofarjun.com/about"
+        },
+        "keywords": {{ page.tags | join: ',' | jsonify }}
+    }
+</script>
 <style>
     header {
         background: url('/assets/images/{{page.coverImage}}');
