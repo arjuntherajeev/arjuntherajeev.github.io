@@ -15,6 +15,7 @@ tags:
 - Ransomware-Tracker
 - Security
 - Tutorial
+- Jupyter
 sitemap:
     lastmod: 2021-10-06
 ---

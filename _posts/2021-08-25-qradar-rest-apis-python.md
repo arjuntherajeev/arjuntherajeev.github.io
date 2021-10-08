@@ -15,9 +15,10 @@ tags:
 - VirtualBox
 - Python
 - Jupyter
-- requests
-- pandas
+- Requests
+- Pandas
 - API
+- Data-Analysis
 sitemap:
     lastmod: 2021-10-06
 toc: true
