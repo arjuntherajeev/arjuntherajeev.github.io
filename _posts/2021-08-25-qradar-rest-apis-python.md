@@ -21,7 +21,6 @@ tags:
 - Data-Analysis
 sitemap:
     lastmod: 2021-10-06
-toc: true
 ---
 ## Introduction
 
