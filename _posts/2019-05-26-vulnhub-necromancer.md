@@ -188,12 +188,12 @@ Now, I wanted to have a look at the `main()` function which is the entry point o
 
 A quick read through the **Assembly** code reveals a function call to the function `wearTalisman()`. Typically, I have seen programs which have some `if-conditional` as follows:
 
-```
+{% highlight python %}
 if input == password:
     call correct()
 else:
     call incorrect()
-```
+{% endhighlight %}
 
 However, in the above Assembly code, I could not see any `CMP` (compare) or `JMP` (jump) Assembly instructions. I concluded that there is **no** checking user input.
 

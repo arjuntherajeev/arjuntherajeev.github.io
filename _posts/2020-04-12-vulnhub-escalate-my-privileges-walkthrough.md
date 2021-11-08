@@ -73,10 +73,10 @@ What does it contain? I decided to find out...
 
 The `Credentials.txt` file contains the following text:
 
-```
+{% highlight text %}
 my password is
 md5(rootroot1)
-```
+{% endhighlight %}
 
 Woohoo! A password... but how to use it?
 

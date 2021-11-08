@@ -31,5 +31,10 @@ pre {
     /* border-color: red; */
     /* margin: 50px; */
     padding: 10px;
-    margin-left: -3%;
+    /* margin-left: -3%; */
+}
+
+.highlight {
+    margin-left: 0%;
+    margin-right: 0%;
 }

