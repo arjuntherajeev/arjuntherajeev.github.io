@@ -11,7 +11,7 @@ sitemap:
         <!-- Blank :) Happy! You're gonna have to hold on! -->
     </div>
     <div class="row">
-        {% for item in site.data.photos limit:4%}
+        {% for item in site.data.photos limit:6%}
         <div class="col s12 m6 l6">
           <div class="card medium">
             <div onclick="window.location='{{item.image_flickr_url}}'" class="card-image cool-image waves-effect waves-block waves-light" style="background-image:url(/assets/images/{{item.image_url}}); background-size:cover;background-position:center;height:100%;padding-bottom: 50%;">
@@ -33,7 +33,7 @@ sitemap:
             <h2>Interests</h2>
             <p>I don't have a preferred genre of photography but my interests revolve around landscapes, cityscapes, and skyscapes. I am particularly fond of photographing sunrises and sunsets. You will also find photos of nature, especially intricate shots of flora and foliage scattered in my collection.</p>
             
-            <h2>Gear</h2>
+            <h2>Current Gear</h2>
             <ul>
                 <li>Canon EOS 450D (EOS Rebel XSi / EOS Kiss X2)</li>
                 <li>Canon 18-55mm f/3.5-5.6</li>
