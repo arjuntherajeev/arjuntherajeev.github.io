@@ -13,3 +13,5 @@ gem "public_suffix", "~> 4.0"
 gem "listen", "~> 3.2"
 
 gem 'jekyll-toc'
+
+gem 'jekyll-feed'
