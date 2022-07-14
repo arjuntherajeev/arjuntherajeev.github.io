@@ -27,7 +27,7 @@ sitemap:
 ---
 ## Introduction
 
-In this tutorial, we will learn how to build ETL pipelines using Logstash to programatically fetch raw data from QRadar REST APIs, apply processing, and output into various formats and destinations.
+In this tutorial, we will learn how to build ETL pipelines using Logstash to programmatically fetch raw data from QRadar REST APIs, apply processing, and output into various formats and destinations.
 
 > Note: This tutorial assumes you have *admin* access to a live QRadar deployment. 
 > For the purpose of this tutorial, I am using [QRadar Community Edition](https://www.ibm.com/community/qradar/ce/). Please follow my step-by-step guide - [How to install IBM QRadar CE V7.3.3 on VirtualBox](https://diaryofarjun.com/blog/install-qradar-ce-on-virtualbox) to get a basic QRadar deployment up and running in your lab environment.
