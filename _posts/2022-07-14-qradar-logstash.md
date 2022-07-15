@@ -1,6 +1,6 @@
 ---
 full_title: "QRadar REST APIs with Logstash"
-description: " "
+description: "A tutorial on building ETL pipelines with Logstash to fetch, transform, and output data from QRadar into various destinations."
 date: "2022-07-14"
 coverImage: "screen-shot-2020-05-29-at-8.08.37-pm.png"
 layout: post
