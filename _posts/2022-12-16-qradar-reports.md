@@ -1,6 +1,6 @@
 ---
 full_title: "How to archive QRadar Reports with Python"
-description: "A tutorial on how to archive QRadar reports to Azure Blob Storage using Python"
+description: "A tutorial on how to archive QRadar reports to Azure Blob Storage using Python."
 date: "2022-12-16"
 coverImage: "qradar-report-gui-1.png"
 layout: post
@@ -21,7 +21,7 @@ tags:
 - VM
 - VirtualBox
 sitemap:
-    lastmod: 2022-12-16
+    lastmod: 2023-10-16
 ---
 ## Introduction
 
