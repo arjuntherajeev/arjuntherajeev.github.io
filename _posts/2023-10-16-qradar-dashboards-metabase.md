@@ -31,7 +31,7 @@ Have you ever wanted to quickly create an interactive QRadar Dashboard on a mode
 In this step-by-step tutorial, we will learn how to leverage [Metabase](https://www.metabase.com/) and its new [CSV upload feature](https://www.metabase.com/product/csv-uploads) to import data exports from QRadar and create interactive Dashboards to gather valuable insights.
 
 > Note: This tutorial assumes you have *admin* access to a live QRadar deployment. 
-> For the purpose of this tutorial, I am using [QRadar Community Edition](https://www.ibm.com/community/qradar/ce/). Please follow my step-by-step guide - [How to install IBM QRadar CE V7.3.3 on VirtualBox](https://diaryofarjun.com/blog/install-qradar-ce-on-virtualbox) to get a basic QRadar deployment up and running in your lab environment.
+> For the purpose of this tutorial, I am using [QRadar Community Edition](https://www.ibm.com/community/101/qradar/ce/). Please follow my step-by-step guide - [How to install IBM QRadar CE V7.3.3 on VirtualBox](https://diaryofarjun.com/blog/install-qradar-ce-on-virtualbox) to get a basic QRadar deployment up and running in your lab environment.
 
 ## Pre-requisites
 
@@ -377,7 +377,7 @@ I hope you enjoyed reading this tutorial. Please reach out if you have any quest
 - [Metabase Documentation](https://www.metabase.com/docs/latest/)
 - [Learn Metabase](https://www.metabase.com/learn/)
 - [Metabase Discussion (discourse)](https://discourse.metabase.com/)
-- [QRadar Community Edition](https://www.ibm.com/community/qradar/ce/)
+- [QRadar Community Edition](https://www.ibm.com/community/101/qradar/ce/)
 - [QRadar Community Edition Quickstart Guide](https://www.ibm.com/security/digital-assets/qradar/community-edition-quickstart-guide/)
 - [QRadar Documentation](https://www.ibm.com/docs/en/qsip/7.4)
 - [How to install IBM QRadar CE V7.3.3 on VirtualBox](/blog/install-qradar-ce-on-virtualbox)

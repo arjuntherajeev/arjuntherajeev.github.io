@@ -30,7 +30,7 @@ Have you ever wanted to download all your QRadar reports and store them in a cen
 In this tutorial, we will write a Python script to identify, parse, map, and upload QRadar reports from QRadar to [Azure Blob Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction).
 
 > Note: This tutorial assumes you have *admin* access to a live QRadar deployment. 
-> For the purpose of this tutorial, I am using [QRadar Community Edition](https://www.ibm.com/community/qradar/ce/). Please follow my step-by-step guide - [How to install IBM QRadar CE V7.3.3 on VirtualBox](https://diaryofarjun.com/blog/install-qradar-ce-on-virtualbox) to get a basic QRadar deployment up and running in your lab environment.
+> For the purpose of this tutorial, I am using [QRadar Community Edition](https://www.ibm.com/community/101/qradar/ce/). Please follow my step-by-step guide - [How to install IBM QRadar CE V7.3.3 on VirtualBox](https://diaryofarjun.com/blog/install-qradar-ce-on-virtualbox) to get a basic QRadar deployment up and running in your lab environment.
 
 > Note: This tutorial also assumes you have some experience with Microsoft Azure. This tutorial is not intended to be a deep-dive into Microsoft Azure and will not go into intricate details about the platform and its services. The aim is to leverage Azure Blob Storage as a means to store and organize QRadar reports. If you are new to Azure and Cloud Computing, please refer to [Introduction to Azure fundamentals](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-fundamentals/) on Microsoft Learn.
 

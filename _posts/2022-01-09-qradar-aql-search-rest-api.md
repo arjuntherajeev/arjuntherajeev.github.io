@@ -31,7 +31,7 @@ sitemap:
 In this tutorial, we will learn how to leverage the QRadar Ariel Search REST API endpoints to run Ariel searches and fetch their results programmatically using Python.
 
 > Note: This tutorial assumes you have *admin* access to a live QRadar deployment. 
-> For the purpose of this tutorial, I am using [QRadar Community Edition](https://www.ibm.com/community/qradar/ce/). Please follow my step-by-step guide - [How to install IBM QRadar CE V7.3.3 on VirtualBox](https://diaryofarjun.com/blog/install-qradar-ce-on-virtualbox) to get a basic QRadar deployment up and running in your lab environment.
+> For the purpose of this tutorial, I am using [QRadar Community Edition](https://www.ibm.com/community/101/qradar/ce/). Please follow my step-by-step guide - [How to install IBM QRadar CE V7.3.3 on VirtualBox](https://diaryofarjun.com/blog/install-qradar-ce-on-virtualbox) to get a basic QRadar deployment up and running in your lab environment.
 
 > Note: This tutorial also assumes you have some experience with QRadar REST APIs and Python scripting. Please follow my step-by-step guide - [QRadar REST APIs with Python](https://diaryofarjun.com/blog/qradar-rest-apis-python) to setup your Python environment with pip and Jupyter Notebook, generate a QRadar API Token, and write simple Python scripts which demonstrate how to make REST API requests to QRadar.
 

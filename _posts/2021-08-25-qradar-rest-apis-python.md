@@ -27,7 +27,7 @@ sitemap:
 In this tutorial, we will learn how to get started with the QRadar REST APIs and write basic Python scripts to fetch sample data from QRadar. 
 
 > Note: This tutorial assumes you have *admin* access to a live QRadar deployment. 
-> For the purpose of this tutorial, I am using [QRadar Community Edition](https://www.ibm.com/community/qradar/ce/). Please follow my step-by-step guide - [How to install IBM QRadar CE V7.3.3 on VirtualBox](https://diaryofarjun.com/blog/install-qradar-ce-on-virtualbox) to get a basic QRadar deployment up and running in your lab environment.
+> For the purpose of this tutorial, I am using [QRadar Community Edition](https://www.ibm.com/community/101/qradar/ce/). Please follow my step-by-step guide - [How to install IBM QRadar CE V7.3.3 on VirtualBox](https://diaryofarjun.com/blog/install-qradar-ce-on-virtualbox) to get a basic QRadar deployment up and running in your lab environment.
 
 According to [IBM QRadar documentation](https://www.ibm.com/docs/en/qsip/7.3.3?topic=api-restful-overview):
 > You access the RESTful API by sending HTTPS requests to specific URLs (endpoints) on the QRadar® SIEM Console. To send these requests, use the HTTP implementation that is built in to the programming language of your choice. Each request contains authentication information, and parameters that modify the request.

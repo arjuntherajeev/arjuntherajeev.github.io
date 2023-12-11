@@ -17,7 +17,7 @@ sitemap:
     lastmod: 2021-05-24
 ---
 
-In this tutorial, we will learn how to install [IBM QRadar Community Edition V7.3.3](https://www.ibm.com/community/qradar/ce/) on VirtualBox.
+In this tutorial, we will learn how to install [IBM QRadar Community Edition V7.3.3](https://www.ibm.com/community/101/qradar/ce/) on VirtualBox.
 
 > Note: IBM has issued a [flash notice](https://www.ibm.com/support/pages/node/6395080) for QRadar Administrators.
 >
@@ -29,13 +29,13 @@ In this tutorial, we will learn how to install [IBM QRadar Community Edition V7.
 
 ![Screen Shot 2020-05-29 at 8.08.37 PM](/assets/images/screen-shot-2020-05-29-at-8.08.37-pm.png)
 
-QRadar Community Edition is a version of QRadar which is great for enthusiasts and learners. According to [IBM](https://www.ibm.com/community/qradar/ce/):
+QRadar Community Edition is a version of QRadar which is great for enthusiasts and learners. According to [IBM](https://www.ibm.com/community/101/qradar/ce/):
 
 > Community Edition is a fully-featured free version of QRadar that is low memory, low EPS, and includes a perpetual license. This version is limited to 50 events per second and 5,000 network flows a minute, supports apps, but is based on a smaller footprint for non-enterprise use.
 
 ## Pre-requisites
 
-- Download the QRadar CE V7.3.3 OVA from the [official website](https://www.ibm.com/community/qradar/ce/) 
+- Download the QRadar CE V7.3.3 OVA from the [official website](https://www.ibm.com/community/101/qradar/ce/) 
 > You will need to create an IBM account to complete the download
 
 - Download and install VirtualBox from the [official website](https://www.virtualbox.org/)
@@ -51,7 +51,7 @@ QRadar Community Edition is a version of QRadar which is great for enthusiasts a
 
 ## 1\. Verify the QRadar CE OVA
 
-Once the **QRadar CE V7.3.3 OVA** is downloaded, let us start by verifying the integrity of the file. IBM provides a button on the [QRadar CE page](https://www.ibm.com/community/qradar/ce/) called **SHA256 Sum for OVA**. Click on it to open a `.txt` file with the SHA256 checksum. Use your checksum utility of choice to generate the SHA256 checksum for the downloaded OVA file. I will use `shasum` utility accessible via the Mac terminal. 
+Once the **QRadar CE V7.3.3 OVA** is downloaded, let us start by verifying the integrity of the file. IBM provides a button on the [QRadar CE page](https://www.ibm.com/community/101/qradar/ce/) called **SHA256 Sum for OVA**. Click on it to open a `.txt` file with the SHA256 checksum. Use your checksum utility of choice to generate the SHA256 checksum for the downloaded OVA file. I will use `shasum` utility accessible via the Mac terminal. 
 
 ![Screen Shot 2020-05-29 at 8.08.16 PM](/assets/images/screen-shot-2020-05-29-at-8.08.16-pm.png)
 
