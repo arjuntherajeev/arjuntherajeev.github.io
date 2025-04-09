@@ -2,7 +2,7 @@
 full_title: "The Case for Data Thinking in the SOC"
 description: "Exploring how Business Intelligence tools like Metabase, Power BI, and Kibana are transforming Security Operations and Management in 2025."
 date: "2025-04-09"
-coverImage: "data_in_socs.png"
+coverImage: "data_in_socs.jpg"
 layout: post
 tags:
 - QRadar
@@ -86,32 +86,107 @@ You don’t need a sprawling infrastructure to adopt a BI solution—especially 
 
 ## Metrics That Matter
 
-BI platforms empower SOCs to track meaningful metrics that guide operational decisions:
+Business Intelligence platforms unlock a powerful opportunity for SOCs: the ability to **track, interpret, and act on meaningful metrics**. Below is a breakdown of essential metrics across SIEM, CTI, SOAR, and Analyst performance—along with their value and suggested visualizations.
 
-### SIEM Metrics:
-- Daily/weekly offense volume
-- Top triggered offense rules
-- Offenses by magnitude or severity
-- Ingested events-to-offense conversion ratio
+### SIEM Metrics
 
-### CTI Metrics:
-- Number of IOCs detected and correlated
-- Threat actor mapping (e.g., MITRE ATT&CK)
-- Time from IOC ingestion to enforcement
+- **Offense Volume (Daily/Weekly/Monthly)**  
+  Measures the number of offenses generated over time. Helps in spotting unusual spikes or seasonality.  
+  📊 *Recommended Chart:* Line chart, area chart
 
-### SOAR Metrics:
-- Manual vs. automated response rate
-- Playbook failure/success stats
-- Average actions per alert
+- **Top Offense Rules Triggered**  
+  Identifies which detection rules are most frequently firing. Useful for fine-tuning rule logic and prioritizing tuning or threat hunting.  
+  📊 *Recommended Chart:* Horizontal bar chart, Pareto chart
 
-### Analyst Metrics:
-- Alerts handled per analyst or team per shift
-- MTTD/MTTR over time
-- False positive ratio
+- **Offenses by Severity / Magnitude**  
+  Shows distribution across low, medium, high severity incidents. Indicates threat landscape shift and response focus areas.  
+  📊 *Recommended Chart:* Stacked bar chart, donut/pie chart
+
+- **Event-to-Offense Conversion Ratio**  
+  Compares raw log volume to actionable alerts. A low ratio could indicate noisy logs; a high one may reflect tuned detection maturity.  
+  📊 *Recommended Chart:* Line or KPI gauge
+
+- **Time to Offense Escalation**  
+  Measures time between initial event ingestion and offense creation. Helps evaluate SIEM responsiveness.  
+  📊 *Recommended Chart:* Boxplot or histogram
+
+- **Rule Utilization Rate**  
+  Percentage of enabled rules that have fired at least once during the period. Helps identify unused or redundant rules.  
+  📊 *Recommended Chart:* Heatmap or bar chart
+
+### CTI Metrics
+
+- **Number of IOCs Ingested vs. Correlated**  
+  Tracks how many indicators are being fed into the SOC vs. how many are actually linked to offenses or events.  
+  📊 *Recommended Chart:* Side-by-side bar chart
+
+- **Threat Actor Mapping (MITRE ATT&CK Coverage)**  
+  Visualizes which tactics and techniques are seen in the environment. Supports purple teaming and control gap assessments.  
+  📊 *Recommended Chart:* Matrix or radial chart
+
+- **Time from IOC Ingestion to Action**  
+  Measures operational agility in CTI response—from ingestion to detection/blocking.  
+  📊 *Recommended Chart:* Line chart or time-to-resolution scatterplot
+
+- **IOC Expiry or Relevance Overlap**  
+  Tracks outdated indicators still in use. Useful for CTI feed hygiene.  
+  📊 *Recommended Chart:* Time-based histogram
+
+- **Top Threat Families Observed**  
+  Groups correlated IOCs by malware family, actor group, or threat category.  
+  📊 *Recommended Chart:* Treemap or bar chart
+
+### SOAR Metrics
+
+- **Manual vs. Automated Response Ratio**  
+  Assesses the maturity and ROI of orchestration. High automation may correlate with faster response.  
+  📊 *Recommended Chart:* Donut/pie chart or stacked column
+
+- **Playbook Success/Failure Rate**  
+  Measures reliability and effectiveness of automated workflows. Failures may indicate logic issues or integration gaps.  
+  📊 *Recommended Chart:* Gauge, bar chart
+
+- **Average Actions per Alert**  
+  Quantifies playbook complexity and potential alert fatigue. Helps optimize playbook paths.  
+  📊 *Recommended Chart:* KPI widget or histogram
+
+- **Time Saved Through Automation**  
+  Aggregates analyst time saved through automated steps—can support business value reporting.  
+  📊 *Recommended Chart:* KPI card with cumulative trend
+
+- **Most Invoked Playbooks**  
+  Tracks usage frequency of individual playbooks. Informs reuse, improvement, and coverage.  
+  📊 *Recommended Chart:* Bar chart or ranking list
+
+### Analyst Metrics
+
+- **Alerts Handled per Analyst per Shift**  
+  Measures productivity and helps balance workloads.  
+  📊 *Recommended Chart:* Column chart or heatmap by analyst/team
+
+- **Mean Time to Detect (MTTD)**  
+  Tracks average time between threat entry and detection. Lower is better; goal is early visibility.  
+  📊 *Recommended Chart:* Line chart with trend
+
+- **Mean Time to Respond (MTTR)**  
+  Measures how quickly incidents are resolved once identified. Key for evaluating SOC agility.  
+  📊 *Recommended Chart:* Line chart or stacked timeline view
+
+- **False Positive Rate**  
+  Evaluates detection quality and alert fatigue. High rates may point to tuning needs or noisy data.  
+  📊 *Recommended Chart:* Donut/pie chart with TP/FP/Unknown
+
+- **Case Reopen Rate**  
+  Tracks how often cases are reclassified or reopened—indicates review quality or rushed closures.  
+  📊 *Recommended Chart:* Bar chart or KPI
+
+- **Escalation Ratio**  
+  Measures how many cases are escalated to higher tiers. Can reveal training needs or process friction.  
+  📊 *Recommended Chart:* Funnel or flow chart
 
 ![SOC Metrics Overview](/assets/images/soc_metrics_overview_1.png)
 
-With the right dashboards in place, these metrics go from being buried in logs to shaping security strategy.
+With the right BI tool and data architecture, these metrics go beyond reporting—they become **decision levers**. They inform tuning, staffing, tool effectiveness, and ultimately, the resilience of your SOC.
 
 ## Future-Proofing: Laying the Groundwork for AI & ML
 
