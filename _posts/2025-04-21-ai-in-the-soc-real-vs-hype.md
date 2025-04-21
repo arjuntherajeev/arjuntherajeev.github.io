@@ -2,7 +2,7 @@
 full_title: "AI in the SOC: What’s Real vs. Hype in 2025"
 description: "A detailed analysis of the real-world applications of AI in Security Operations Centers, separating practical wins from industry hype."
 date: "2025-04-21"
-coverImage: "ai_in_soc_cover.png"
+coverImage: "ai_in_soc.png"
 layout: post
 tags:
 - SOC
