@@ -8,11 +8,15 @@ tags:
 - SOC
 - Cybersecurity
 - AI
-- MachineLearning
+- Machine-Learning
+- ML
+- NLP
+- LLM
+- Copilot
 - SIEM
-- ThreatDetection
-- SecurityAnalytics
-- ThoughtLeadership
+- Threat-Detection
+- Security-Analytics
+- Thought-Leadership
 sitemap:
   lastmod: 2025-04-21
 ---
@@ -71,8 +75,6 @@ Few-shot and zero-shot learning techniques allow models to generalize threat det
 
 > Reference: A domain-specific application in IoT security is demonstrated in [Enhancing IoT Security: A Few-Shot Learning Approach for Intrusion Detection](https://www.mdpi.com/2227-7390/12/7/1055).
 
-It is to be noted that foundational data engineering efforts significantly enhance SOC readiness for machine learning. For practical guidance, refer to [Quick QRadar Dashboards with Metabase BI](/blog/qradar-dashboards-metabase).
-
 ### 3. Security-Specific Fine-Tuning of LLMs
 
 Fine-tuning large language models on cybersecurity-specific corpora (e.g., MITRE ATT&CK reports) mitigates hallucination risks and enhances investigative accuracy.
@@ -88,8 +90,6 @@ GNNs allow modeling of entities, relationships, and multi-domain telemetry for a
 > Reference: An intuitive introduction is available in [A Gentle Introduction to Graph Neural Networks](https://distill.pub/2021/gnn-intro/).
 
 > Reference: For practical threat hunting applications, see [DeepHunter: A Graph Neural Network Based Approach for Robust Cyber Threat Hunting](https://arxiv.org/abs/2104.09806).
-
-If you are interested in building foundational telemetry architectures that later support graph analytics, my post on [Archiving QRadar Reports with Python](/blog/qradar-archive-reports-python) provides an example approach.
 
 ### 5. Human-in-the-Loop (HITL) AI Systems
 
